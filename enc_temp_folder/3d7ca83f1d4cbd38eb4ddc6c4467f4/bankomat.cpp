@@ -118,7 +118,7 @@ void bankomat::utworzTloEkranu()
 }
 
 void bankomat::rysujBankomat(sf::RenderWindow &okienko){
-	for (int i = 0; i < 22; ++i) {
+	for (int i = 0; i < 1; ++i) {
 		tablicaPrzyciskow[i].RysujPrzycisk(okienko);
 	}
 }
@@ -197,15 +197,17 @@ string bankomat::CzytaniePinu()
 				case 21:
 					if (petla ==3){
 					for (int b = 0; b < 4; b++)
-						{
+					{
 						ostatecznyPIN[b] = pin[b];
-						}
 					}
+					}
+					
 					break;
 				}
 				//cout << pin[petla -1];
 			}
 		}
+	
 	string PIN="";
 	for (int j = 0; j < 4; ++j) {
 		PIN += std::to_string(pin[j]);

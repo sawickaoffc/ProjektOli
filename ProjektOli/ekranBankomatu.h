@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "bankomat.h"
+#include "Guzik.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -20,7 +21,7 @@ private:
 	sf::Text MenuWplataGotowki;
 	sf::Text MenuDostepneSrodki;
 	sf::Text MenuZmianaPin;
-	sf::RectangleShape KsztaltMenuNaglowek;
+//	sf::RectangleShape KsztaltMenuNaglowek;
 	sf::RectangleShape KsztaltMenuAnuluj;
 	sf::RectangleShape KsztaltMenuAktywacjaKarty;
 	sf::RectangleShape KsztaltMenuWyplataGotowki;
@@ -28,14 +29,11 @@ private:
 	sf::RectangleShape KsztaltMenuDostepneSrodki;
 	sf::RectangleShape KsztaltMenuZmianaPin;
 
-
-
-
 public:
 	void ekranPoczatkowy();
 	void RysujEkranPoczatkowy();
 	ekranBankomatu(sf::RenderWindow* okienko);
-	void WpisywaniePinu();
+	string WpisywaniePinu();
 	void RysujWpisywaniePinu();
 	void Menu();
 	void RysujMenu();
@@ -52,8 +50,10 @@ public:
 	void RysujPotwierdzeniePlatnosci();
 	void WyjecieKarty();
 	void RysujWyjecieKarty();
-	int x;
-
-
+	void RysujAktywacjaKarty();
+	void AktywacjaKarty();
+	Guzik tablicaMenu[8]; 
+	void LimitMiesieczny();
+	
 };
 
