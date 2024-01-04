@@ -1,6 +1,7 @@
 #include "ekranBankomatu.h"
 #include <SFML/Graphics/Font.hpp>
 extern bankomat bankomat1;
+extern ekranBankomatu ekranbankomatu1;
 
 
 void ekranBankomatu::Stworz(sf::RenderWindow* okienko)
@@ -54,7 +55,8 @@ string ekranBankomatu::WpisywaniePinu()
 	WprowadzeniePinu.setPosition(250, 270);
 	WprowadzeniePinu.setFillColor(sf::Color(0, 0, 0));
 	WprowadzeniePinu.setString("Wprowadz kod PIN");
-	return bankomat1.CzytaniePinu();
+	obecnyPIN = bankomat1.CzytaniePinu();
+	return obecnyPIN;
 }
 
 void ekranBankomatu::RysujWpisywaniePinu()
@@ -133,10 +135,26 @@ void ekranBankomatu::RysujWyplataGotowki()
 
 void ekranBankomatu::ZmianaPinu()
 {
+	ekranbankomatu1.RysujWpisywaniePinu(); 
+	tablicaMenu[8] = Guzik("Potwierdzam ze chce zmienic Pin", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaMenu[8].Czcionka(font);
+	tablicaMenu[8].Polozenie({ 370, 360 });
+
+	tablicaMenu[9] = Guzik("Na jaki Pin chcesz zmienic?", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaMenu[9].Czcionka(font);
+	tablicaMenu[9].Polozenie({ 370, 360 });
+	//ekranbankomatu1.tablicaMenu[8].RysujPrzycisk(*okienko);
+	if (sf::Event::MouseButtonPressed && ekranbankomatu1.tablicaMenu[8].PolozenieMyszki(*okienko) == true) {
+		bankomat1.CzytaniePinu();
+		if (bankomat1.CzytaniePinu() == obecnyPIN) { 
+			ekranbankomatu1.tablicaMenu[9].RysujPrzycisk(*okienko);
+			ekranbankomatu1.WpisywaniePinu();
+		}
+	}
 }
 
 void ekranBankomatu::RysujZmianaPinu()
-{
+{ 
 	okienko->draw(tloEkranu);
 }
 
@@ -176,6 +194,10 @@ void ekranBankomatu::AktywacjaKarty()
 }
 
 void ekranBankomatu::LimitMiesieczny()
+{
+}
+
+void ekranBankomatu::RysujLimitMiesieczny()
 {
 }
 

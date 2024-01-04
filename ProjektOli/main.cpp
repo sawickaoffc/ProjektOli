@@ -32,15 +32,19 @@ int main(){
 				okienko.close();
 				break;
 			case sf::Event::MouseButtonPressed:
+				cout << stanEkranu;
 				bankomat1.CzytaniePinu(); 
 				switch (stanEkranu) {
 				case stan::poczatkowy:
 					if (bankomat1.WlozenieKarty(okienko) == true) {
 						stanEkranu = stan::wpisywaniepinu;
 					}
+
 					break;
 				case stan::wpisywaniepinu: 
-					stanEkranu = stan::menu;
+					if (bankomat1.PodaniePinu(okienko) == true) {
+						stanEkranu = stan::menu;
+					}
 					break;
 				case stan::menu:
 					switch (bankomat1.WybranieStrzalki(okienko)) {
@@ -78,21 +82,21 @@ int main(){
 	okienko.clear(sf::Color::Black);
 	bankomat1.rysujBankomat(okienko);
 	switch (stanEkranu)
-	{
+	{	
 	case stan::poczatkowy:
-		ekranbankomatu1.RysujEkranPoczatkowy(); 
+		ekranbankomatu1.RysujEkranPoczatkowy();
 		break;
 	case stan::wpisywaniepinu:
 		ekranbankomatu1.RysujWpisywaniePinu();
 		break;
 	case stan::menu:
 		ekranbankomatu1.RysujMenu();
-		break; 
+		break;
 	case stan::wyplacanie:
 		ekranbankomatu1.RysujWyplataGotowki();
 		break;
-	case stan::wplacanie: 
-		ekranbankomatu1.RysujWplataGotowki(); 
+	case stan::wplacanie:
+		ekranbankomatu1.RysujWplataGotowki();
 		break;
 	case stan::srodki:
 		ekranbankomatu1.RysujDostepneSrodki();
@@ -101,22 +105,15 @@ int main(){
 		ekranbankomatu1.RysujAktywacjaKarty();
 		break;
 	case stan::zmianaPinu:
-		ekranbankomatu1.RysujWyplataGotowki();
+		ekranbankomatu1.RysujZmianaPinu();
 		break;
 	case stan::wyjeciekarty:
-		ekranbankomatu1.RysujWyplataGotowki();
+		ekranbankomatu1.RysujWyjecieKarty();
 		break;
 	case stan::limit:
-		ekranbankomatu1.RysujWyplataGotowki();
+		ekranbankomatu1.RysujLimitMiesieczny();
 		break;
 	}
-
-
-	ekranbankomatu1.RysujEkranPoczatkowy();
-	
-	//ekranBankomatu.RysujWpisywaniePinu();
-	//ekranBankomatu.RysujMenu();
-
 	}
 	okienko.display();
 	}

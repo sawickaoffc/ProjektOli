@@ -21,4 +21,5 @@ public:
 	Guzik tablicaPrzyciskow[23];
 	int WybranieStrzalki(sf::RenderWindow& okienko);
 	bool WlozenieKarty(sf::RenderWindow& okienko);
+	bool PodaniePinu(sf::RenderWindow& okienko);
 };

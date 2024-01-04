@@ -126,94 +126,95 @@ void bankomat::rysujBankomat(sf::RenderWindow &okienko){
 
 string bankomat::CzytaniePinu()
 {
-		for (int i = 10; i < 22; i++)
-		{
-			if (tablicaPrzyciskow[i].PolozenieMyszki(*okienko) == true) {
-				switch (i) {
-				case 10:
-					if (petla < 4) {
+	for (int i = 10; i < 22; i++)
+	{
+		if (tablicaPrzyciskow[i].PolozenieMyszki(*okienko) == true) {
+			switch (i) {
+			case 10:
+				if (petla < 4) {
 					pin[petla] = 1;
 					petla++;
-					}
-					break;
-				case 11:
-					if (petla < 4) {
+				}
+				break;
+			case 11:
+				if (petla < 4) {
 					pin[petla] = 2;
 					petla++;
-					}
-					break;
-				case 12:
-					if (petla < 4) {
+				}
+				break;
+			case 12:
+				if (petla < 4) {
 					pin[petla] = 3;
 					petla++;
-					}
-					break;
-				case 13:
-					if (petla < 4) {
+				}
+				break;
+			case 13:
+				if (petla < 4) {
 					pin[petla] = 4;
 					petla++;
-					}
-					break;
-				case 14:
-					if (petla < 4) {
+				}
+				break;
+			case 14:
+				if (petla < 4) {
 					pin[petla] = 5;
 					petla++;
-					}
-					break;
-				case 15:
-					if (petla < 4) {
+				}
+				break;
+			case 15:
+				if (petla < 4) {
 					pin[petla] = 0;
 					petla++;
-					}
-					break;
-				case 16:
-					if (petla < 4) {
+				}
+				break;
+			case 16:
+				if (petla < 4) {
 					pin[petla] = 6;
 					petla++;
-					}
-					break;
+				}
+				break;
 
-				case 17:
-					if (petla < 4) {
+			case 17:
+				if (petla < 4) {
 					pin[petla] = 7;
 					petla++;
-					}
+				}
 
-					break;
-				case 18:
-					if (petla < 4) {
+				break;
+			case 18:
+				if (petla < 4) {
 					pin[petla] = 8;
 					petla++;
-					}
-					break;
-				case 19:
-					if (petla < 4) {
+				}
+				break;
+			case 19:
+				if (petla < 4) {
 					pin[petla] = 9;
 					petla++;
-					}
-					break;
-				case 20:
-					petla--;
-					break;
-				case 21:
-					if (petla ==3){
-					for (int b = 0; b < 4; b++)
-						{
-						ostatecznyPIN[b] = pin[b];
-						}
-					}
-					break;
 				}
-				//cout << pin[petla -1];
+				break;
+			case 20:
+				petla--;
+				break;
+			case 21:
+				if (petla == 3) {
+					for (int b = 0; b < 4; b++)
+					{
+						ostatecznyPIN[b] = pin[b];
+					}
+				}
+				break;
 			}
+			//cout << pin[petla -1];
 		}
-	string PIN="";
+	}
+	string PIN = "";
 	for (int j = 0; j < 4; ++j) {
 		PIN += std::to_string(pin[j]);
-	}				
+	}
 	cout << PIN;
 	return PIN;
 }
+
 
 void bankomat::Stworz(sf::RenderWindow* okienko)
 {
@@ -245,7 +246,7 @@ int bankomat::WybranieStrzalki(sf::RenderWindow& okienko)
 				case 6:
 					return 5;
 					break;
-				case 17:
+				case 7:
 					return 6;
 					break;
 				case 8:
@@ -266,6 +267,15 @@ bool bankomat::WlozenieKarty(sf::RenderWindow& okienko)
 	}
 	else
 	return false;
+}
+
+bool bankomat::PodaniePinu(sf::RenderWindow& okienko)
+{
+	if (sf::Event::MouseButtonPressed && bankomat1.tablicaPrzyciskow[21].PolozenieMyszki(okienko) == true) {
+		return true;
+	}
+	else
+		return false;
 }
 //pomysl: stworzenie szablonu do prostok¹ta i podpinamy przycisk jako ogolny obraz 
 // pod nasze poszczegolne prostokaty i wtedy sprawdzamy z czym sie porywa nam myszka
