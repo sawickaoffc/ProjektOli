@@ -1,7 +1,8 @@
 #include "bankomat.h"
-#include "Guzik.h"
+#include "ekranBankomatu.h"
 #include <SFML/Graphics/Font.hpp>
 extern bankomat bankomat1;
+extern ekranBankomatu ekranbankomatu1;
 
 
 bankomat::bankomat(sf::RenderWindow* okienko)
@@ -112,9 +113,9 @@ void bankomat::utworzTloEkranu()
 
 
 	//robie przycisk do ekranu
-	tablicaPrzyciskow[22] = Guzik("Wlozono karte", { 150,50 }, 0, sf::Color{ 59, 17, 82 }, sf::Color::White, font);
+	tablicaPrzyciskow[22] = Guzik("Wlozono karte", { 200,80 }, 30, sf::Color{ 59, 17, 82 }, sf::Color::White, font);
 	tablicaPrzyciskow[22].Czcionka(font);
-	tablicaPrzyciskow[22].Polozenie({ 700,0 });
+	tablicaPrzyciskow[22].Polozenie({ 630,20 });
 }
 
 void bankomat::rysujBankomat(sf::RenderWindow &okienko){
@@ -212,6 +213,14 @@ string bankomat::CzytaniePinu()
 	}				
 	cout << PIN;
 	return PIN;
+}
+
+void bankomat::Stworz(sf::RenderWindow* okienko)
+{
+	this->okienko = okienko;
+	utworzTloEkranu();
+	CzytaniePinu();
+
 }
 
 int bankomat::WybranieStrzalki(sf::RenderWindow& okienko)

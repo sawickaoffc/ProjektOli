@@ -17,6 +17,7 @@ public:
 	void utworzTloEkranu();
 	void rysujBankomat(sf::RenderWindow& okienko);
 	string CzytaniePinu();
+	void Stworz(sf::RenderWindow* okienko);
 	Guzik tablicaPrzyciskow[23];
 	int WybranieStrzalki(sf::RenderWindow& okienko);
 	bool WlozenieKarty(sf::RenderWindow& okienko);

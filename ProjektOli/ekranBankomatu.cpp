@@ -3,6 +3,22 @@
 extern bankomat bankomat1;
 
 
+void ekranBankomatu::Stworz(sf::RenderWindow* okienko)
+{
+	this->okienko = okienko; //referencja
+	ekranPoczatkowy();
+	WpisywaniePinu();
+	WplataGotowki();
+	WyplataGotowki();
+	Menu();
+	DostepneSrodki();
+	ZmianaPinu();
+	PotwierdzeniePlatnosci();
+	WyjecieKarty();
+	AktywacjaKarty();
+	LimitMiesieczny();
+}
+
 void ekranBankomatu::ekranPoczatkowy()
 {
 	font.loadFromFile("Roboto-Bold.ttf");
@@ -25,20 +41,10 @@ void ekranBankomatu::RysujEkranPoczatkowy()
 	okienko->draw(Powitanie);
 	//okienko->display();
 	//okienko->clear();
-	bankomat wlozenieKarty;
-	wlozenieKarty.tablicaPrzyciskow[22].RysujPrzycisk(*okienko);
+	bankomat1.tablicaPrzyciskow[22].RysujPrzycisk(*okienko);
 	}
 //wskaznik dajemy gdy przekazujemy caly obiekt
 
-ekranBankomatu::ekranBankomatu(sf::RenderWindow* okienko) //konstruktor
-{
-	this->okienko = okienko; //referencja
-	ekranPoczatkowy(); 
-	WpisywaniePinu();
-	WplataGotowki();
-	WyplataGotowki();
-	Menu();
-}
 
 string ekranBankomatu::WpisywaniePinu()
 {
@@ -172,3 +178,5 @@ void ekranBankomatu::AktywacjaKarty()
 void ekranBankomatu::LimitMiesieczny()
 {
 }
+
+
