@@ -4,6 +4,8 @@
 #include <SFML/Window.hpp>
 #include "Guzik.h"
 #include <string>
+#include <random>
+#include <iostream>
 
 class bankomat
 {
@@ -19,6 +21,7 @@ public:
     int pin[4];
     int petla = 0;
     string kwota = "";
+    float stanKonta = 0;
     bankomat() = default;
     bankomat(sf::RenderWindow* okienko);
     void utworzTloEkranu();

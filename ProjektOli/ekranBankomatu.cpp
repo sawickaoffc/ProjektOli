@@ -130,6 +130,30 @@ void ekranBankomatu::RysujWplataGotowki() {
 	}
 }
 
+void ekranBankomatu::PotwierdzeniePlatnosci() {
+	tablicaWplacaniePotwierdzenie[0] = Guzik("Anuluj", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaWplacaniePotwierdzenie[0].Czcionka(font);
+	tablicaWplacaniePotwierdzenie[0].Polozenie({ 180,60 });
+
+	string pin_str = "";
+	for (int j = 0; j < bankomat1.petla; j++) {
+		pin_str += std::to_string(bankomat1.pin[j]);
+	}
+
+	tablicaWplacaniePotwierdzenie[1] = Guzik(pin_str, { 260,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
+	tablicaWplacaniePotwierdzenie[1].Czcionka(font);
+	tablicaWplacaniePotwierdzenie[1].Polozenie({ 370, 300 });
+
+}
+
+void ekranBankomatu::RysujPotwierdzeniePlatnosci() {
+	PotwierdzeniePlatnosci();
+
+	okienko->draw(tloEkranu);
+	for (int i = 0; i < 2; ++i) {
+		tablicaWplacaniePotwierdzenie[i].RysujPrzycisk(*okienko);
+	}
+}
 
 
 void ekranBankomatu::WyplataGotowki()
@@ -163,14 +187,7 @@ void ekranBankomatu::RysujDostepneSrodki()
 	okienko->draw(tloEkranu);
 }
 
-void ekranBankomatu::PotwierdzeniePlatnosci() {
 
-}
-
-void ekranBankomatu::RysujPotwierdzeniePlatnosci()
-{
-	okienko->draw(tloEkranu);
-}
 
 void ekranBankomatu::WyjecieKarty()
 {

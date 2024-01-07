@@ -11,6 +11,7 @@ bankomat::bankomat(sf::RenderWindow* okienko)
 	utworzTloEkranu();
 	CzytaniePinu();
 }
+
 void bankomat::Stworz(sf::RenderWindow* okienko)
 {
 	this->okienko = okienko;
@@ -18,7 +19,10 @@ void bankomat::Stworz(sf::RenderWindow* okienko)
 	CzytaniePinu();
 	WybranieStrzalki(*okienko);
 	WlozenieKarty(*okienko);
-
+	random_device rd;
+	mt19937 gen(rd());
+	uniform_real_distribution<> dis(1300.0, 7000.0);
+	stanKonta = dis(gen);
 }
 
 void bankomat::utworzTloEkranu()

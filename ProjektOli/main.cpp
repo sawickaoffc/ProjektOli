@@ -5,6 +5,8 @@
 #include "bankomat.h"
 #include "ekranBankomatu.h"
 #include "Guzik.h"
+#include <cstring>
+
 bankomat bankomat1;
 ekranBankomatu ekranbankomatu1;
 enum stan {
@@ -22,6 +24,7 @@ int main() {
 	bankomat1.Stworz(&okienko); //przekazywanie rzeczy z konstruktora do okienka
 	ekranbankomatu1.Stworz(&okienko);
 
+	int poprzedniStan = stan::poczatkowy;
 	int stanEkranu = stan::poczatkowy;
 	while (okienko.isOpen()) {
 		while (okienko.pollEvent(event)) {
@@ -38,9 +41,12 @@ int main() {
 					}
 					break;
 				case stan::wpisywaniepinu:
-
+					cout << "Stan konta: " << bankomat1.stanKonta << endl;
 					if (bankomat1.CzytaniePinu()) {
 						stanEkranu = stan::menu;
+						std::memset(bankomat1.pin, 0, sizeof(bankomat1.pin));
+						bankomat1.petla = 0;
+						bankomat1.is_valid_pin = false;
 					};
 					break;
 
@@ -52,6 +58,7 @@ int main() {
 						break;
 					case 2:
 						stanEkranu = stan::wplacanie;
+						bankomat1.kwota = "";
 						break;
 					case 3:
 						stanEkranu = stan::wyplacanie;
@@ -75,6 +82,7 @@ int main() {
 
 				case stan::wplacanie:
 					if (bankomat1.PobierzKwote()) {
+						poprzedniStan = stanEkranu;
 						stanEkranu = potwierdzenie;
 					}
 
@@ -84,8 +92,30 @@ int main() {
 						break;
 					}
 					break;
+
+					// Potwierdzenia pinem
 				case stan::potwierdzenie:
+					if (bankomat1.CzytaniePinu()) {
+
+						stanEkranu = stan::menu; // dodac do stanu konta
+						std::memset(bankomat1.pin, 0, sizeof(bankomat1.pin));
+						bankomat1.petla = 0;
+						bankomat1.is_valid_pin = false;
+
+						if (poprzedniStan == wplacanie) {
+							bankomat1.stanKonta += stof(bankomat1.kwota);
+						}
+						else if (poprzedniStan == wyplacanie) {
+							bankomat1.stanKonta -= stof(bankomat1.kwota);
+						}
+					};
+
 					ekranbankomatu1.PotwierdzeniePlatnosci();
+					switch (bankomat1.WybranieStrzalki(okienko)) {
+					case 1:
+						stanEkranu = stan::menu;
+						break;
+					}
 					break;
 				}
 				break;
