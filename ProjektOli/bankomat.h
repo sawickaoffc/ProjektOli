@@ -22,6 +22,7 @@ public:
     int petla = 0;
     string karta = "nieaktywna";
     string kwota = "";
+    string limit = "5000";
     float stanKonta = 0;
     bankomat() = default;
     bankomat(sf::RenderWindow* okienko);

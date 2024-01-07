@@ -10,7 +10,8 @@
 bankomat bankomat1;
 ekranBankomatu ekranbankomatu1;
 enum stan {
-	poczatkowy, wpisywaniepinu, menu, wyplacanie, wplacanie, srodki, aktywacja, zmianaPinu, wyjeciekarty, limit, potwierdzenie
+	poczatkowy, wpisywaniepinu, menu, wyplacanie, wplacanie, srodki, aktywacja,
+	zmianaPinu, wyjeciekarty, limit, potwierdzenie, zmianalimitu
 };
 
 using namespace std;
@@ -76,7 +77,6 @@ int main() {
 						stanEkranu = stan::limit;
 						break;
 					case 8:
-						//stan::;
 						break;
 					}
 					break;
@@ -126,6 +126,9 @@ int main() {
 							bankomat1.czyPierwszePodaniePinu = true;
 							stanEkranu = stan::wpisywaniepinu;
 						}
+						else if (poprzedniStan == zmianalimitu) {
+							bankomat1.limit = bankomat1.kwota;
+						}
 					}
 
 					ekranbankomatu1.PotwierdzeniePlatnosci();
@@ -164,7 +167,33 @@ int main() {
 					case 1:
 						stanEkranu = stan::menu;
 						break;
-					case 8:
+
+					}
+
+				case stan::limit:
+					if (bankomat1.PobierzKwote() && stof(bankomat1.kwota) <= bankomat1.stanKonta) {
+						poprzedniStan = stanEkranu;
+						stanEkranu = potwierdzenie;
+					}
+
+					switch (bankomat1.WybranieStrzalki(okienko)) {
+					case 1:
+						stanEkranu = stan::menu;
+						break;
+					case 5:
+						stanEkranu = stan::zmianalimitu;
+						break;
+					}
+
+				case stan::zmianalimitu:
+					if (bankomat1.PobierzKwote() && stof(bankomat1.kwota) >= 0) {
+						poprzedniStan = stanEkranu;
+						stanEkranu = potwierdzenie;
+					}
+
+					switch (bankomat1.WybranieStrzalki(okienko)) {
+					case 1:
+						stanEkranu = stan::menu;
 						break;
 					}
 
@@ -209,6 +238,9 @@ int main() {
 				break;
 			case stan::limit:
 				ekranbankomatu1.RysujLimitMiesieczny();
+				break;
+			case stan::zmianalimitu:
+				ekranbankomatu1.RysujZmianeLimitu();
 				break;
 			}
 		}

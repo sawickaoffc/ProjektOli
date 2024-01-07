@@ -42,6 +42,9 @@ public:
     void AktywacjaKarty();
     void RysujAktywacjaKarty();
 
+    void ZmianaLimitu();
+    void RysujZmianeLimitu();
+
     Guzik tablicaMenu[9];
     Guzik tablicaWplacanie[2];
     Guzik tablicaWyplacanie[2];
@@ -49,6 +52,8 @@ public:
     Guzik tablicaSrodki[2];
     Guzik tablicaAktywacja[3];
     Guzik tablicaZmianyPinu[2];
+    Guzik tablicaLimitu[3];
+    Guzik tablicaZmianyLimitu[2];
 
     void LimitMiesieczny();
     void RysujLimitMiesieczny();

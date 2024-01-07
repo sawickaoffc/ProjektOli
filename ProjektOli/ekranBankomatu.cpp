@@ -212,7 +212,6 @@ void ekranBankomatu::AktywacjaKarty() {
 
 }
 
-
 void ekranBankomatu::RysujAktywacjaKarty() {
 	AktywacjaKarty();
 	okienko->draw(tloEkranu);
@@ -221,7 +220,6 @@ void ekranBankomatu::RysujAktywacjaKarty() {
 	}
 
 }
-
 
 void ekranBankomatu::ZmianaPinu() {
 	tablicaZmianyPinu[0] = Guzik("Anuluj", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
@@ -252,24 +250,50 @@ void ekranBankomatu::RysujZmianaPinu()
 }
 
 
+void ekranBankomatu::LimitMiesieczny() {
+	tablicaLimitu[0] = Guzik("Anuluj", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaLimitu[0].Czcionka(font);
+	tablicaLimitu[0].Polozenie({ 180,60 });
 
+	tablicaLimitu[1] = Guzik("Ustaw inny limit", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::Black, font);
+	tablicaLimitu[1].Czcionka(font);
+	tablicaLimitu[1].Polozenie({ 560,60 });
 
-
-void ekranBankomatu::WyjecieKarty()
-{
+	tablicaLimitu[2] = Guzik("Aktualny limit: " + bankomat1.limit, { 260,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
+	tablicaLimitu[2].Czcionka(font);
+	tablicaLimitu[2].Polozenie({ 370, 300 });
 }
 
-void ekranBankomatu::RysujWyjecieKarty()
-{
+void ekranBankomatu::RysujLimitMiesieczny() {
+	LimitMiesieczny();
 	okienko->draw(tloEkranu);
+	for (int i = 0; i < 3; ++i) {
+		tablicaLimitu[i].RysujPrzycisk(*okienko);
+	}
+}
+
+void ekranBankomatu::ZmianaLimitu() {
+	tablicaZmianyLimitu[0] = Guzik("Anuluj", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaZmianyLimitu[0].Czcionka(font);
+	tablicaZmianyLimitu[0].Polozenie({ 180,60 });
+
+	tablicaZmianyLimitu[1] = Guzik(bankomat1.kwota, { 260,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
+	tablicaZmianyLimitu[1].Czcionka(font);
+	tablicaZmianyLimitu[1].Polozenie({ 370, 300 });
+
+}
+void ekranBankomatu::RysujZmianeLimitu() {
+	ZmianaLimitu();
+	okienko->draw(tloEkranu);
+	for (int i = 0; i < 2; ++i) {
+		tablicaZmianyLimitu[i].RysujPrzycisk(*okienko);
+	}
+
 }
 
 
-
-void ekranBankomatu::LimitMiesieczny()
-{
+void ekranBankomatu::WyjecieKarty() {
 }
 
-void ekranBankomatu::RysujLimitMiesieczny()
-{
+void ekranBankomatu::RysujWyjecieKarty() {
 }
