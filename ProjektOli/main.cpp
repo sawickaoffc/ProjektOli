@@ -10,7 +10,6 @@ ekranBankomatu ekranbankomatu1;
 enum stan {
 	poczatkowy, wpisywaniepinu, menu, wyplacanie, wplacanie, srodki, aktywacja, zmianaPinu, wyjeciekarty, limit,
 };
-
 using namespace std;
 int main() {
 	sf::VideoMode rozmiar(1000, 800);
@@ -32,9 +31,6 @@ int main() {
 				okienko.close();
 				break;
 			case sf::Event::MouseButtonPressed:
-				//cout << stanEkranu;
-				cout << "\n";
-				//bankomat1.CzytaniePinu();
 				switch (stanEkranu) {
 				case stan::poczatkowy:
 					if (bankomat1.WlozenieKarty(okienko) == true) {
@@ -42,17 +38,14 @@ int main() {
 					}
 					break;
 				case stan::wpisywaniepinu:
-					if (sf::Event::MouseButtonPressed) {
-						bankomat1.CzytaniePinu();
-					}
-					cout << bankomat1.obecnyPIN;
-					if (bankomat1.PodaniePinu(okienko) == true) {
-						stanEkranu = stan::menu;
-					}
+				if (bankomat1.CzytaniePinu() == true) {
+					stanEkranu = stan::menu;
+				}
 					break;
 				case stan::menu:
 					switch (bankomat1.WybranieStrzalki(okienko)) {
 					case 1:
+						bankomat1.is_valid_pin = false; 
 						stanEkranu = stan::poczatkowy;
 						break;
 					case 2:
@@ -70,7 +63,8 @@ int main() {
 					case 6:
 						bankomat1.petla = 0;
 						stanEkranu = stan::zmianaPinu; 
-						if (bankomat1.PoprawnoscPinu(okienko) == true) {
+						bankomat1.CzytaniePinu();
+						if (bankomat1.is_valid_pin == true) {
 
 						}
 						

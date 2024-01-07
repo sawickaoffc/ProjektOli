@@ -30,11 +30,10 @@ private:
 	sf::RectangleShape KsztaltMenuZmianaPin;
 
 public:
-	string podanyPin;
 	ekranBankomatu() = default;
 	void ekranPoczatkowy();
 	void RysujEkranPoczatkowy();
-	string WpisywaniePinu();
+	bool WpisywaniePinu();
 	void RysujWpisywaniePinu();
 	void Menu();
 	void RysujMenu();

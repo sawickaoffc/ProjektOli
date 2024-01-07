@@ -1,5 +1,15 @@
 #include "Guzik.h"
 
+void Guzik::set_value(int val)
+{
+	value = val;
+}
+
+int Guzik::get_value()
+{
+	return value;
+}
+
 Guzik::Guzik(string napis, sf::Vector2f rozmiarWektora, int wielkoscNapisu, sf::Color kolorTla, sf::Color kolorTekstu, sf::Font &czcionka)
 {
 	tekst.setFillColor(kolorTekstu);
@@ -8,6 +18,7 @@ Guzik::Guzik(string napis, sf::Vector2f rozmiarWektora, int wielkoscNapisu, sf::
 	guzik.setFillColor(kolorTla);
 	tekst.setFont(czcionka); 
 	tekst.setString(napis);
+	set_value(-1);
 
 }
 

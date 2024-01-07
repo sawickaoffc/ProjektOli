@@ -47,7 +47,7 @@ void ekranBankomatu::RysujEkranPoczatkowy()
 //wskaznik dajemy gdy przekazujemy caly obiekt
 
 
-string ekranBankomatu::WpisywaniePinu()
+bool ekranBankomatu::WpisywaniePinu()
 {
 	font.loadFromFile("Roboto-Bold.ttf");
 	WprowadzeniePinu.setFont(font);

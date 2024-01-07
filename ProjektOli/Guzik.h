@@ -8,8 +8,11 @@ class Guzik
 private:
 	sf::RectangleShape guzik;
 	sf::Text tekst; 
+	int value;
 public:
 	Guzik() {}
+	void set_value(int val);
+	int get_value();
 	Guzik(string napis, sf::Vector2f rozmiarWektora, int wielkoscNapisu, sf::Color kolorTla, sf::Color kolorTekstu, sf::Font& czcionka);
 	void Czcionka(sf::Font& font); 
 	void KolorTla(sf::Color color);

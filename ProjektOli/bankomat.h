@@ -6,24 +6,24 @@
 class bankomat
 {
 private:
-	sf::Font font; 
-	sf::RenderWindow* okienko;
-	int ostatecznyPIN[4];
-	
+    sf::Font font;
+    sf::RenderWindow* okienko;
+
+
 public:
-	string obecnyPIN;
-	bool czyPierwszePodaniePinu = false;
-	int pin[4];
-	int petla = 0;
-	bankomat() = default;
-	bankomat(sf::RenderWindow* okienko);
-	void utworzTloEkranu();
-	void rysujBankomat(sf::RenderWindow& okienko);
-	string CzytaniePinu();
-	void Stworz(sf::RenderWindow* okienko);
-	Guzik tablicaPrzyciskow[23];
-	int WybranieStrzalki(sf::RenderWindow& okienko);
-	bool WlozenieKarty(sf::RenderWindow& okienko);
-	bool PodaniePinu(sf::RenderWindow& okienko);
-	bool PoprawnoscPinu(sf::RenderWindow& okienko);
+    string obecnyPIN = "";
+    bool is_valid_pin = false;
+    bool czyPierwszePodaniePinu = true;
+    int pin[4];
+    int petla = 0;
+    bankomat() = default;
+    bankomat(sf::RenderWindow* okienko);
+    void utworzTloEkranu(); 
+    void rysujBankomat(sf::RenderWindow& okienko);
+    bool CzytaniePinu();
+    void Stworz(sf::RenderWindow* okienko);
+    Guzik tablicaPrzyciskow[23];
+    int WybranieStrzalki(sf::RenderWindow& okienko);
+    bool WlozenieKarty(sf::RenderWindow& okienko);
+
 };
