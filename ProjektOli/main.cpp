@@ -41,7 +41,6 @@ int main() {
 					}
 					break;
 				case stan::wpisywaniepinu:
-					cout << "Stan konta: " << bankomat1.stanKonta << endl;
 					if (bankomat1.CzytaniePinu()) {
 						stanEkranu = stan::menu;
 						std::memset(bankomat1.pin, 0, sizeof(bankomat1.pin));
@@ -51,6 +50,7 @@ int main() {
 					break;
 
 				case stan::menu:
+					cout << "Stan konta: " << bankomat1.stanKonta << endl;
 					switch (bankomat1.WybranieStrzalki(okienko)) {
 					case 1:
 						stanEkranu = stan::poczatkowy;
@@ -70,6 +70,7 @@ int main() {
 						stanEkranu = stan::aktywacja;
 						break;
 					case 6:
+						stanEkranu = stan::zmianaPinu;
 						break;
 					case 7:
 						stanEkranu = stan::limit;
@@ -81,7 +82,20 @@ int main() {
 					break;
 
 				case stan::wplacanie:
-					if (bankomat1.PobierzKwote()) {
+					if (bankomat1.PobierzKwote() && stof(bankomat1.kwota) > 0) {
+						poprzedniStan = stanEkranu;
+						stanEkranu = potwierdzenie;
+					}
+
+					switch (bankomat1.WybranieStrzalki(okienko)) {
+					case 1:
+						stanEkranu = stan::menu;
+						break;
+					}
+					break;
+
+				case stan::wyplacanie:
+					if (bankomat1.PobierzKwote() && stof(bankomat1.kwota) <= bankomat1.stanKonta) {
 						poprzedniStan = stanEkranu;
 						stanEkranu = potwierdzenie;
 					}
@@ -108,7 +122,11 @@ int main() {
 						else if (poprzedniStan == wyplacanie) {
 							bankomat1.stanKonta -= stof(bankomat1.kwota);
 						}
-					};
+						else if (poprzedniStan == zmianaPinu) {
+							bankomat1.czyPierwszePodaniePinu = true;
+							stanEkranu = stan::wpisywaniepinu;
+						}
+					}
 
 					ekranbankomatu1.PotwierdzeniePlatnosci();
 					switch (bankomat1.WybranieStrzalki(okienko)) {
@@ -117,6 +135,39 @@ int main() {
 						break;
 					}
 					break;
+
+				case stan::srodki:
+					switch (bankomat1.WybranieStrzalki(okienko)) {
+					case 1:
+						stanEkranu = stan::menu;
+						break;
+					}
+					break;
+
+				case stan::aktywacja:
+					switch (bankomat1.WybranieStrzalki(okienko)) {
+					case 1:
+						stanEkranu = stan::menu;
+						break;
+					case 5:
+						bankomat1.karta = "Aktywna";
+						break;
+					}
+
+					break;
+
+				case stan::zmianaPinu:
+					poprzedniStan = stanEkranu;
+					stanEkranu = potwierdzenie;
+
+					switch (bankomat1.WybranieStrzalki(okienko)) {
+					case 1:
+						stanEkranu = stan::menu;
+						break;
+					case 8:
+						break;
+					}
+
 				}
 				break;
 				cout << okienko.isOpen() << okienko.pollEvent(event) << endl;

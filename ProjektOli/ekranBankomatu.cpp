@@ -131,18 +131,18 @@ void ekranBankomatu::RysujWplataGotowki() {
 }
 
 void ekranBankomatu::PotwierdzeniePlatnosci() {
-	tablicaWplacaniePotwierdzenie[0] = Guzik("Anuluj", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
-	tablicaWplacaniePotwierdzenie[0].Czcionka(font);
-	tablicaWplacaniePotwierdzenie[0].Polozenie({ 180,60 });
+	tablicaPotwierdzenie[0] = Guzik("Anuluj", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaPotwierdzenie[0].Czcionka(font);
+	tablicaPotwierdzenie[0].Polozenie({ 180,60 });
 
 	string pin_str = "";
 	for (int j = 0; j < bankomat1.petla; j++) {
 		pin_str += std::to_string(bankomat1.pin[j]);
 	}
 
-	tablicaWplacaniePotwierdzenie[1] = Guzik(pin_str, { 260,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
-	tablicaWplacaniePotwierdzenie[1].Czcionka(font);
-	tablicaWplacaniePotwierdzenie[1].Polozenie({ 370, 300 });
+	tablicaPotwierdzenie[1] = Guzik(pin_str, { 260,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
+	tablicaPotwierdzenie[1].Czcionka(font);
+	tablicaPotwierdzenie[1].Polozenie({ 370, 300 });
 
 }
 
@@ -151,41 +151,107 @@ void ekranBankomatu::RysujPotwierdzeniePlatnosci() {
 
 	okienko->draw(tloEkranu);
 	for (int i = 0; i < 2; ++i) {
-		tablicaWplacaniePotwierdzenie[i].RysujPrzycisk(*okienko);
+		tablicaPotwierdzenie[i].RysujPrzycisk(*okienko);
 	}
 }
 
+void ekranBankomatu::WyplataGotowki() {
+	tablicaWyplacanie[0] = Guzik("Anuluj", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaWyplacanie[0].Czcionka(font);
+	tablicaWyplacanie[0].Polozenie({ 180,60 });
 
-void ekranBankomatu::WyplataGotowki()
-{
+	tablicaWyplacanie[1] = Guzik(bankomat1.kwota, { 260,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
+	tablicaWyplacanie[1].Czcionka(font);
+	tablicaWyplacanie[1].Polozenie({ 370, 300 });
 }
 
 void ekranBankomatu::RysujWyplataGotowki()
 {
+	WyplataGotowki();
+
 	okienko->draw(tloEkranu);
+	for (int i = 0; i < 2; ++i) {
+		tablicaWyplacanie[i].RysujPrzycisk(*okienko);
+	}
 }
 
-void ekranBankomatu::ZmianaPinu()
-{
-	tablicaMenu[8] = Guzik("Potwierdzam ze chce zmienic Pin", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
-	tablicaMenu[8].Czcionka(font);
-	tablicaMenu[8].Polozenie({ 370, 360 });
+void ekranBankomatu::DostepneSrodki() {
+	tablicaSrodki[0] = Guzik("Anuluj", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaSrodki[0].Czcionka(font);
+	tablicaSrodki[0].Polozenie({ 180,60 });
+
+	int stan_len = to_string(static_cast<int>(bankomat1.stanKonta)).length();
+
+	string stan_str = to_string(bankomat1.stanKonta).substr(0, stan_len + 3);
+	tablicaSrodki[1] = Guzik(stan_str, { 260,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
+	tablicaSrodki[1].Czcionka(font);
+	tablicaSrodki[1].Polozenie({ 370, 300 });
+}
+
+void ekranBankomatu::RysujDostepneSrodki() {
+	DostepneSrodki();
+
+	okienko->draw(tloEkranu);
+	for (int i = 0; i < 2; ++i) {
+		tablicaSrodki[i].RysujPrzycisk(*okienko);
+	}
+}
+
+void ekranBankomatu::AktywacjaKarty() {
+	tablicaAktywacja[0] = Guzik("Anuluj", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaAktywacja[0].Czcionka(font);
+	tablicaAktywacja[0].Polozenie({ 180,60 });
+
+	tablicaAktywacja[1] = Guzik("Aktywuj", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::Black, font);
+	tablicaAktywacja[1].Czcionka(font);
+	tablicaAktywacja[1].Polozenie({ 560,60 });
+
+	tablicaAktywacja[2] = Guzik("Stan Karty: " + bankomat1.karta, { 260,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
+	tablicaAktywacja[2].Czcionka(font);
+	tablicaAktywacja[2].Polozenie({ 370, 300 });
+
+}
+
+
+void ekranBankomatu::RysujAktywacjaKarty() {
+	AktywacjaKarty();
+	okienko->draw(tloEkranu);
+	for (int i = 0; i < 3; ++i) {
+		tablicaAktywacja[i].RysujPrzycisk(*okienko);
+	}
+
+}
+
+
+void ekranBankomatu::ZmianaPinu() {
+	tablicaZmianyPinu[0] = Guzik("Anuluj", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaZmianyPinu[0].Czcionka(font);
+	tablicaZmianyPinu[0].Polozenie({ 180,60 });
+
+	tablicaZmianyPinu[1] = Guzik("Potwierdzam ze chce zmienic pin", { 340,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaZmianyPinu[1].Czcionka(font);
+	tablicaZmianyPinu[1].Polozenie({ 470, 360 });
+
+	// string pin_str = "";
+	// for (int j = 0; j < bankomat1.petla; j++) {
+	// 	pin_str += std::to_string(bankomat1.pin[j]);
+	// }
+
+	// tablicaZmianyPinu[2] = Guzik(pin_str, { 390,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
+	// tablicaZmianyPinu[2].Czcionka(font);
+	// tablicaZmianyPinu[2].Polozenie({ 325, 390});
+
 }
 
 void ekranBankomatu::RysujZmianaPinu()
 {
 	okienko->draw(tloEkranu);
-	ekranbankomatu1.tablicaMenu[8].RysujPrzycisk(*okienko);
+	for (int i = 0; i < 2; ++i) {
+		tablicaZmianyPinu[i].RysujPrzycisk(*okienko);
+	}
 }
 
-void ekranBankomatu::DostepneSrodki()
-{
-}
 
-void ekranBankomatu::RysujDostepneSrodki()
-{
-	okienko->draw(tloEkranu);
-}
 
 
 
@@ -198,13 +264,7 @@ void ekranBankomatu::RysujWyjecieKarty()
 	okienko->draw(tloEkranu);
 }
 
-void ekranBankomatu::RysujAktywacjaKarty()
-{
-}
 
-void ekranBankomatu::AktywacjaKarty()
-{
-}
 
 void ekranBankomatu::LimitMiesieczny()
 {

@@ -15,11 +15,12 @@ private:
 
 
 public:
-    string obecnyPIN = "";
+    string obecnyPIN = ""; // do logowania
     bool is_valid_pin = false;
     bool czyPierwszePodaniePinu = true;
-    int pin[4];
+    int pin[4]; // do wpisywania
     int petla = 0;
+    string karta = "nieaktywna";
     string kwota = "";
     float stanKonta = 0;
     bankomat() = default;
