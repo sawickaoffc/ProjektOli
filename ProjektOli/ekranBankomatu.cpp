@@ -1,4 +1,4 @@
-#include "ekranBankomatu.h"
+ï»¿#include "ekranBankomatu.h"
 #include <SFML/Graphics/Font.hpp>
 extern bankomat bankomat1;
 extern ekranBankomatu ekranbankomatu1;
@@ -23,8 +23,8 @@ void ekranBankomatu::Stworz(sf::RenderWindow* okienko)
 void ekranBankomatu::ekranPoczatkowy()
 {
 	font.loadFromFile("Roboto-Bold.ttf");
-	//rysujemy ekran na którym wszystko ma przebiegaæ
-	tloEkranu.setPosition(150, 0); //pozycja w jakiej sie zaczyna wiec od górnego lewego rogu
+	//rysujemy ekran na ktÃ³rym wszystko ma przebiegaÃ¦
+	tloEkranu.setPosition(150, 0); //pozycja w jakiej sie zaczyna wiec od gÃ³rnego lewego rogu
 	tloEkranu.setSize(sf::Vector2f(700, 500));
 	tloEkranu.setFillColor(sf::Color(76, 0, 255));
 	//a nastepnie napis poczatkowy
@@ -32,7 +32,7 @@ void ekranBankomatu::ekranPoczatkowy()
 	Powitanie.setCharacterSize(32);
 	Powitanie.setPosition(250, 270);
 	Powitanie.setFillColor(sf::Color(0, 0, 0));
-	Powitanie.setString("Dzien dobry! \n Prosze wlozyc karte do czytnika ");
+	Powitanie.setString("Dzien dobry! \nProsze wlozyc karte do czytnika ");
 
 }
 
@@ -40,10 +40,8 @@ void ekranBankomatu::RysujEkranPoczatkowy()
 {
 	okienko->draw(tloEkranu);
 	okienko->draw(Powitanie);
-	//okienko->display();
-	//okienko->clear();
 	bankomat1.tablicaPrzyciskow[22].RysujPrzycisk(*okienko);
-	}
+}
 //wskaznik dajemy gdy przekazujemy caly obiekt
 
 
@@ -67,7 +65,7 @@ void ekranBankomatu::RysujWpisywaniePinu()
 
 void ekranBankomatu::Menu()
 {
-	font.loadFromFile("Roboto-Bold.ttf"); 
+	font.loadFromFile("Roboto-Bold.ttf");
 	tablicaMenu[0] = Guzik("Anuluj", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
 	tablicaMenu[0].Czcionka(font);
 	tablicaMenu[0].Polozenie({ 180,60 });
@@ -80,7 +78,7 @@ void ekranBankomatu::Menu()
 	tablicaMenu[2].Czcionka(font);
 	tablicaMenu[2].Polozenie({ 180,260 });
 
-	tablicaMenu[3] = Guzik("Dostêpne Srodki", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaMenu[3] = Guzik("DostÃªpne Srodki", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
 	tablicaMenu[3].Czcionka(font);
 	tablicaMenu[3].Polozenie({ 180,360 });
 
@@ -104,20 +102,35 @@ void ekranBankomatu::Menu()
 
 void ekranBankomatu::RysujMenu()
 {
-	okienko->draw(tloEkranu); 
+	okienko->draw(tloEkranu);
 	for (int i = 0; i < 8; ++i) {
 		tablicaMenu[i].RysujPrzycisk(*okienko);
 	}
 }
 
+
 void ekranBankomatu::WplataGotowki()
 {
+	tablicaWplacanie[0] = Guzik("Anuluj", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaWplacanie[0].Czcionka(font);
+	tablicaWplacanie[0].Polozenie({ 180,60 });
+
+	tablicaWplacanie[1] = Guzik(bankomat1.kwota, { 260,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
+	tablicaWplacanie[1].Czcionka(font);
+	tablicaWplacanie[1].Polozenie({ 370, 300 });
+
 }
 
-void ekranBankomatu::RysujWplataGotowki()
-{
+void ekranBankomatu::RysujWplataGotowki() {
+	WplataGotowki();
+
 	okienko->draw(tloEkranu);
+	for (int i = 0; i < 2; ++i) {
+		tablicaWplacanie[i].RysujPrzycisk(*okienko);
+	}
 }
+
+
 
 void ekranBankomatu::WyplataGotowki()
 {
@@ -129,15 +142,16 @@ void ekranBankomatu::RysujWyplataGotowki()
 }
 
 void ekranBankomatu::ZmianaPinu()
-{	tablicaMenu[8] = Guzik("Prosze podaæ obecny Pin", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+{
+	tablicaMenu[8] = Guzik("Potwierdzam ze chce zmienic Pin", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
 	tablicaMenu[8].Czcionka(font);
 	tablicaMenu[8].Polozenie({ 370, 360 });
 }
 
 void ekranBankomatu::RysujZmianaPinu()
-{ 	okienko->draw(tloEkranu);
+{
+	okienko->draw(tloEkranu);
 	ekranbankomatu1.tablicaMenu[8].RysujPrzycisk(*okienko);
-	//ekranbankomatu1.RysujWpisywaniePinu();
 }
 
 void ekranBankomatu::DostepneSrodki()
@@ -149,8 +163,8 @@ void ekranBankomatu::RysujDostepneSrodki()
 	okienko->draw(tloEkranu);
 }
 
-void ekranBankomatu::PotwierdzeniePlatnosci()
-{
+void ekranBankomatu::PotwierdzeniePlatnosci() {
+
 }
 
 void ekranBankomatu::RysujPotwierdzeniePlatnosci()

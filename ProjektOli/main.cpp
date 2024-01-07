@@ -8,8 +8,9 @@
 bankomat bankomat1;
 ekranBankomatu ekranbankomatu1;
 enum stan {
-	poczatkowy, wpisywaniepinu, menu, wyplacanie, wplacanie, srodki, aktywacja, zmianaPinu, wyjeciekarty, limit,
+	poczatkowy, wpisywaniepinu, menu, wyplacanie, wplacanie, srodki, aktywacja, zmianaPinu, wyjeciekarty, limit, potwierdzenie
 };
+
 using namespace std;
 int main() {
 	sf::VideoMode rozmiar(1000, 800);
@@ -24,12 +25,12 @@ int main() {
 	int stanEkranu = stan::poczatkowy;
 	while (okienko.isOpen()) {
 		while (okienko.pollEvent(event)) {
-			switch (event.type)
-			{
+			switch (event.type) {
 			case sf::Event::Closed:
 				okienko.close();
 				break;
 			case sf::Event::MouseButtonPressed:
+
 				switch (stanEkranu) {
 				case stan::poczatkowy:
 					if (bankomat1.WlozenieKarty(okienko) == true) {
@@ -37,15 +38,17 @@ int main() {
 					}
 					break;
 				case stan::wpisywaniepinu:
-					if (bankomat1.CzytaniePinu() == true) {
+
+					if (bankomat1.CzytaniePinu()) {
 						stanEkranu = stan::menu;
-					}
+					};
 					break;
+
 				case stan::menu:
 					switch (bankomat1.WybranieStrzalki(okienko)) {
 					case 1:
-						bankomat1.is_valid_pin = false;
 						stanEkranu = stan::poczatkowy;
+						bankomat1.is_valid_pin = false;
 						break;
 					case 2:
 						stanEkranu = stan::wplacanie;
@@ -60,13 +63,6 @@ int main() {
 						stanEkranu = stan::aktywacja;
 						break;
 					case 6:
-						bankomat1.petla = 0;
-						stanEkranu = stan::zmianaPinu;
-						bankomat1.CzytaniePinu();
-						if (bankomat1.is_valid_pin == true) {
-
-						}
-
 						break;
 					case 7:
 						stanEkranu = stan::limit;
@@ -77,14 +73,28 @@ int main() {
 					}
 					break;
 
+				case stan::wplacanie:
+					if (bankomat1.PobierzKwote()) {
+						stanEkranu = potwierdzenie;
+					}
+
+					switch (bankomat1.WybranieStrzalki(okienko)) {
+					case 1:
+						stanEkranu = stan::menu;
+						break;
+					}
+					break;
+				case stan::potwierdzenie:
+					ekranbankomatu1.PotwierdzeniePlatnosci();
+					break;
 				}
 				break;
+				cout << okienko.isOpen() << okienko.pollEvent(event) << endl;
 			}
 
 			okienko.clear(sf::Color::Black);
 			bankomat1.rysujBankomat(okienko);
-			switch (stanEkranu)
-			{
+			switch (stanEkranu) {
 			case stan::poczatkowy:
 				ekranbankomatu1.RysujEkranPoczatkowy();
 				break;
@@ -94,6 +104,10 @@ int main() {
 			case stan::menu:
 				ekranbankomatu1.RysujMenu();
 				break;
+			case stan::potwierdzenie:
+				ekranbankomatu1.RysujPotwierdzeniePlatnosci();
+				break;
+
 			case stan::wyplacanie:
 				ekranbankomatu1.RysujWyplataGotowki();
 				break;
@@ -117,7 +131,7 @@ int main() {
 				break;
 			}
 		}
-	okienko.display();
+		okienko.display();
 	}
 	return 0;
 }

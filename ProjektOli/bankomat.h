@@ -3,6 +3,8 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include "Guzik.h"
+#include <string>
+
 class bankomat
 {
 private:
@@ -16,11 +18,13 @@ public:
     bool czyPierwszePodaniePinu = true;
     int pin[4];
     int petla = 0;
+    string kwota = "";
     bankomat() = default;
     bankomat(sf::RenderWindow* okienko);
-    void utworzTloEkranu(); 
+    void utworzTloEkranu();
     void rysujBankomat(sf::RenderWindow& okienko);
     bool CzytaniePinu();
+    bool PobierzKwote();
     void Stworz(sf::RenderWindow* okienko);
     Guzik tablicaPrzyciskow[23];
     int WybranieStrzalki(sf::RenderWindow& okienko);
