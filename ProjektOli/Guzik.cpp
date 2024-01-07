@@ -1,4 +1,5 @@
 #include "Guzik.h"
+
 Guzik::Guzik(string napis, sf::Vector2f rozmiarWektora, int wielkoscNapisu, sf::Color kolorTla, sf::Color kolorTekstu, sf::Font &czcionka)
 {
 	tekst.setFillColor(kolorTekstu);

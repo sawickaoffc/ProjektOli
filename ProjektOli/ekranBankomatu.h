@@ -30,7 +30,7 @@ private:
 	sf::RectangleShape KsztaltMenuZmianaPin;
 
 public:
-	string obecnyPIN; 
+	string podanyPin;
 	ekranBankomatu() = default;
 	void ekranPoczatkowy();
 	void RysujEkranPoczatkowy();
@@ -53,7 +53,7 @@ public:
 	void RysujWyjecieKarty();
 	void RysujAktywacjaKarty();
 	void AktywacjaKarty();
-	Guzik tablicaMenu[10]; 
+	Guzik tablicaMenu[9]; 
 	void LimitMiesieczny();
 	void RysujLimitMiesieczny();
 	void Stworz(sf::RenderWindow* okienko);

@@ -11,6 +11,17 @@ bankomat::bankomat(sf::RenderWindow* okienko)
 	utworzTloEkranu();
 	CzytaniePinu();
 }
+void bankomat::Stworz(sf::RenderWindow* okienko)
+{
+	this->okienko = okienko;
+	utworzTloEkranu();
+	CzytaniePinu();
+	WybranieStrzalki(*okienko);
+	WlozenieKarty(*okienko);
+	PodaniePinu(*okienko);
+	PoprawnoscPinu(*okienko);
+
+}
 
 void bankomat::utworzTloEkranu()
 {
@@ -82,7 +93,7 @@ void bankomat::utworzTloEkranu()
 	tablicaPrzyciskow[14].Czcionka(font);
 	tablicaPrzyciskow[14].Polozenie({ 710,560 });
 	
-	tablicaPrzyciskow[15] = Guzik("0", { 90,60 }, 40, sf::Color(59, 17, 82), sf::Color::White, font);
+	tablicaPrzyciskow[15] = Guzik("0", { 70,60 }, 40, sf::Color(59, 17, 82), sf::Color::White, font);
 	tablicaPrzyciskow[15].Czcionka(font);
 	tablicaPrzyciskow[15].Polozenie({ 710,680 });
 
@@ -126,103 +137,101 @@ void bankomat::rysujBankomat(sf::RenderWindow &okienko){
 
 string bankomat::CzytaniePinu()
 {
-	for (int i = 10; i < 22; i++)
-	{
-		if (tablicaPrzyciskow[i].PolozenieMyszki(*okienko) == true) {
-			switch (i) {
-			case 10:
-				if (petla < 4) {
-					pin[petla] = 1;
-					petla++;
-				}
-				break;
-			case 11:
-				if (petla < 4) {
-					pin[petla] = 2;
-					petla++;
-				}
-				break;
-			case 12:
-				if (petla < 4) {
-					pin[petla] = 3;
-					petla++;
-				}
-				break;
-			case 13:
-				if (petla < 4) {
-					pin[petla] = 4;
-					petla++;
-				}
-				break;
-			case 14:
-				if (petla < 4) {
-					pin[petla] = 5;
-					petla++;
-				}
-				break;
-			case 15:
-				if (petla < 4) {
-					pin[petla] = 0;
-					petla++;
-				}
-				break;
-			case 16:
-				if (petla < 4) {
-					pin[petla] = 6;
-					petla++;
-				}
-				break;
+	//petla = 0;
+		for (int i = 10; i < 22; i++)
+			{
+				if (tablicaPrzyciskow[i].PolozenieMyszki(*okienko) == true) {
+					switch (i) {
+					case 10:
+						if (petla < 4) {
+							pin[petla] = 1;
+							petla++;
+						}
+						break;
+					case 11:
+						if (petla < 4) {
+							pin[petla] = 2;
+							petla++;
+						}
+						break;
+					case 12:
+						if (petla < 4) {
+							pin[petla] = 3;
+							petla++;
+						}
+						break;
+					case 13:
+						if (petla < 4) {
+							pin[petla] = 4;
+							petla++;
+						}
+						break;
+					case 14:
+						if (petla < 4) {
+							pin[petla] = 5;
+							petla++;
+						}
+						break;
+					case 15:
+						if (petla < 4) {
+							pin[petla] = 0;
+							petla++;
+						}
+						break;
+					case 16:
+						if (petla < 4) {
+							pin[petla] = 6;
+							petla++;
+						}
+						break;
 
-			case 17:
-				if (petla < 4) {
-					pin[petla] = 7;
-					petla++;
-				}
+					case 17:
+						if (petla < 4) {
+							pin[petla] = 7;
+							petla++;
+						}
 
-				break;
-			case 18:
-				if (petla < 4) {
-					pin[petla] = 8;
-					petla++;
-				}
-				break;
-			case 19:
-				if (petla < 4) {
-					pin[petla] = 9;
-					petla++;
-				}
-				break;
-			case 20:
-				petla--;
-				break;
-			case 21:
-				if (petla == 3) {
-					for (int b = 0; b < 4; b++)
-					{
-						ostatecznyPIN[b] = pin[b];
+						break;
+					case 18:
+						if (petla < 4) {
+							pin[petla] = 8;
+							petla++;
+						}
+						break;
+					case 19:
+						if (petla < 4) {
+							pin[petla] = 9;
+							petla++;
+						}
+						break;
+					case 20:
+						petla--;
+						break;
+					case 21:
+						if (petla == 3) {
+							for (int b = 0; b < 4; b++)
+							{
+								ostatecznyPIN[b] = pin[b];
+							}
+						}
+						break;
 					}
 				}
-				break;
 			}
-			//cout << pin[petla -1];
-		}
-	}
 	string PIN = "";
 	for (int j = 0; j < 4; ++j) {
 		PIN += std::to_string(pin[j]);
 	}
 	cout << PIN;
+	//teraz zapamiêtujemy nasz pierwszopodany pin
+	if (!czyPierwszePodaniePinu) {
+		obecnyPIN = PIN;
+		czyPierwszePodaniePinu = true;
+	}
 	return PIN;
 }
 
 
-void bankomat::Stworz(sf::RenderWindow* okienko)
-{
-	this->okienko = okienko;
-	utworzTloEkranu();
-	CzytaniePinu();
-
-}
 
 int bankomat::WybranieStrzalki(sf::RenderWindow& okienko)
 {
@@ -272,6 +281,14 @@ bool bankomat::WlozenieKarty(sf::RenderWindow& okienko)
 bool bankomat::PodaniePinu(sf::RenderWindow& okienko)
 {
 	if (sf::Event::MouseButtonPressed && bankomat1.tablicaPrzyciskow[21].PolozenieMyszki(okienko) == true) {
+		return true;
+	}
+	else
+		return false;
+}
+bool bankomat::PoprawnoscPinu(sf::RenderWindow& okienko) {
+	ekranbankomatu1.podanyPin = bankomat1.CzytaniePinu();
+	if (ekranbankomatu1.podanyPin == bankomat1.obecnyPIN) {
 		return true;
 	}
 	else
