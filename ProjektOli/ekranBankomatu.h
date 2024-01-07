@@ -33,8 +33,8 @@ public:
     void DostepneSrodki();
     void RysujDostepneSrodki();
 
-    void PotwierdzeniePlatnosci();
-    void RysujPotwierdzeniePlatnosci();
+    void Potwierdzenie();
+    void RysujPotwierdzenie();
 
     void WyjecieKarty();
     void RysujWyjecieKarty();
@@ -46,6 +46,7 @@ public:
     void RysujZmianeLimitu();
 
     Guzik tablicaMenu[9];
+    Guzik tablicaPinu[1];
     Guzik tablicaWplacanie[2];
     Guzik tablicaWyplacanie[2];
     Guzik tablicaPotwierdzenie[2];

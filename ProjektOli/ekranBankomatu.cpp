@@ -14,11 +14,12 @@ void ekranBankomatu::Stworz(sf::RenderWindow* okienko)
 	Menu();
 	DostepneSrodki();
 	ZmianaPinu();
-	PotwierdzeniePlatnosci();
+	Potwierdzenie();
 	WyjecieKarty();
 	AktywacjaKarty();
 	LimitMiesieczny();
 }
+
 
 void ekranBankomatu::ekranPoczatkowy()
 {
@@ -58,9 +59,18 @@ bool ekranBankomatu::WpisywaniePinu()
 
 void ekranBankomatu::RysujWpisywaniePinu()
 {
+	string pin_str = "";
+	for (int j = 0; j < bankomat1.petla; j++) {
+		pin_str += std::to_string(bankomat1.pin[j]);
+	}
+
+	tablicaPinu[0] = Guzik(pin_str, { 260,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
+	tablicaPinu[0].Czcionka(font);
+	tablicaPinu[0].Polozenie({ 370, 400 });
+
 	okienko->draw(tloEkranu);
 	okienko->draw(WprowadzeniePinu);
-	okienko->display();
+	tablicaPinu[0].RysujPrzycisk(*okienko);
 }
 
 void ekranBankomatu::Menu()
@@ -108,7 +118,6 @@ void ekranBankomatu::RysujMenu()
 	}
 }
 
-
 void ekranBankomatu::WplataGotowki()
 {
 	tablicaWplacanie[0] = Guzik("Anuluj", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
@@ -130,7 +139,7 @@ void ekranBankomatu::RysujWplataGotowki() {
 	}
 }
 
-void ekranBankomatu::PotwierdzeniePlatnosci() {
+void ekranBankomatu::Potwierdzenie() {
 	tablicaPotwierdzenie[0] = Guzik("Anuluj", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
 	tablicaPotwierdzenie[0].Czcionka(font);
 	tablicaPotwierdzenie[0].Polozenie({ 180,60 });
@@ -146,8 +155,8 @@ void ekranBankomatu::PotwierdzeniePlatnosci() {
 
 }
 
-void ekranBankomatu::RysujPotwierdzeniePlatnosci() {
-	PotwierdzeniePlatnosci();
+void ekranBankomatu::RysujPotwierdzenie() {
+	Potwierdzenie();
 
 	okienko->draw(tloEkranu);
 	for (int i = 0; i < 2; ++i) {
@@ -280,8 +289,8 @@ void ekranBankomatu::ZmianaLimitu() {
 	tablicaZmianyLimitu[1] = Guzik(bankomat1.kwota, { 260,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
 	tablicaZmianyLimitu[1].Czcionka(font);
 	tablicaZmianyLimitu[1].Polozenie({ 370, 300 });
-
 }
+
 void ekranBankomatu::RysujZmianeLimitu() {
 	ZmianaLimitu();
 	okienko->draw(tloEkranu);
@@ -297,3 +306,8 @@ void ekranBankomatu::WyjecieKarty() {
 
 void ekranBankomatu::RysujWyjecieKarty() {
 }
+
+
+
+
+

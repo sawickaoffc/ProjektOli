@@ -95,7 +95,8 @@ int main() {
 					break;
 
 				case stan::wyplacanie:
-					if (bankomat1.PobierzKwote() && stof(bankomat1.kwota) <= bankomat1.stanKonta) {
+					if (bankomat1.PobierzKwote() && stof(bankomat1.kwota) <= bankomat1.stanKonta
+						&& stof(bankomat1.kwota) <= stof(bankomat1.limit)) {
 						poprzedniStan = stanEkranu;
 						stanEkranu = potwierdzenie;
 					}
@@ -131,7 +132,7 @@ int main() {
 						}
 					}
 
-					ekranbankomatu1.PotwierdzeniePlatnosci();
+					ekranbankomatu1.Potwierdzenie();
 					switch (bankomat1.WybranieStrzalki(okienko)) {
 					case 1:
 						stanEkranu = stan::menu;
@@ -215,7 +216,7 @@ int main() {
 				ekranbankomatu1.RysujMenu();
 				break;
 			case stan::potwierdzenie:
-				ekranbankomatu1.RysujPotwierdzeniePlatnosci();
+				ekranbankomatu1.RysujPotwierdzenie();
 				break;
 
 			case stan::wyplacanie:
