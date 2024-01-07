@@ -110,10 +110,6 @@ void ekranBankomatu::RysujMenu()
 	}
 }
 
-void ekranBankomatu::Anuluj()
-{
-}
-
 void ekranBankomatu::WplataGotowki()
 {
 }

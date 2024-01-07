@@ -26,26 +26,21 @@ void bankomat::utworzTloEkranu()
 	//ustalamy t³o ca³ego ekranu
 
 	tablicaPrzyciskow[0] = Guzik("", { 1000,500 }, 0, sf::Color{ 189, 76, 86 }, sf::Color::White, font);
-	tablicaPrzyciskow[0].Czcionka(font);
 	tablicaPrzyciskow[0].Polozenie({ 0,0 });
 
 	//nastêpnie t³o klawiatury poni¿ej ekranu
 
 	tablicaPrzyciskow[1] = Guzik("", { 1000, 300 }, 0, sf::Color{ 184, 187, 230 }, sf::Color::White, font);
-	tablicaPrzyciskow[1].Czcionka(font);
 	tablicaPrzyciskow[1].Polozenie({ 0,0 });
 	//opisujemy guziki z boku wyœwietlacza
-
+	 
 	tablicaPrzyciskow[2] = Guzik("->", { 70,50 }, 40, sf::Color{ 65, 75, 217 }, sf::Color::White, font);
-	tablicaPrzyciskow[2].Czcionka(font);
 	tablicaPrzyciskow[2].Polozenie({ 40,70 });
 
 	tablicaPrzyciskow[3] = Guzik("->", { 70, 50 }, 40, sf::Color(65, 75, 217), sf::Color::White, font);
-	tablicaPrzyciskow[3].Czcionka(font);
 	tablicaPrzyciskow[3].Polozenie({ 40,170 });
 
 	tablicaPrzyciskow[4] = Guzik("->", { 70, 50 }, 40, sf::Color(65, 75, 217), sf::Color::White, font);
-	tablicaPrzyciskow[4].Czcionka(font);
 	tablicaPrzyciskow[4].Polozenie({ 40,270 });
 
 	tablicaPrzyciskow[5] = Guzik("->", { 70, 50 }, 40, sf::Color(65, 75, 217), sf::Color::White, font);
@@ -70,72 +65,36 @@ void bankomat::utworzTloEkranu()
 
 	//dodajemy przyciski do klawiatury poni¿ej wyœwietlacza
 
-
-	tablicaPrzyciskow[10] = Guzik("1", { 70,60 }, 40, sf::Color(59, 17, 82), sf::Color::White, font);
-	tablicaPrzyciskow[10].Czcionka(font);
-	tablicaPrzyciskow[10].Polozenie({ 150,560 });
-	tablicaPrzyciskow[10].set_value(1);
-
-	tablicaPrzyciskow[11] = Guzik("2", { 70,60 }, 40, sf::Color(59, 17, 82), sf::Color::White, font);
-	tablicaPrzyciskow[11].Czcionka(font);
-	tablicaPrzyciskow[11].Polozenie({ 290,560 });
-	tablicaPrzyciskow[11].set_value(2);
-
-	tablicaPrzyciskow[12] = Guzik("3", { 70,60 }, 40, sf::Color(59, 17, 82), sf::Color::White, font);
-	tablicaPrzyciskow[12].Czcionka(font);
-	tablicaPrzyciskow[12].Polozenie({ 430,560 });
-	tablicaPrzyciskow[12].set_value(3);
-
-	tablicaPrzyciskow[13] = Guzik("4", { 70,60 }, 40, sf::Color(59, 17, 82), sf::Color::White, font);
-	tablicaPrzyciskow[13].Czcionka(font);
-	tablicaPrzyciskow[13].Polozenie({ 570,560 });
-	tablicaPrzyciskow[13].set_value(4);
-
-	tablicaPrzyciskow[14] = Guzik("5", { 70,60 }, 40, sf::Color(59, 17, 82), sf::Color::White, font);
-	tablicaPrzyciskow[14].Czcionka(font);
-	tablicaPrzyciskow[14].Polozenie({ 710,560 });
-	tablicaPrzyciskow[14].set_value(5);
+	for (int i = 1; i < 6; i++) {
+		tablicaPrzyciskow[i+9] = Guzik(std::to_string(i), {70, 60}, 40, sf::Color(59, 17, 82), sf::Color::White, font);
+		tablicaPrzyciskow[i+9].Czcionka(font);
+		float liczbaFloat = static_cast<float>(140*i);
+		tablicaPrzyciskow[i+9].Polozenie({liczbaFloat+10, 560});
+		tablicaPrzyciskow[i+9].set_value(i);
+	}
+	for (int i = 6; i < 10; i++) {
+		tablicaPrzyciskow[i + 10] = Guzik(std::to_string(i), { 70, 60 }, 40, sf::Color(59, 17, 82), sf::Color::White, font);
+		tablicaPrzyciskow[i + 10].Czcionka(font);
+		float liczbaFloat = static_cast<float>(140 * (i-5));
+		tablicaPrzyciskow[i + 10].Polozenie({ liczbaFloat + 10, 680 });
+		tablicaPrzyciskow[i + 10].set_value(i);
+	}
 
 	tablicaPrzyciskow[15] = Guzik("0", { 70,60 }, 40, sf::Color(59, 17, 82), sf::Color::White, font);
-	tablicaPrzyciskow[15].Czcionka(font);
 	tablicaPrzyciskow[15].Polozenie({ 710,680 });
 	tablicaPrzyciskow[15].set_value(0);
 
-	tablicaPrzyciskow[16] = Guzik("6", { 70,60 }, 40, sf::Color(59, 17, 82), sf::Color::White, font);
-	tablicaPrzyciskow[16].Czcionka(font);
-	tablicaPrzyciskow[16].Polozenie({ 150,680 });
-	tablicaPrzyciskow[16].set_value(6);
-
-	tablicaPrzyciskow[17] = Guzik("7", { 70,60 }, 40, sf::Color(59, 17, 82), sf::Color::White, font);
-	tablicaPrzyciskow[17].Czcionka(font);
-	tablicaPrzyciskow[17].Polozenie({ 290,680 });
-	tablicaPrzyciskow[17].set_value(7);
-
-	tablicaPrzyciskow[18] = Guzik("8", { 70,60 }, 40, sf::Color(59, 17, 82), sf::Color::White, font);
-	tablicaPrzyciskow[18].Czcionka(font);
-	tablicaPrzyciskow[18].Polozenie({ 430,680 });
-	tablicaPrzyciskow[18].set_value(8);
-
-	tablicaPrzyciskow[19] = Guzik("9", { 70,60 }, 40, sf::Color(59, 17, 82), sf::Color::White, font);
-	tablicaPrzyciskow[19].Czcionka(font);
-	tablicaPrzyciskow[19].Polozenie({ 570,680 });
-	tablicaPrzyciskow[19].set_value(9);
-
 	tablicaPrzyciskow[20] = Guzik("Usun", { 100,60 }, 20, sf::Color(59, 17, 82), sf::Color::White, font);
-	tablicaPrzyciskow[20].Czcionka(font);
 	tablicaPrzyciskow[20].Polozenie({ 840,560 });
 	tablicaPrzyciskow[20].set_value(-2);
 
 	tablicaPrzyciskow[21] = Guzik("Enter", { 100,60 }, 20, sf::Color(59, 17, 82), sf::Color::White, font);
-	tablicaPrzyciskow[21].Czcionka(font);
 	tablicaPrzyciskow[21].Polozenie({ 840,680 });
 	tablicaPrzyciskow[21].set_value(-3);
 	//	font.loadFromFile("Roboto-Bold.ttf"); //pobieramy czcionke do napisów
-
-
-		//robie przycisk do ekranu
+	
+	//robie przycisk do ekranu
 	tablicaPrzyciskow[22] = Guzik("Wlozono karte", { 200,80 }, 30, sf::Color{ 59, 17, 82 }, sf::Color::White, font);
-	tablicaPrzyciskow[22].Czcionka(font);
 	tablicaPrzyciskow[22].Polozenie({ 630,20 });
 }
 
@@ -147,30 +106,30 @@ void bankomat::rysujBankomat(sf::RenderWindow& okienko) {
 
 bool bankomat::CzytaniePinu() {
 	for (int i = 10; i < 22; i++) {
-		if (tablicaPrzyciskow[i].PolozenieMyszki(*okienko) == true) {
+		if (tablicaPrzyciskow[i].PolozenieMyszki(*okienko) == true) { //sprawdzam czy najechaliśmy na dany przycisk
 
-			if (tablicaPrzyciskow[i].get_value() == -2 && petla > 0) { // delete
-				petla--;
+			if (tablicaPrzyciskow[i].get_value() == -2 && petla > 0) { // sprawdzamy czy to nasz przycisk usun
+				petla--; //cofam sie do poprzedniego indeksu żeby nadpisać ten wyraz
 			}
 
-			else if (tablicaPrzyciskow[i].get_value() == -3) {
+			else if (tablicaPrzyciskow[i].get_value() == -3) {  // sprawdzamy czy to nasz przycisk enter
 
-				if (petla >= 3 && czyPierwszePodaniePinu) {
+				if (petla >= 3 && czyPierwszePodaniePinu) {  // zapisujemy nasz pin
 					czyPierwszePodaniePinu = false;
 					is_valid_pin = true;
-
 					obecnyPIN = "";
 					for (int j = 0; j < 4; j++) {
 						obecnyPIN += std::to_string(pin[j]);
 					}
 				}
-				else if (petla >= 3 && !czyPierwszePodaniePinu) {
+				// jeśli to już niepierwsze wpisywanie pinu to sprawdzamy jego poprawnosc porownujac go do pierwszego wpisania
+				else if (petla >= 3 && !czyPierwszePodaniePinu) { 
 					string pin_str = ""; // tablica -> string
-					for (int j = 0; j < 4; j++) {
-						pin_str += std::to_string(pin[j]);
+					for (int j = 0; j < 4; j++) { //zakres naszej tablicy
+						pin_str += std::to_string(pin[j]); //spisujemy nasz podany pin
 					}
 					cout << pin_str << "  " << obecnyPIN << endl;
-					if (pin_str == obecnyPIN) {
+					if (pin_str == obecnyPIN) { //jesli pin jest taki sam to wiemy ze jest on poprawny
 						is_valid_pin = true;
 					}
 					else {
@@ -178,7 +137,7 @@ bool bankomat::CzytaniePinu() {
 					}
 				}
 
-				else if (petla < 3) {
+				else if (petla < 3) { //jesli chcemy klinac enter bez uzupelnienia calej tablicy
 					cout << "Dokoncz pin" << endl;
 				}
 
@@ -194,14 +153,14 @@ bool bankomat::CzytaniePinu() {
 			}
 
 			if (tablicaPrzyciskow[i].get_value() >= 0) {
-				pin[petla] = tablicaPrzyciskow[i].get_value();
+				pin[petla] = tablicaPrzyciskow[i].get_value();  //wpisywanie w tablice wartosci guzikow
 				petla++;
 			}
 		}
 	}
 	// wyswietlanie pinu
 	string PIN = "";
-	for (int j = 0; j < petla; ++j) {
+	for (int j = 0; j < petla; ++j) { //konwersja na string
 		PIN += std::to_string(pin[j]);
 	}
 	cout << "PIN:  " << PIN << endl;

@@ -14,21 +14,7 @@ private:
 	sf::Font font;
 	sf::Text Powitanie;
 	sf::Text WprowadzeniePinu;
-	sf::Text MenuNaglowek;
-	sf::Text MenuAnuluj;
-	sf::Text MenuAktywacjaKarty;
-	sf::Text MenuWyplataGotowki;
-	sf::Text MenuWplataGotowki;
-	sf::Text MenuDostepneSrodki;
-	sf::Text MenuZmianaPin;
-//	sf::RectangleShape KsztaltMenuNaglowek;
-	sf::RectangleShape KsztaltMenuAnuluj;
-	sf::RectangleShape KsztaltMenuAktywacjaKarty;
-	sf::RectangleShape KsztaltMenuWyplataGotowki;
-	sf::RectangleShape KsztaltMenuWplataGotowki;
-	sf::RectangleShape KsztaltMenuDostepneSrodki;
-	sf::RectangleShape KsztaltMenuZmianaPin;
-
+	
 public:
 	ekranBankomatu() = default;
 	void ekranPoczatkowy();
@@ -37,7 +23,6 @@ public:
 	void RysujWpisywaniePinu();
 	void Menu();
 	void RysujMenu();
-	void Anuluj();
 	void WplataGotowki();
 	void RysujWplataGotowki();
 	void WyplataGotowki();

@@ -23,8 +23,7 @@ int main() {
 
 	int stanEkranu = stan::poczatkowy;
 	while (okienko.isOpen()) {
-		while (okienko.pollEvent(event))
-		{
+		while (okienko.pollEvent(event)) {
 			switch (event.type)
 			{
 			case sf::Event::Closed:
@@ -38,14 +37,14 @@ int main() {
 					}
 					break;
 				case stan::wpisywaniepinu:
-				if (bankomat1.CzytaniePinu() == true) {
-					stanEkranu = stan::menu;
-				}
+					if (bankomat1.CzytaniePinu() == true) {
+						stanEkranu = stan::menu;
+					}
 					break;
 				case stan::menu:
 					switch (bankomat1.WybranieStrzalki(okienko)) {
 					case 1:
-						bankomat1.is_valid_pin = false; 
+						bankomat1.is_valid_pin = false;
 						stanEkranu = stan::poczatkowy;
 						break;
 					case 2:
@@ -62,12 +61,12 @@ int main() {
 						break;
 					case 6:
 						bankomat1.petla = 0;
-						stanEkranu = stan::zmianaPinu; 
+						stanEkranu = stan::zmianaPinu;
 						bankomat1.CzytaniePinu();
 						if (bankomat1.is_valid_pin == true) {
 
 						}
-						
+
 						break;
 					case 7:
 						stanEkranu = stan::limit;
@@ -118,7 +117,7 @@ int main() {
 				break;
 			}
 		}
-		okienko.display();
+	okienko.display();
 	}
 	return 0;
 }
