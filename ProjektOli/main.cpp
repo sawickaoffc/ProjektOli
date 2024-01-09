@@ -11,9 +11,8 @@ bankomat bankomat1;
 ekranBankomatu ekranbankomatu1;
 enum stan {
 	poczatkowy, wpisywaniepinu, menu, wyplacanie, wplacanie, srodki, aktywacja,
-	zmianaPinu, wyjeciekarty, limit, potwierdzenie, zmianalimitu
+	zmianaPinu, wyjeciekarty, limity, limitmiesieczny, potwierdzenie, zmianalimitu, limitdzienny
 };
-
 using namespace std;
 int main() {
 	sf::VideoMode rozmiar(1000, 800);
@@ -27,6 +26,7 @@ int main() {
 
 	int poprzedniStan = stan::poczatkowy;
 	int stanEkranu = stan::poczatkowy;
+	int typLimitu = 0;
 	while (okienko.isOpen()) {
 		while (okienko.pollEvent(event)) {
 			switch (event.type) {
@@ -51,7 +51,7 @@ int main() {
 					break;
 
 				case stan::menu:
-					cout << "Stan konta: " << bankomat1.stanKonta << endl;
+					std::cout << "Stan konta: " << bankomat1.stanKonta << endl;
 					switch (bankomat1.WybranieStrzalki(okienko)) {
 					case 1:
 						stanEkranu = stan::poczatkowy;
@@ -74,7 +74,7 @@ int main() {
 						stanEkranu = stan::zmianaPinu;
 						break;
 					case 7:
-						stanEkranu = stan::limit;
+						stanEkranu = stan::limity;
 						break;
 					case 8:
 						break;
@@ -96,7 +96,7 @@ int main() {
 
 				case stan::wyplacanie:
 					if (bankomat1.PobierzKwote() && stof(bankomat1.kwota) <= bankomat1.stanKonta
-						&& stof(bankomat1.kwota) <= stof(bankomat1.limit)) {
+						&& stof(bankomat1.kwota) <= stof(bankomat1.limitZwykly)) {
 						poprzedniStan = stanEkranu;
 						stanEkranu = potwierdzenie;
 					}
@@ -127,11 +127,22 @@ int main() {
 							bankomat1.czyPierwszePodaniePinu = true;
 							stanEkranu = stan::wpisywaniepinu;
 						}
-						else if (poprzedniStan == zmianalimitu) {
-							bankomat1.limit = bankomat1.kwota;
+						else if (poprzedniStan == zmianalimitu && typLimitu == 0) {
+							bankomat1.limitMiesieczny = bankomat1.kwota;
+							bankomat1.kwota = "0";
 						}
-					}
+						else if (poprzedniStan == zmianalimitu && typLimitu == 1) {
+							bankomat1.limitDzienny = bankomat1.kwota;
+							bankomat1.kwota = "0";
 
+						}
+						else if (poprzedniStan == zmianalimitu && typLimitu == 2) {
+							bankomat1.limitZwykly = bankomat1.kwota;
+							bankomat1.kwota = "0";
+
+						}
+						cout << poprzedniStan << typLimitu << endl;
+					}
 					ekranbankomatu1.Potwierdzenie();
 					switch (bankomat1.WybranieStrzalki(okienko)) {
 					case 1:
@@ -170,21 +181,28 @@ int main() {
 						break;
 
 					}
+					break;
 
-				case stan::limit:
-					if (bankomat1.PobierzKwote() && stof(bankomat1.kwota) <= bankomat1.stanKonta) {
-						poprzedniStan = stanEkranu;
-						stanEkranu = potwierdzenie;
-					}
-
+				case stan::limity:
+					poprzedniStan = limity;
 					switch (bankomat1.WybranieStrzalki(okienko)) {
 					case 1:
 						stanEkranu = stan::menu;
 						break;
-					case 5:
+					case 6:
+						typLimitu = 0;
+						stanEkranu = stan::zmianalimitu;
+						break;
+					case 7:
+						typLimitu = 1;
+						stanEkranu = stan::zmianalimitu;
+						break;
+					case 8:
+						typLimitu = 2;
 						stanEkranu = stan::zmianalimitu;
 						break;
 					}
+					break;
 
 				case stan::zmianalimitu:
 					if (bankomat1.PobierzKwote() && stof(bankomat1.kwota) >= 0) {
@@ -197,10 +215,12 @@ int main() {
 						stanEkranu = stan::menu;
 						break;
 					}
+					break;
+					
 
 				}
 				break;
-				cout << okienko.isOpen() << okienko.pollEvent(event) << endl;
+				std::cout << okienko.isOpen() << okienko.pollEvent(event) << endl;
 			}
 
 			okienko.clear(sf::Color::Black);
@@ -237,15 +257,18 @@ int main() {
 			case stan::wyjeciekarty:
 				ekranbankomatu1.RysujWyjecieKarty();
 				break;
-			case stan::limit:
-				ekranbankomatu1.RysujLimitMiesieczny();
+			case stan::limity:
+				ekranbankomatu1.RysujLimity();
 				break;
 			case stan::zmianalimitu:
 				ekranbankomatu1.RysujZmianeLimitu();
 				break;
+			case stan::limitdzienny:
+				ekranbankomatu1.RysujLimitDzienny();
+				break;
 			}
 		}
 		okienko.display();
-	}
+	}	
 	return 0;
 }

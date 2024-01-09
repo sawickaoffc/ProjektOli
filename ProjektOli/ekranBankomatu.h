@@ -53,10 +53,13 @@ public:
     Guzik tablicaSrodki[2];
     Guzik tablicaAktywacja[3];
     Guzik tablicaZmianyPinu[2];
-    Guzik tablicaLimitu[3];
+    Guzik tablicaLimitu[7];
     Guzik tablicaZmianyLimitu[2];
 
-    void LimitMiesieczny();
-    void RysujLimitMiesieczny();
+    void Limity();
+    void RysujLimity();
+
+    void LimitDzienny();
+    void RysujLimitDzienny();
     void Stworz(sf::RenderWindow* okienko);
 };

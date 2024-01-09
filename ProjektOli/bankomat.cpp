@@ -94,7 +94,7 @@ void bankomat::utworzTloEkranu()
 
 
 		//robie przycisk do ekranu
-	tablicaPrzyciskow[22] = Guzik("Wlozono karte", { 200,80 }, 30, sf::Color{ 59, 17, 82 }, sf::Color::White, font);
+	tablicaPrzyciskow[22] = Guzik("Wloz karte", { 200,80 }, 30, sf::Color{ 59, 17, 82 }, sf::Color::White, font);
 	tablicaPrzyciskow[22].Czcionka(font);
 	tablicaPrzyciskow[22].Polozenie({ 630,20 });
 }
@@ -200,7 +200,6 @@ bool bankomat::WlozenieKarty(sf::RenderWindow& okienko)
 bool bankomat::PobierzKwote() {
 	for (int i = 10; i < 22; i++) {
 		if (tablicaPrzyciskow[i].PolozenieMyszki(*okienko) == true) {
-
 			if (tablicaPrzyciskow[i].get_value() >= 0) { // delete
 				kwota += std::to_string(tablicaPrzyciskow[i].get_value());
 			}

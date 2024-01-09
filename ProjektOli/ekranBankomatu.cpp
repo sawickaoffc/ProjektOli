@@ -3,7 +3,6 @@
 extern bankomat bankomat1;
 extern ekranBankomatu ekranbankomatu1;
 
-
 void ekranBankomatu::Stworz(sf::RenderWindow* okienko)
 {
 	this->okienko = okienko; //referencja
@@ -17,7 +16,7 @@ void ekranBankomatu::Stworz(sf::RenderWindow* okienko)
 	Potwierdzenie();
 	WyjecieKarty();
 	AktywacjaKarty();
-	LimitMiesieczny();
+	Limity();
 }
 
 
@@ -88,7 +87,7 @@ void ekranBankomatu::Menu()
 	tablicaMenu[2].Czcionka(font);
 	tablicaMenu[2].Polozenie({ 180,260 });
 
-	tablicaMenu[3] = Guzik("Dostêpne Srodki", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaMenu[3] = Guzik("Dostepne Srodki", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
 	tablicaMenu[3].Czcionka(font);
 	tablicaMenu[3].Polozenie({ 180,360 });
 
@@ -100,7 +99,7 @@ void ekranBankomatu::Menu()
 	tablicaMenu[5].Czcionka(font);
 	tablicaMenu[5].Polozenie({ 560, 160 });
 
-	tablicaMenu[6] = Guzik("Limit miesieczny", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaMenu[6] = Guzik("Limity", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
 	tablicaMenu[6].Czcionka(font);
 	tablicaMenu[6].Polozenie({ 560,260 });
 
@@ -259,24 +258,64 @@ void ekranBankomatu::RysujZmianaPinu()
 }
 
 
-void ekranBankomatu::LimitMiesieczny() {
+void ekranBankomatu::Limity() {
 	tablicaLimitu[0] = Guzik("Anuluj", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
 	tablicaLimitu[0].Czcionka(font);
 	tablicaLimitu[0].Polozenie({ 180,60 });
 
-	tablicaLimitu[1] = Guzik("Ustaw inny limit", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::Black, font);
+	tablicaLimitu[1] = Guzik("Ustaw limit miesieczny", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::Black, font);
 	tablicaLimitu[1].Czcionka(font);
-	tablicaLimitu[1].Polozenie({ 560,60 });
+	tablicaLimitu[1].Polozenie({ 560,160 });
 
-	tablicaLimitu[2] = Guzik("Aktualny limit: " + bankomat1.limit, { 260,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
+	tablicaLimitu[2] = Guzik("Aktualny limit miesieczny: " + bankomat1.limitMiesieczny, { 300,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
 	tablicaLimitu[2].Czcionka(font);
-	tablicaLimitu[2].Polozenie({ 370, 300 });
+	tablicaLimitu[2].Polozenie({ 180, 160 });
+
+	tablicaLimitu[3] = Guzik("Ustaw limit dzienny", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::Black, font);
+	tablicaLimitu[3].Czcionka(font);
+	tablicaLimitu[3].Polozenie({ 560, 260 });
+
+	tablicaLimitu[4] = Guzik("Aktualny limit dzienny: " + bankomat1.limitDzienny, { 300,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
+	tablicaLimitu[4].Czcionka(font);
+	tablicaLimitu[4].Polozenie({ 180, 260 });
+
+	tablicaLimitu[5] = Guzik("Ustaw limit zwykly", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::Black, font);
+	tablicaLimitu[5].Czcionka(font);
+	tablicaLimitu[5].Polozenie({ 560, 360 });
+
+	tablicaLimitu[6] = Guzik("Aktualny limit zwykly: " + bankomat1.limitZwykly, { 300,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
+	tablicaLimitu[6].Czcionka(font);
+	tablicaLimitu[6].Polozenie({ 180, 360 });
 }
 
-void ekranBankomatu::RysujLimitMiesieczny() {
-	LimitMiesieczny();
+void ekranBankomatu::RysujLimity() {
+	Limity();
 	okienko->draw(tloEkranu);
-	for (int i = 0; i < 3; ++i) {
+	for (int i = 0; i < 7; ++i) {
+		tablicaLimitu[i].RysujPrzycisk(*okienko);
+	}
+}
+
+void ekranBankomatu::LimitDzienny()
+{
+	tablicaLimitu[3] = Guzik("Anuluj", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaLimitu[3].Czcionka(font);
+	tablicaLimitu[3].Polozenie({ 180,60 });
+
+	tablicaLimitu[4] = Guzik("Ustaw inny limit", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::Black, font);
+	tablicaLimitu[4].Czcionka(font);
+	tablicaLimitu[4].Polozenie({ 560,60 });
+
+	tablicaLimitu[5] = Guzik("Aktualny limit: " + bankomat1.limitDzienny, { 260,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
+	tablicaLimitu[5].Czcionka(font);
+	tablicaLimitu[5].Polozenie({ 370, 300 });
+}
+
+void ekranBankomatu::RysujLimitDzienny()
+{
+	LimitDzienny();
+	okienko->draw(tloEkranu);
+	for (int i = 3; i < 6; ++i) {
 		tablicaLimitu[i].RysujPrzycisk(*okienko);
 	}
 }

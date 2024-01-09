@@ -22,7 +22,11 @@ public:
     int petla = 0;
     string karta = "nieaktywna";
     string kwota = "";
-    string limit = "5000";
+    string limitMiesieczny = "5000";
+    string limitDzienny = "500";
+    string limitZwykly = "200";
+    vector<vector<int>> zasobnik { {10, 0}, {20, 0}, {50, 0}, {100, 0}, {200, 0}, {500, 0} };
+
     float stanKonta = 0;
     bankomat() = default;
     bankomat(sf::RenderWindow* okienko);
