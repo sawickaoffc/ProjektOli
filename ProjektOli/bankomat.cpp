@@ -214,6 +214,27 @@ bool bankomat::PobierzKwote() {
 	return false;
 }
 
+vector<int> bankomat::WydajBanknoty(int kwota){
+	for (int i = 6; i > 0; i--) {
+		if (kwota >= banknoty[i]) {
+			int n = kwota / banknoty[i];
+			kwota = kwota - n*banknoty[i];
+			wydanie[6-i] = n;
+		}
+	}
+	ilosc = "";
+	for (int i = 0; i < 6; i++) {
+		ilosc += std::to_string(banknoty[i]);
+		ilosc += "*";
+		ilosc += std::to_string(wydanie[i]);
+		ilosc += ",   ";
+
+	
+	}
+	
+	return wydanie;
+}
+
 
 //pomysl: stworzenie szablonu do prostok¹ta i podpinamy przycisk jako ogolny obraz 
 // pod nasze poszczegolne prostokaty i wtedy sprawdzamy z czym sie porywa nam myszka

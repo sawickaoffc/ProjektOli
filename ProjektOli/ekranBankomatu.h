@@ -45,11 +45,15 @@ public:
     void ZmianaLimitu();
     void RysujZmianeLimitu();
 
+    void WydaneBanknoty();
+    void RysujWydaneBanknoty();
+
     Guzik tablicaMenu[9];
     Guzik tablicaPinu[1];
     Guzik tablicaWplacanie[2];
+    Guzik tablicaWydaneBanknoty[2];
     Guzik tablicaWyplacanie[2];
-    Guzik tablicaPotwierdzenie[2];
+    Guzik tablicaPotwierdzenie[3];
     Guzik tablicaSrodki[2];
     Guzik tablicaAktywacja[3];
     Guzik tablicaZmianyPinu[2];

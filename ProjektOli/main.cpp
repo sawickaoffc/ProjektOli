@@ -11,7 +11,8 @@ bankomat bankomat1;
 ekranBankomatu ekranbankomatu1;
 enum stan {
 	poczatkowy, wpisywaniepinu, menu, wyplacanie, wplacanie, srodki, aktywacja,
-	zmianaPinu, wyjeciekarty, limity, limitmiesieczny, potwierdzenie, zmianalimitu, limitdzienny
+	zmianaPinu, wyjeciekarty, limity, limitmiesieczny, potwierdzenie, zmianalimitu,
+	limitdzienny, wydaneBanknoty
 };
 using namespace std;
 int main() {
@@ -122,6 +123,9 @@ int main() {
 						}
 						else if (poprzedniStan == wyplacanie) {
 							bankomat1.stanKonta -= stof(bankomat1.kwota);
+							vector<int> wyplata = bankomat1.WydajBanknoty(stof(bankomat1.kwota));
+							stanEkranu = stan::wydaneBanknoty;
+
 						}
 						else if (poprzedniStan == zmianaPinu) {
 							bankomat1.czyPierwszePodaniePinu = true;
@@ -216,7 +220,14 @@ int main() {
 						break;
 					}
 					break;
-					
+				case stan::wydaneBanknoty:
+					poprzedniStan = stanEkranu;
+					switch (bankomat1.WybranieStrzalki(okienko)) {
+					case 1:
+						stanEkranu = stan::menu;
+						break;
+					}
+					break;
 
 				}
 				break;
@@ -265,6 +276,9 @@ int main() {
 				break;
 			case stan::limitdzienny:
 				ekranbankomatu1.RysujLimitDzienny();
+				break;
+			case stan::wydaneBanknoty:
+				ekranbankomatu1.RysujWydaneBanknoty();
 				break;
 			}
 		}

@@ -152,13 +152,16 @@ void ekranBankomatu::Potwierdzenie() {
 	tablicaPotwierdzenie[1].Czcionka(font);
 	tablicaPotwierdzenie[1].Polozenie({ 370, 300 });
 
+	tablicaPotwierdzenie[2] = Guzik("Potwierdz swoj pin", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaPotwierdzenie[2].Czcionka(font);
+	tablicaPotwierdzenie[2].Polozenie({ 370,160 });
 }
 
 void ekranBankomatu::RysujPotwierdzenie() {
 	Potwierdzenie();
 
 	okienko->draw(tloEkranu);
-	for (int i = 0; i < 2; ++i) {
+	for (int i = 0; i < 3; ++i) {
 		tablicaPotwierdzenie[i].RysujPrzycisk(*okienko);
 	}
 }
@@ -338,6 +341,28 @@ void ekranBankomatu::RysujZmianeLimitu() {
 	}
 
 }
+
+void ekranBankomatu::WydaneBanknoty()
+{
+	tablicaWydaneBanknoty[0] = Guzik("Anuluj", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaWydaneBanknoty[0].Czcionka(font);
+	tablicaWydaneBanknoty[0].Polozenie({ 180,60 });
+	/*
+	tablicaWydaneBanknoty[1] = Guzik("Wydane banknoty:\nilosc:" + bankomat1.ilosc, {360, 150}, 20, sf::Color{255, 255, 255}, sf::Color::Black, font);
+	tablicaWydaneBanknoty[1].Czcionka(font);
+	tablicaWydaneBanknoty[1].Polozenie({ 320, 300 });
+	*/
+}
+
+void ekranBankomatu::RysujWydaneBanknoty() {
+	WydaneBanknoty();
+	okienko->draw(tloEkranu);
+	for (int i = 0; i < 1; ++i) {
+		tablicaWydaneBanknoty[i].RysujPrzycisk(*okienko);
+	}
+
+}
+
 
 
 void ekranBankomatu::WyjecieKarty() {

@@ -25,8 +25,10 @@ public:
     string limitMiesieczny = "5000";
     string limitDzienny = "500";
     string limitZwykly = "200";
-    vector<vector<int>> zasobnik { {10, 0}, {20, 0}, {50, 0}, {100, 0}, {200, 0}, {500, 0} };
-
+    //vector<vector<int>> banknoty { {10, 1}, {20, 2}, {50, 1}, {100, 1}, {200, 2}, {500, 1000} };
+    vector<int> wydanie{ 0,0,0,0,0,0 };
+    vector<int> banknoty{ 10, 20, 50, 100, 200, 500 };
+    string ilosc;
     float stanKonta = 0;
     bankomat() = default;
     bankomat(sf::RenderWindow* okienko);
@@ -34,9 +36,9 @@ public:
     void rysujBankomat(sf::RenderWindow& okienko);
     bool CzytaniePinu();
     bool PobierzKwote();
+    vector<int> WydajBanknoty(int kwota);
     void Stworz(sf::RenderWindow* okienko);
     Guzik tablicaPrzyciskow[23];
     int WybranieStrzalki(sf::RenderWindow& okienko);
     bool WlozenieKarty(sf::RenderWindow& okienko);
-
 };
