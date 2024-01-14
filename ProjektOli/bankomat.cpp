@@ -137,6 +137,7 @@ bool bankomat::CzytaniePinu() {
 					}
 					else {
 						is_valid_pin = false;
+						iloscProbPin--;
 					}
 				}
 
@@ -214,13 +215,10 @@ bool bankomat::PobierzKwote() {
 	return false;
 }
 
-vector<int> bankomat::WydajBanknoty(int kwota){
-	for (int i = 6; i > 0; i--) {
-		if (kwota >= banknoty[i]) {
-			int n = kwota / banknoty[i];
-			kwota = kwota - n*banknoty[i];
-			wydanie[6-i] = n;
-		}
+string bankomat::WydajBanknoty(int kwota){
+	for (int i = 5; i > 0; i--) {
+		wydanie[i] = kwota / banknoty[i];
+		kwota %= banknoty[i];
 	}
 	ilosc = "";
 	for (int i = 0; i < 6; i++) {
@@ -228,11 +226,8 @@ vector<int> bankomat::WydajBanknoty(int kwota){
 		ilosc += "*";
 		ilosc += std::to_string(wydanie[i]);
 		ilosc += ",   ";
-
-	
 	}
-	
-	return wydanie;
+	return ilosc;
 }
 
 

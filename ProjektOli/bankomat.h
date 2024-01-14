@@ -15,6 +15,7 @@ private:
 
 
 public:
+    int iloscProbPin = 3;
     string obecnyPIN = ""; // do logowania
     bool is_valid_pin = false;
     bool czyPierwszePodaniePinu = true;
@@ -26,8 +27,8 @@ public:
     string limitDzienny = "500";
     string limitZwykly = "200";
     //vector<vector<int>> banknoty { {10, 1}, {20, 2}, {50, 1}, {100, 1}, {200, 2}, {500, 1000} };
-    vector<int> wydanie{ 0,0,0,0,0,0 };
-    vector<int> banknoty{ 10, 20, 50, 100, 200, 500 };
+    int wydanie[6] = { 0,0,0,0,0,0};
+    int banknoty[6] = { 10, 20, 50, 100, 200, 500 };
     string ilosc;
     float stanKonta = 0;
     bankomat() = default;
@@ -36,7 +37,7 @@ public:
     void rysujBankomat(sf::RenderWindow& okienko);
     bool CzytaniePinu();
     bool PobierzKwote();
-    vector<int> WydajBanknoty(int kwota);
+    string WydajBanknoty(int kwota);
     void Stworz(sf::RenderWindow* okienko);
     Guzik tablicaPrzyciskow[23];
     int WybranieStrzalki(sf::RenderWindow& okienko);

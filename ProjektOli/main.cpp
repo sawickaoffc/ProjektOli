@@ -111,7 +111,7 @@ int main() {
 
 					// Potwierdzenia pinem
 				case stan::potwierdzenie:
-					if (bankomat1.CzytaniePinu()) {
+					if (bankomat1.CzytaniePinu() && bankomat1.iloscProbPin>0) {
 
 						stanEkranu = stan::menu; // dodac do stanu konta
 						std::memset(bankomat1.pin, 0, sizeof(bankomat1.pin));
@@ -123,7 +123,7 @@ int main() {
 						}
 						else if (poprzedniStan == wyplacanie) {
 							bankomat1.stanKonta -= stof(bankomat1.kwota);
-							vector<int> wyplata = bankomat1.WydajBanknoty(stof(bankomat1.kwota));
+							string wyplata = bankomat1.WydajBanknoty(stof(bankomat1.kwota));
 							stanEkranu = stan::wydaneBanknoty;
 
 						}
@@ -146,6 +146,10 @@ int main() {
 
 						}
 						cout << poprzedniStan << typLimitu << endl;
+					}
+					else if (bankomat1.iloscProbPin ==0)
+					{
+						stanEkranu = poczatkowy;
 					}
 					ekranbankomatu1.Potwierdzenie();
 					switch (bankomat1.WybranieStrzalki(okienko)) {

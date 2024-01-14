@@ -347,17 +347,17 @@ void ekranBankomatu::WydaneBanknoty()
 	tablicaWydaneBanknoty[0] = Guzik("Anuluj", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
 	tablicaWydaneBanknoty[0].Czcionka(font);
 	tablicaWydaneBanknoty[0].Polozenie({ 180,60 });
-	/*
-	tablicaWydaneBanknoty[1] = Guzik("Wydane banknoty:\nilosc:" + bankomat1.ilosc, {360, 150}, 20, sf::Color{255, 255, 255}, sf::Color::Black, font);
+	
+	tablicaWydaneBanknoty[1] = Guzik("Wydane banknoty:\nbanknot*ilosc:\n" + bankomat1.WydajBanknoty(stof(bankomat1.kwota)), {460, 150}, 20, sf::Color{255, 255, 255}, sf::Color::Black, font);
 	tablicaWydaneBanknoty[1].Czcionka(font);
-	tablicaWydaneBanknoty[1].Polozenie({ 320, 300 });
-	*/
+	tablicaWydaneBanknoty[1].Polozenie({ 270, 300 });
+	
 }
 
 void ekranBankomatu::RysujWydaneBanknoty() {
 	WydaneBanknoty();
 	okienko->draw(tloEkranu);
-	for (int i = 0; i < 1; ++i) {
+	for (int i = 0; i < 2; ++i) {
 		tablicaWydaneBanknoty[i].RysujPrzycisk(*okienko);
 	}
 
