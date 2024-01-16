@@ -285,8 +285,9 @@ int main() {
 				ekranbankomatu1.RysujWydaneBanknoty();
 				break;
 			}
+			okienko.display();
 		}
-		okienko.display();
+		//okienko.display();
 	}
 	return 0;
 }
