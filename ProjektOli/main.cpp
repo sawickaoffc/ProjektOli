@@ -83,7 +83,7 @@ int main() {
 					break;
 
 				case stan::wplacanie:
-					if (bankomat1.PobierzKwote() && stof(bankomat1.kwota) > 0) {
+					if (bankomat1.PobierzKwote() && stof(bankomat1.kwota) >0) {
 						poprzedniStan = stanEkranu;
 						stanEkranu = potwierdzenie;
 					}
@@ -111,7 +111,7 @@ int main() {
 
 					// Potwierdzenia pinem
 				case stan::potwierdzenie:
-					if (bankomat1.CzytaniePinu() && bankomat1.iloscProbPin>0) {
+					if (bankomat1.CzytaniePinu() && bankomat1.iloscProbPin > 0) {
 
 						stanEkranu = stan::menu; // dodac do stanu konta
 						std::memset(bankomat1.pin, 0, sizeof(bankomat1.pin));
@@ -147,7 +147,7 @@ int main() {
 						}
 						cout << poprzedniStan << typLimitu << endl;
 					}
-					else if (bankomat1.iloscProbPin ==0)
+					else if (bankomat1.iloscProbPin == 0)
 					{
 						stanEkranu = poczatkowy;
 					}
@@ -287,6 +287,6 @@ int main() {
 			}
 		}
 		okienko.display();
-	}	
+	}
 	return 0;
 }

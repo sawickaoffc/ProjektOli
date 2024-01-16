@@ -56,7 +56,7 @@ bool Guzik::PolozenieMyszki(sf::RenderWindow& window)
 	float yWspolrzedne = guzik.getPosition().y;
 	float SzerokoscPrzycisku = guzik.getPosition().x + guzik.getLocalBounds().width;
 	float WysokoscPrzycisku = guzik.getPosition().y + guzik.getLocalBounds().height;
-	if (xMyszki< SzerokoscPrzycisku && xMyszki > xWspolrzedne && yMyszki < WysokoscPrzycisku && yMyszki >yWspolrzedne)
+	if (xMyszki< SzerokoscPrzycisku && xMyszki > xWspolrzedne && yMyszki < WysokoscPrzycisku && yMyszki >yWspolrzedne &&sf::Event::MouseButtonPressed)
 	{
 		return true;
 	}

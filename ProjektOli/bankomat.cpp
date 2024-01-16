@@ -28,21 +28,21 @@ void bankomat::Stworz(sf::RenderWindow* okienko)
 void bankomat::utworzTloEkranu()
 {
 	font.loadFromFile("Roboto-Bold.ttf");
-	//ustalamy t³o ca³ego ekranu
+	//ustalamy tlo calego ekranu
 
-	tablicaPrzyciskow[0] = Guzik("", { 1000,500 }, 0, sf::Color{ 189, 76, 86 }, sf::Color::White, font);
+	tablicaPrzyciskow[0] = Guzik("", { 1000,500 }, 0, sf::Color{ 251, 138, 255 }, sf::Color::White, font);
 	tablicaPrzyciskow[0].Czcionka(font);
 	tablicaPrzyciskow[0].Polozenie({ 0,0 });
 
-	//nastêpnie t³o klawiatury poni¿ej ekranu
+	//nastepnie tlo klawiatury poni¿ej ekranu
 
-	tablicaPrzyciskow[1] = Guzik("", { 1000, 300 }, 0, sf::Color{ 184, 187, 230 }, sf::Color::White, font);
+	tablicaPrzyciskow[1] = Guzik("", { 1000, 300 }, 0, sf::Color{ 251, 194, 255 }, sf::Color::White, font);
 	tablicaPrzyciskow[1].Czcionka(font);
-	tablicaPrzyciskow[1].Polozenie({ 0,0 });
+	tablicaPrzyciskow[1].Polozenie({ 0,500 });
 
 	//opisujemy guziki z boku wyœwietlacza
 	for (int i = 1; i < 5; i++) {
-		tablicaPrzyciskow[i + 1] = Guzik("->", { 70, 60 }, 40, sf::Color(65, 75, 217), sf::Color::White, font);
+		tablicaPrzyciskow[i + 1] = Guzik("->", { 70, 60 }, 40, sf::Color(30, 0, 86), sf::Color::White, font);
 		tablicaPrzyciskow[i + 1].Czcionka(font);
 		float liczbaFloat = static_cast<float>(100 * i - 30);
 		tablicaPrzyciskow[i + 1].Polozenie({ 40, liczbaFloat });
@@ -50,7 +50,7 @@ void bankomat::utworzTloEkranu()
 	}
 
 	for (int i = 1; i < 5; i++) {
-		tablicaPrzyciskow[i + 5] = Guzik("<-", { 70, 60 }, 40, sf::Color(65, 75, 217), sf::Color::White, font);
+		tablicaPrzyciskow[i + 5] = Guzik("<-", { 70, 60 }, 40, sf::Color(30, 0, 86), sf::Color::White, font);
 		tablicaPrzyciskow[i + 5].Czcionka(font);
 		float liczbaFloat = static_cast<float>(100 * i - 30);
 		tablicaPrzyciskow[i + 5].Polozenie({ 890, liczbaFloat });
@@ -59,44 +59,44 @@ void bankomat::utworzTloEkranu()
 
 	// klawiatura pin
 	for (int i = 1; i < 6; i++) {
-		tablicaPrzyciskow[i + 9] = Guzik(std::to_string(i), { 70, 60 }, 40, sf::Color(59, 17, 82), sf::Color::White, font);
+		tablicaPrzyciskow[i + 9] = Guzik(std::to_string(i), { 90, 80 }, 40, sf::Color(251, 138, 255), sf::Color::Black, font);
 		tablicaPrzyciskow[i + 9].Czcionka(font);
-		float liczbaFloat = static_cast<float>(140 * i);
-		tablicaPrzyciskow[i + 9].Polozenie({ liczbaFloat + 10, 560 });
+		float liczbaFloat = static_cast<float>(140 * i - 40);
+		tablicaPrzyciskow[i + 9].Polozenie({ liczbaFloat , 560 });
 		tablicaPrzyciskow[i + 9].set_value(i);
 	}
 
 	for (int i = 6; i < 10; i++) {
-		tablicaPrzyciskow[i + 10] = Guzik(std::to_string(i), { 70, 60 }, 40, sf::Color(59, 17, 82), sf::Color::White, font);
+		tablicaPrzyciskow[i + 10] = Guzik(std::to_string(i), { 90, 80 }, 40, sf::Color(251, 138, 255), sf::Color::Black, font);
 		tablicaPrzyciskow[i + 10].Czcionka(font);
-		float liczbaFloat = static_cast<float>(140 * (i - 5));
-		tablicaPrzyciskow[i + 10].Polozenie({ liczbaFloat + 10, 680 });
+		float liczbaFloat = static_cast<float>(140 * (i - 5)  - 40);
+		tablicaPrzyciskow[i + 10].Polozenie({ liczbaFloat , 680 });
 		tablicaPrzyciskow[i + 10].set_value(i);
 	}
 
 
 
-	tablicaPrzyciskow[15] = Guzik("0", { 70,60 }, 40, sf::Color(59, 17, 82), sf::Color::White, font);
+	tablicaPrzyciskow[15] = Guzik("0", { 90,80 }, 40, sf::Color(251, 138, 255), sf::Color::Black, font);
 	tablicaPrzyciskow[15].Czcionka(font);
-	tablicaPrzyciskow[15].Polozenie({ 710,680 });
+	tablicaPrzyciskow[15].Polozenie({ 660,680 });
 	tablicaPrzyciskow[15].set_value(0);
 
-	tablicaPrzyciskow[20] = Guzik("Usun", { 100,60 }, 20, sf::Color(59, 17, 82), sf::Color::White, font);
+	tablicaPrzyciskow[20] = Guzik("Usun", { 120,80 }, 30, sf::Color(251, 138, 255), sf::Color::Black, font);
 	tablicaPrzyciskow[20].Czcionka(font);
-	tablicaPrzyciskow[20].Polozenie({ 840,560 });
+	tablicaPrzyciskow[20].Polozenie({ 770,560 });
 	tablicaPrzyciskow[20].set_value(-2);
 
-	tablicaPrzyciskow[21] = Guzik("Enter", { 100,60 }, 20, sf::Color(59, 17, 82), sf::Color::White, font);
+	tablicaPrzyciskow[21] = Guzik("Enter", { 120,80 }, 30, sf::Color(251, 138, 255), sf::Color::Black, font);
 	tablicaPrzyciskow[21].Czcionka(font);
-	tablicaPrzyciskow[21].Polozenie({ 840,680 });
+	tablicaPrzyciskow[21].Polozenie({ 770,680 });
 	tablicaPrzyciskow[21].set_value(-3);
 	//	font.loadFromFile("Roboto-Bold.ttf"); //pobieramy czcionke do napisów
 
 
 		//robie przycisk do ekranu
-	tablicaPrzyciskow[22] = Guzik("Wloz karte", { 200,80 }, 30, sf::Color{ 59, 17, 82 }, sf::Color::White, font);
+	tablicaPrzyciskow[22] = Guzik("Wloz karte", { 260,100 }, 30, sf::Color{ 251, 194, 255 }, sf::Color::Black, font);
 	tablicaPrzyciskow[22].Czcionka(font);
-	tablicaPrzyciskow[22].Polozenie({ 630,20 });
+	tablicaPrzyciskow[22].Polozenie({ 570,40 });
 }
 
 

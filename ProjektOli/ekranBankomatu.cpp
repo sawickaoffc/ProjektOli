@@ -26,12 +26,12 @@ void ekranBankomatu::ekranPoczatkowy()
 	//rysujemy ekran na którym wszystko ma przebiegaæ
 	tloEkranu.setPosition(150, 0); //pozycja w jakiej sie zaczyna wiec od górnego lewego rogu
 	tloEkranu.setSize(sf::Vector2f(700, 500));
-	tloEkranu.setFillColor(sf::Color(76, 0, 255));
+	tloEkranu.setFillColor(sf::Color(30, 0, 86));
 	//a nastepnie napis poczatkowy
 	Powitanie.setFont(font);
 	Powitanie.setCharacterSize(32);
 	Powitanie.setPosition(250, 270);
-	Powitanie.setFillColor(sf::Color(0, 0, 0));
+	Powitanie.setFillColor(sf::Color::White);
 	Powitanie.setString("Dzien dobry! \nProsze wlozyc karte do czytnika ");
 
 }
@@ -51,7 +51,7 @@ bool ekranBankomatu::WpisywaniePinu()
 	WprowadzeniePinu.setFont(font);
 	WprowadzeniePinu.setCharacterSize(62);
 	WprowadzeniePinu.setPosition(250, 270);
-	WprowadzeniePinu.setFillColor(sf::Color(0, 0, 0));
+	Powitanie.setFillColor(sf::Color::White);
 	WprowadzeniePinu.setString("Wprowadz kod PIN");
 	return bankomat1.CzytaniePinu();
 }
