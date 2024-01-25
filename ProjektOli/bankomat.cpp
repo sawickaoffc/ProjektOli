@@ -290,6 +290,7 @@ string bankomat::WydajBanknoty(int kwota){
 
 	if (pomocnicza != 0)
 	{
+	
 		for (int j = 0; j < 6; j++)
 		{
 			int pom[] = { 0,0,0,0,0,0 };

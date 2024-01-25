@@ -38,7 +38,6 @@ int main() {
 				okienko.close();
 				break;
 			case sf::Event::MouseButtonPressed:
-
 				switch (stanEkranu) {
 				case stan::poczatkowy:
 					if (bankomat1.WlozenieKarty(okienko) == true && pobranie.zablokowanieKarty == false) {
@@ -223,7 +222,6 @@ int main() {
 						stanEkranu = menu;
 					}
 					break;
-
 				}
 				break;
 				std::cout << okienko.isOpen() << okienko.pollEvent(event) << endl;
