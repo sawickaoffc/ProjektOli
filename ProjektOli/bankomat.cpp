@@ -82,7 +82,7 @@ void bankomat::utworzTloEkranu()
 	tablicaPrzyciskow[15].Polozenie({ 660,680 });
 	tablicaPrzyciskow[15].set_value(0);
 
-	tablicaPrzyciskow[20] = Guzik("Usun", { 120,80 }, 30, sf::Color(251, 138, 255), sf::Color::Black, font);
+	tablicaPrzyciskow[20] = Guzik("Wstecz", { 120,80 }, 30, sf::Color(251, 138, 255), sf::Color::Black, font);
 	tablicaPrzyciskow[20].Czcionka(font);
 	tablicaPrzyciskow[20].Polozenie({ 770,560 });
 	tablicaPrzyciskow[20].set_value(-2);

@@ -75,7 +75,7 @@ void ekranBankomatu::Menu()
 
 	tablicaMenu[0] = Guzik("Wyplacanie Gotowki", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
 	tablicaMenu[0].Czcionka(font);
-	tablicaMenu[0].Polozenie({ 180,260 });
+	tablicaMenu[0].Polozenie({ 180,160 });
 
 	tablicaMenu[1] = Guzik("Dostepne Srodki", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
 	tablicaMenu[1].Czcionka(font);
@@ -94,7 +94,7 @@ void ekranBankomatu::Menu()
 void ekranBankomatu::RysujMenu()
 {
 	okienko->draw(tloEkranu);
-	for (int i = 0; i < 8; ++i) {
+	for (int i = 0; i < 4; ++i) {
 		tablicaMenu[i].RysujPrzycisk(*okienko);
 	}
 }
@@ -152,7 +152,7 @@ void ekranBankomatu::InnaKwota()
 void ekranBankomatu::RysujInnaKwote() {
 	InnaKwota();
 	okienko->draw(tloEkranu);
-	for (int i = 0; i < 1; ++i) {
+	for (int i = 7; i < 8; ++i) {
 		tablicaWyplacanie[i].RysujPrzycisk(*okienko);
 	}
 }

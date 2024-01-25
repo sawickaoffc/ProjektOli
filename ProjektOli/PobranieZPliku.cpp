@@ -27,7 +27,6 @@ bool PobranieZPliku::PobranieZKarty(const string& nazwaPliku)
     getline(plik, bankomat1.limitMiesieczny);
     getline(plik, bankomat1.limitZwykly);
     getline(plik, pomocnicza);
-    cout << pomocnicza << endl;
     if (pomocnicza == "0" || zgoda == false) {
         return false;       //czy Karta jest zablokowana (nie jest)
     }

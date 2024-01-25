@@ -82,8 +82,13 @@ int main() {
 					switch (bankomat1.WybranieStrzalki(okienko)) {
 					case 1:
 						bankomat1.kwota = "10";
+						cout << bankomat1.kwota << endl;
+						cout << bankomat1.saldo<< endl;
+						cout << bankomat1.wyplata << endl;
+
 						if (stof(bankomat1.kwota) <= bankomat1.saldo && stod(bankomat1.kwota) <= stod(bankomat1.limitZwykly) &&
 							(stoi(bankomat1.limitZwykly) - bankomat1.wyplata)<= stoi(bankomat1.kwota)) {
+							cout << "jestem";
 							bankomat1.saldo -= stof(bankomat1.kwota);
 							bankomat1.wyplata += stof(bankomat1.kwota);
 							stanEkranu = stan::wydaneBanknoty;
