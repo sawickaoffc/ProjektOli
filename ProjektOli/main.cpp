@@ -30,6 +30,7 @@ int main() {
 	int poprzedniStan = stan::poczatkowy;
 	int stanEkranu = stan::poczatkowy;
 	int typLimitu = 0;
+	string money = "";
 	while (okienko.isOpen()) {
 		while (okienko.pollEvent(event)) {
 			switch (event.type) {
@@ -82,13 +83,10 @@ int main() {
 					switch (bankomat1.WybranieStrzalki(okienko)) {
 					case 1:
 						bankomat1.kwota = "10";
-						cout << bankomat1.kwota << endl;
-						cout << bankomat1.saldo<< endl;
-						cout << bankomat1.wyplata << endl;
-
+						money = bankomat1.kwota;
+						bankomat1.WydajBanknoty(stof(money));
 						if (stof(bankomat1.kwota) <= bankomat1.saldo && stod(bankomat1.kwota) <= stod(bankomat1.limitZwykly) &&
-							(stoi(bankomat1.limitZwykly) - bankomat1.wyplata)<= stoi(bankomat1.kwota)) {
-							cout << "jestem";
+							(stoi(bankomat1.limitZwykly) - bankomat1.wyplata)>= stoi(bankomat1.kwota) && bankomat1.czymozna == true) {
 							bankomat1.saldo -= stof(bankomat1.kwota);
 							bankomat1.wyplata += stof(bankomat1.kwota);
 							stanEkranu = stan::wydaneBanknoty;
@@ -96,8 +94,10 @@ int main() {
 						break;
 					case 2:
 						bankomat1.kwota = "20";
+						money = bankomat1.kwota;
+						bankomat1.WydajBanknoty(stof(money));
 						if (stof(bankomat1.kwota) <= bankomat1.saldo && stod(bankomat1.kwota) <= stod(bankomat1.limitZwykly) &&
-							(stoi(bankomat1.limitZwykly) - bankomat1.wyplata) <= stoi(bankomat1.kwota)) {
+							(stoi(bankomat1.limitZwykly) - bankomat1.wyplata) >= stoi(bankomat1.kwota) && bankomat1.czymozna == true) {
 							bankomat1.saldo -= stof(bankomat1.kwota);
 							bankomat1.wyplata += stof(bankomat1.kwota);
 							stanEkranu = stan::wydaneBanknoty;
@@ -105,8 +105,10 @@ int main() {
 						break;
 					case 3:
 						bankomat1.kwota = "50";
+						money = bankomat1.kwota;
+						bankomat1.WydajBanknoty(stof(money));
 						if (stof(bankomat1.kwota) <= bankomat1.saldo && stod(bankomat1.kwota) <= stod(bankomat1.limitZwykly) &&
-							(stoi(bankomat1.limitZwykly) - bankomat1.wyplata) <= stoi(bankomat1.kwota)) {
+							(stoi(bankomat1.limitZwykly) - bankomat1.wyplata) >= stoi(bankomat1.kwota) && bankomat1.czymozna == true) {
 							bankomat1.saldo -= stof(bankomat1.kwota);
 							bankomat1.wyplata += stof(bankomat1.kwota);
 							stanEkranu = stan::wydaneBanknoty;
@@ -114,8 +116,10 @@ int main() {
 						break;
 					case 4:
 						bankomat1.kwota = "100";
+						money = bankomat1.kwota;
+						bankomat1.WydajBanknoty(stof(money));
 						if (stof(bankomat1.kwota) <= bankomat1.saldo && stod(bankomat1.kwota) <= stod(bankomat1.limitZwykly) &&
-							(stoi(bankomat1.limitZwykly) - bankomat1.wyplata) <= stoi(bankomat1.kwota)) {
+							(stoi(bankomat1.limitZwykly) - bankomat1.wyplata) >= stoi(bankomat1.kwota) && bankomat1.czymozna == true) {
 							bankomat1.saldo -= stof(bankomat1.kwota);
 							bankomat1.wyplata += stof(bankomat1.kwota);
 							stanEkranu = stan::wydaneBanknoty;
@@ -123,8 +127,10 @@ int main() {
 						break;
 					case 5:
 						bankomat1.kwota = "200";
+						money = bankomat1.kwota;
+						bankomat1.WydajBanknoty(stof(money));
 						if (stof(bankomat1.kwota) <= bankomat1.saldo && stod(bankomat1.kwota) <= stod(bankomat1.limitZwykly) &&
-							(stoi(bankomat1.limitZwykly) - bankomat1.wyplata) <= stoi(bankomat1.kwota)) {
+							(stoi(bankomat1.limitZwykly) - bankomat1.wyplata) >= stoi(bankomat1.kwota) && bankomat1.czymozna == true) {
 							bankomat1.saldo -= stof(bankomat1.kwota);
 							bankomat1.wyplata += stof(bankomat1.kwota);
 							stanEkranu = stan::wydaneBanknoty;
@@ -132,8 +138,10 @@ int main() {
 						break;
 					case 6:
 						bankomat1.kwota = "500";
+						money = bankomat1.kwota;
+						bankomat1.WydajBanknoty(stof(money));
 						if (stof(bankomat1.kwota) <= bankomat1.saldo && stod(bankomat1.kwota) <= stod(bankomat1.limitZwykly) &&
-							(stoi(bankomat1.limitZwykly) - bankomat1.wyplata) <= stoi(bankomat1.kwota)) {
+							(stoi(bankomat1.limitZwykly) - bankomat1.wyplata) >= stoi(bankomat1.kwota) && bankomat1.czymozna == true) {
 							bankomat1.saldo -= stof(bankomat1.kwota);
 							bankomat1.wyplata += stof(bankomat1.kwota);
 							stanEkranu = stan::wydaneBanknoty;
@@ -149,12 +157,11 @@ int main() {
 					break;
 				case stan::innakwota:
 					if (stof(bankomat1.kwota) <= bankomat1.saldo && stod(bankomat1.kwota) <= stod(bankomat1.limitZwykly) &&
-						(stoi(bankomat1.limitZwykly) - bankomat1.wyplata) <= stoi(bankomat1.kwota)) {
+						(stoi(bankomat1.limitZwykly) - bankomat1.wyplata) >= stoi(bankomat1.kwota) && bankomat1.czymozna == true) {
 						bankomat1.saldo -= stof(bankomat1.kwota);
 						bankomat1.wyplata += stof(bankomat1.kwota);
 						stanEkranu = stan::wydaneBanknoty;
-					}
-					
+					}		
 
 					if (sf::Event::MouseButtonPressed && bankomat1.tablicaPrzyciskow[20].PolozenieMyszki(okienko) == true && bankomat1.kwota == "") {
 						stanEkranu = stan::wyplacanie;

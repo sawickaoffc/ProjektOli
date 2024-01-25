@@ -27,11 +27,12 @@ public:
     string limitMiesieczny;
     string limitDzienny;
     string limitZwykly;
-    int wyplata = 0 ;
+    int wyplata = 0;
     int wydanie[6] = { 0,0,0,0,0,0};
     int banknoty[6] = { 10, 20, 50, 100, 200, 500 };
     int zasobnik[6];
     bool zmianaPinu = false;
+    bool czymozna = false;
     string ilosc;
     float saldo = 0;
     bankomat() = default;

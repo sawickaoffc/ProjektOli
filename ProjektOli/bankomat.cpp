@@ -224,6 +224,8 @@ string bankomat::WydajBanknoty(int kwota){
 	int dziele;
 	int reszta;
 	int pom[] = { 0,0,0,0,0,0 };
+	ilosc = "";
+
 	for (int i = 0; i < 6; i++)
 	{
 		if (pomocnicza >= banknoty[i]) {
@@ -250,7 +252,6 @@ string bankomat::WydajBanknoty(int kwota){
 
 			if (banknoty[i] == 50 && dziele <= zasobnik[3])
 			{
-				cout << "wchodzi do 50" << endl;
 				pomocnicza = reszta;
 				pom[3] = dziele;
 			}
@@ -267,6 +268,14 @@ string bankomat::WydajBanknoty(int kwota){
 			}
 			if (pomocnicza == 0)
 			{
+				for (int i = 0; i < 6; i++) {
+					ilosc += std::to_string(banknoty[i]);
+					ilosc += "*";
+					ilosc += std::to_string(wydanie[i]);
+					ilosc += ",   ";
+				}
+				bool czymozna = true;
+
 				i = 6;   // nie wchodzi juz do petli
 			}
 		}
@@ -326,8 +335,21 @@ string bankomat::WydajBanknoty(int kwota){
 					}
 					if (pomocnicza == 0)
 					{
+						for (int i = 0; i < 6; i++) {
+							ilosc += std::to_string(banknoty[i]);
+							ilosc += "*";
+							ilosc += std::to_string(wydanie[i]);
+							ilosc += ",   ";
+						}
+						bool czymozna = true;
+
 						i = 10;
 						j = 10;
+					}
+					else {
+						ilosc = "NIE MOZNA WYDAC TAKICH BANKNOTOW";
+						bool czymozna = false;
+
 					}
 				}
 			}
@@ -335,14 +357,6 @@ string bankomat::WydajBanknoty(int kwota){
 		for (int i = 5; i > 0; i--) {
 			wydanie[i] = pom[i];
 		}
-	}
-	
-	ilosc = "";
-	for (int i = 0; i < 6; i++) {
-		ilosc += std::to_string(banknoty[i]);
-		ilosc += "*";
-		ilosc += std::to_string(wydanie[i]);
-		ilosc += ",   ";
 	}
 	return ilosc;
 }
