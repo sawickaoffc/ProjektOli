@@ -3,6 +3,8 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include "Guzik.h"
+#include "PobranieZPliku.h"
+
 #include <string>
 #include <random>
 #include <iostream>
@@ -25,6 +27,7 @@ public:
     string limitMiesieczny;
     string limitDzienny;
     string limitZwykly;
+    int wyplata = 0 ;
     int wydanie[6] = { 0,0,0,0,0,0};
     int banknoty[6] = { 10, 20, 50, 100, 200, 500 };
     int zasobnik[6];

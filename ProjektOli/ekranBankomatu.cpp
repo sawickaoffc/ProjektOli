@@ -2,6 +2,7 @@
 #include <SFML/Graphics/Font.hpp>
 extern bankomat bankomat1;
 extern ekranBankomatu ekranbankomatu1;
+extern PobranieZPliku pobranie;
 
 void ekranBankomatu::Stworz(sf::RenderWindow* okienko)
 {
@@ -56,7 +57,7 @@ void ekranBankomatu::RysujWpisywaniePinu()
 {
 	string pin_str = "";
 	for (int j = 0; j < bankomat1.petla; j++) {
-		pin_str += std::to_string(bankomat1.pin[j]);
+		pin_str += "*";
 	}
 
 	tablicaPinu[0] = Guzik(pin_str, { 260,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
@@ -100,20 +101,62 @@ void ekranBankomatu::RysujMenu()
 
 void ekranBankomatu::WyplataGotowki() {
 
-	tablicaWyplacanie[0] = Guzik(bankomat1.kwota, { 260,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
+		
+	tablicaWyplacanie[0] = Guzik("10", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
 	tablicaWyplacanie[0].Czcionka(font);
-	tablicaWyplacanie[0].Polozenie({ 370, 300 });
+	tablicaWyplacanie[0].Polozenie({ 180,60 });
+
+	tablicaWyplacanie[1] = Guzik("20", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaWyplacanie[1].Czcionka(font);
+	tablicaWyplacanie[1].Polozenie({ 180,160 });
+	
+	tablicaWyplacanie[2] = Guzik("50", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaWyplacanie[2].Czcionka(font);
+	tablicaWyplacanie[2].Polozenie({ 180,260 });
+
+	tablicaWyplacanie[3] = Guzik("100", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaWyplacanie[3].Czcionka(font);
+	tablicaWyplacanie[3].Polozenie({ 180,360 });
+
+	tablicaWyplacanie[4] = Guzik("200", {260,70}, 20, sf::Color{255, 191, 143}, sf::Color::White, font);
+	tablicaWyplacanie[4].Czcionka(font);
+	tablicaWyplacanie[4].Polozenie({ 560, 60 });
+
+	tablicaWyplacanie[5] = Guzik("500", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaWyplacanie[5].Czcionka(font);
+	tablicaWyplacanie[5].Polozenie({ 560,160 });
+
+	tablicaWyplacanie[6] = Guzik("Inna Kwota", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaWyplacanie[6].Czcionka(font);
+	tablicaWyplacanie[6].Polozenie({ 560,260 });	
 }
 
 void ekranBankomatu::RysujWyplataGotowki()
 {
 	WyplataGotowki();
+	okienko->draw(tloEkranu);
+	for (int i = 0; i < 7; ++i) {
+		tablicaWyplacanie[i].RysujPrzycisk(*okienko);
+	}
+	
+}
 
+void ekranBankomatu::InnaKwota()
+{
+	tablicaWyplacanie[7] = Guzik(bankomat1.kwota, { 260,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
+	tablicaWyplacanie[7].Czcionka(font);
+	tablicaWyplacanie[7].Polozenie({ 370, 300 });
+
+}
+
+void ekranBankomatu::RysujInnaKwote() {
+	InnaKwota();
 	okienko->draw(tloEkranu);
 	for (int i = 0; i < 1; ++i) {
 		tablicaWyplacanie[i].RysujPrzycisk(*okienko);
 	}
 }
+
 
 void ekranBankomatu::DostepneSrodki() {
 	string str = to_string(bankomat1.saldo);

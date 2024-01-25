@@ -2,6 +2,7 @@
 #include <iostream>
 #include "bankomat.h"
 #include "Guzik.h"
+#include "PobranieZPliku.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -29,6 +30,9 @@ public:
     void WyplataGotowki();
     void RysujWyplataGotowki();
 
+    void InnaKwota();
+    void RysujInnaKwote();
+
     void ZmianaPinu();
     void RysujZmianaPinu();
 
@@ -43,7 +47,7 @@ public:
     Guzik tablicaMenu[4];
     Guzik tablicaPinu[1];
     Guzik tablicaWydaneBanknoty[1];
-    Guzik tablicaWyplacanie[1];
+    Guzik tablicaWyplacanie[8];
     Guzik tablicaSrodki[1];
     Guzik tablicaAktywacja[2];
     Guzik tablicaZmianyPinu[1];

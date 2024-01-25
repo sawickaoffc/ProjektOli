@@ -3,6 +3,7 @@
 #include <SFML/Graphics/Font.hpp>
 extern bankomat bankomat1;
 extern ekranBankomatu ekranbankomatu1;
+extern PobranieZPliku pobranie;
 
 
 bankomat::bankomat(sf::RenderWindow* okienko)
@@ -109,7 +110,7 @@ void bankomat::rysujBankomat(sf::RenderWindow& okienko) {
 
 bool bankomat::CzytaniePinu() {
 	for (int i = 10; i < 22; i++) {
-		if (tablicaPrzyciskow[i].PolozenieMyszki(*okienko) == true) {
+		if (tablicaPrzyciskow[i].PolozenieMyszki(*okienko) == true && pobranie.zablokowanieKarty == false) {
 
 			if (tablicaPrzyciskow[i].get_value() == -2 && petla > 0) { // delete
 				petla--;
@@ -131,13 +132,15 @@ bool bankomat::CzytaniePinu() {
 					for (int j = 0; j < 4; j++) {
 						pin_str += std::to_string(pin[j]);
 					}
-					cout << pin_str << "  " << obecnyPIN << endl;
 					if (pin_str == obecnyPIN) {
 						is_valid_pin = true;
 					}
 					else {
 						is_valid_pin = false;
 						iloscProbPin--;
+						if (iloscProbPin == 0) {
+							pobranie.zablokowanieKarty = true;
+						}
 					}
 				}
 
@@ -167,8 +170,8 @@ bool bankomat::CzytaniePinu() {
 	for (int j = 0; j < petla; ++j) {
 		PIN += std::to_string(pin[j]);
 	}
-	cout << "PIN:  " << PIN << endl;
-	cout << "obecnyPIN:  " << obecnyPIN << "\n\n";
+	//cout << "PIN:  " << PIN << endl;
+	//cout << "obecnyPIN:  " << obecnyPIN << "\n\n";
 
 	return is_valid_pin;
 }
@@ -290,44 +293,36 @@ string bankomat::WydajBanknoty(int kwota){
 					{
 						pomocnicza = reszta;
 						pom[0] = dziele;
-
-
 					}
 
 					if (j != 4 && banknoty[i] == 200 && dziele < zasobnik[1])
 					{
 						pomocnicza = reszta;
 						pom[1] = dziele;
-
 					}
 
 					if (j != 3 && banknoty[i] == 100 && dziele < zasobnik[2])
 					{
 						pomocnicza = reszta;
 						pom[2] = dziele;
-
 					}
 
 					if (j != 2 && banknoty[i] == 50 && dziele < zasobnik[3])
 					{
 						pomocnicza = reszta;
 						pom[3] = dziele;
-						cout << "wchodze do 50" << endl;
-
 					}
 
 					if (j != 1 && banknoty[i] == 20 && dziele < zasobnik[4])
 					{
 						pomocnicza = reszta;
 						pom[4] = dziele;
-
 					}
 
 					if (j != 0 && banknoty[i] == 10 && dziele < zasobnik[5])
 					{
 						pomocnicza = reszta;
 						pom[5] = dziele;
-
 					}
 					if (pomocnicza == 0)
 					{
@@ -342,9 +337,6 @@ string bankomat::WydajBanknoty(int kwota){
 		}
 	}
 	
-	
-	
-	
 	ilosc = "";
 	for (int i = 0; i < 6; i++) {
 		ilosc += std::to_string(banknoty[i]);
@@ -354,7 +346,3 @@ string bankomat::WydajBanknoty(int kwota){
 	}
 	return ilosc;
 }
-
-
-//pomysl: stworzenie szablonu do prostok¹ta i podpinamy przycisk jako ogolny obraz 
-// pod nasze poszczegolne prostokaty i wtedy sprawdzamy z czym sie porywa nam myszka
