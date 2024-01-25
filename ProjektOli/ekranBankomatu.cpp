@@ -191,9 +191,9 @@ void ekranBankomatu::DostepneSrodki() {
 	tablicaSrodki[0].Czcionka(font);
 	tablicaSrodki[0].Polozenie({ 180,60 });
 
-	int stan_len = to_string(static_cast<int>(bankomat1.stanKonta)).length();
+	int stan_len = to_string(static_cast<int>(bankomat1.saldo)).length();
 
-	string stan_str = to_string(bankomat1.stanKonta).substr(0, stan_len + 3);
+	string stan_str = to_string(bankomat1.saldo).substr(0, stan_len + 3);
 	tablicaSrodki[1] = Guzik(stan_str, { 260,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
 	tablicaSrodki[1].Czcionka(font);
 	tablicaSrodki[1].Polozenie({ 370, 300 });

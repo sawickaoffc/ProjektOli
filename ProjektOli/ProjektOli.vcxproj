@@ -160,12 +160,14 @@
     <ClInclude Include="bankomat.h" />
     <ClInclude Include="ekranBankomatu.h" />
     <ClInclude Include="Guzik.h" />
+    <ClInclude Include="PobranieZPliku.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bankomat.cpp" />
     <ClCompile Include="ekranBankomatu.cpp" />
     <ClCompile Include="Guzik.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PobranieZPliku.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

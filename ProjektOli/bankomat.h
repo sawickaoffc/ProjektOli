@@ -21,16 +21,16 @@ public:
     bool czyPierwszePodaniePinu = true;
     int pin[4]; // do wpisywania
     int petla = 0;
-    string karta = "nieaktywna";
     string kwota = "";
-    string limitMiesieczny = "5000";
-    string limitDzienny = "500";
-    string limitZwykly = "200";
-    //vector<vector<int>> banknoty { {10, 1}, {20, 2}, {50, 1}, {100, 1}, {200, 2}, {500, 1000} };
+    string limitMiesieczny;
+    string limitDzienny;
+    string limitZwykly;
     int wydanie[6] = { 0,0,0,0,0,0};
     int banknoty[6] = { 10, 20, 50, 100, 200, 500 };
+    int zasobnik[6];
+    bool zmianaPinu = false;
     string ilosc;
-    float stanKonta = 0;
+    float saldo = 0;
     bankomat() = default;
     bankomat(sf::RenderWindow* okienko);
     void utworzTloEkranu();

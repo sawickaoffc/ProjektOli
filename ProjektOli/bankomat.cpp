@@ -22,7 +22,7 @@ void bankomat::Stworz(sf::RenderWindow* okienko)
 	random_device rd;
 	mt19937 gen(rd());
 	uniform_real_distribution<> dis(1300.0, 7000.0);
-	stanKonta = dis(gen);
+	saldo = dis(gen);
 }
 
 void bankomat::utworzTloEkranu()
@@ -216,10 +216,135 @@ bool bankomat::PobierzKwote() {
 }
 
 string bankomat::WydajBanknoty(int kwota){
-	for (int i = 5; i > 0; i--) {
-		wydanie[i] = kwota / banknoty[i];
-		kwota %= banknoty[i];
+	int pomwydaj = 0;
+	int pomocnicza = kwota;
+	int dziele;
+	int reszta;
+	int pom[] = { 0,0,0,0,0,0 };
+	for (int i = 0; i < 6; i++)
+	{
+		if (pomocnicza >= banknoty[i]) {
+			dziele = pomocnicza / banknoty[i];
+			reszta = pomocnicza % banknoty[i];
+
+			if (banknoty[i] == 500 && dziele <= zasobnik[0])
+			{
+				pomocnicza = reszta;
+				pom[0] = dziele;
+			}
+
+			if (banknoty[i] == 200 && dziele <= zasobnik[1])
+			{
+				pomocnicza = reszta;
+				pom[1] = dziele;
+			}
+
+			if (banknoty[i] == 100 && dziele <= zasobnik[2])
+			{
+				pomocnicza = reszta;
+				pom[2] = dziele;
+			}
+
+			if (banknoty[i] == 50 && dziele <= zasobnik[3])
+			{
+				cout << "wchodzi do 50" << endl;
+				pomocnicza = reszta;
+				pom[3] = dziele;
+			}
+
+			if (banknoty[i] == 20 && dziele <= zasobnik[4])
+			{
+				pomocnicza = reszta;
+				pom[4] = dziele;
+			}
+			if (banknoty[i] == 10 && dziele <= zasobnik[5])
+			{
+				pomocnicza = reszta;
+				pom[5] = dziele;
+			}
+			if (pomocnicza == 0)
+			{
+				i = 6;   // nie wchodzi juz do petli
+			}
+		}
+		for (int i = 5; i > 0; i--) {
+			wydanie[i] = pom[i];
+		}
 	}
+
+	if (pomocnicza != 0)
+	{
+		for (int j = 0; j < 6; j++)
+		{
+			int pom[] = { 0,0,0,0,0,0 };
+			pomocnicza = kwota;
+			for (int i = 0; i < 6; i++)
+			{
+				if (pomocnicza >= banknoty[i]) {
+
+					dziele = pomocnicza / banknoty[i];
+					reszta = pomocnicza % banknoty[i];
+
+
+					if (j != 5 && banknoty[i] == 500 && dziele < zasobnik[0])
+					{
+						pomocnicza = reszta;
+						pom[0] = dziele;
+
+
+					}
+
+					if (j != 4 && banknoty[i] == 200 && dziele < zasobnik[1])
+					{
+						pomocnicza = reszta;
+						pom[1] = dziele;
+
+					}
+
+					if (j != 3 && banknoty[i] == 100 && dziele < zasobnik[2])
+					{
+						pomocnicza = reszta;
+						pom[2] = dziele;
+
+					}
+
+					if (j != 2 && banknoty[i] == 50 && dziele < zasobnik[3])
+					{
+						pomocnicza = reszta;
+						pom[3] = dziele;
+						cout << "wchodze do 50" << endl;
+
+					}
+
+					if (j != 1 && banknoty[i] == 20 && dziele < zasobnik[4])
+					{
+						pomocnicza = reszta;
+						pom[4] = dziele;
+
+					}
+
+					if (j != 0 && banknoty[i] == 10 && dziele < zasobnik[5])
+					{
+						pomocnicza = reszta;
+						pom[5] = dziele;
+
+					}
+					if (pomocnicza == 0)
+					{
+						i = 10;
+						j = 10;
+					}
+				}
+			}
+		}
+		for (int i = 5; i > 0; i--) {
+			wydanie[i] = pom[i];
+		}
+	}
+	
+	
+	
+	
 	ilosc = "";
 	for (int i = 0; i < 6; i++) {
 		ilosc += std::to_string(banknoty[i]);
