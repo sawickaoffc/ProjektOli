@@ -268,20 +268,24 @@ string bankomat::WydajBanknoty(int kwota){
 			}
 			if (pomocnicza == 0)
 			{
-				for (int i = 0; i < 6; i++) {
-					ilosc += std::to_string(banknoty[i]);
-					ilosc += "*";
-					ilosc += std::to_string(wydanie[i]);
-					ilosc += ",   ";
+				for (int i = 0; i <= 5; i++) {
+					wydanie[i] = pom[i];
 				}
+					for (int i = 0; i < 6; i++) {
+						if (wydanie[i] != 0) {
+
+							ilosc += std::to_string(banknoty[i]);
+							ilosc += "*";
+							ilosc += std::to_string(wydanie[i]);
+							ilosc += ",   ";
+						}
+					}
 				bool czymozna = true;
 
 				i = 6;   // nie wchodzi juz do petli
 			}
 		}
-		for (int i = 5; i > 0; i--) {
-			wydanie[i] = pom[i];
-		}
+		
 	}
 
 	if (pomocnicza != 0)
@@ -335,11 +339,17 @@ string bankomat::WydajBanknoty(int kwota){
 					}
 					if (pomocnicza == 0)
 					{
+						for (int i = 0; i <= 5; i++) {
+							wydanie[i] = pom[i];
+						}
 						for (int i = 0; i < 6; i++) {
-							ilosc += std::to_string(banknoty[i]);
-							ilosc += "*";
-							ilosc += std::to_string(wydanie[i]);
-							ilosc += ",   ";
+							if (wydanie[i] != 0) {
+
+								ilosc += std::to_string(banknoty[i]);
+								ilosc += "*";
+								ilosc += std::to_string(wydanie[i]);
+								ilosc += ",   ";
+							}
 						}
 						bool czymozna = true;
 
@@ -354,9 +364,7 @@ string bankomat::WydajBanknoty(int kwota){
 				}
 			}
 		}
-		for (int i = 5; i > 0; i--) {
-			wydanie[i] = pom[i];
-		}
+		
 	}
 	return ilosc;
 }

@@ -29,6 +29,5 @@ public:
 	void PobranieZBankomatu(const string& nazwaPliku);
 	void ZapisPoWyplacie(const string& nazwaPliku);
 	void ZapisDoKarty(const string& nazwaPliku);
-	bool zgoda = true;
 };
 

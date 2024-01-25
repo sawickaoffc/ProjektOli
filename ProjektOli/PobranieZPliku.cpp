@@ -27,12 +27,14 @@ bool PobranieZPliku::PobranieZKarty(const string& nazwaPliku)
     getline(plik, bankomat1.limitMiesieczny);
     getline(plik, bankomat1.limitZwykly);
     getline(plik, pomocnicza);
-    if (pomocnicza == "0" || zgoda == false) {
+    if (pomocnicza == "0") {
         return false;       //czy Karta jest zablokowana (nie jest)
     }
     else {
         return true;
     }
+    getline(plik, pomocnicza); 
+    bankomat1.czymozna= stoi(pomocnicza);
 }
 
 
