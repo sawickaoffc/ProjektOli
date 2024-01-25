@@ -19,51 +19,38 @@ public:
     ekranBankomatu() = default;
     void ekranPoczatkowy();
     void RysujEkranPoczatkowy();
+
     bool WpisywaniePinu();
     void RysujWpisywaniePinu();
+
     void Menu();
     void RysujMenu();
-    void WplataGotowki();
-    void RysujWplataGotowki();
+
     void WyplataGotowki();
     void RysujWyplataGotowki();
+
     void ZmianaPinu();
     void RysujZmianaPinu();
 
     void DostepneSrodki();
     void RysujDostepneSrodki();
-
-    void Potwierdzenie();
-    void RysujPotwierdzenie();
-
-    void WyjecieKarty();
-    void RysujWyjecieKarty();
-
-    void AktywacjaKarty();
-    void RysujAktywacjaKarty();
-
     void ZmianaLimitu();
     void RysujZmianeLimitu();
 
     void WydaneBanknoty();
     void RysujWydaneBanknoty();
 
-    Guzik tablicaMenu[9];
+    Guzik tablicaMenu[4];
     Guzik tablicaPinu[1];
-    Guzik tablicaWplacanie[2];
-    Guzik tablicaWydaneBanknoty[2];
-    Guzik tablicaWyplacanie[2];
-    Guzik tablicaPotwierdzenie[3];
-    Guzik tablicaSrodki[2];
-    Guzik tablicaAktywacja[3];
-    Guzik tablicaZmianyPinu[2];
-    Guzik tablicaLimitu[7];
-    Guzik tablicaZmianyLimitu[2];
+    Guzik tablicaWydaneBanknoty[1];
+    Guzik tablicaWyplacanie[1];
+    Guzik tablicaSrodki[1];
+    Guzik tablicaAktywacja[2];
+    Guzik tablicaZmianyPinu[1];
+    Guzik tablicaLimitu[6];
+    Guzik tablicaZmianyLimitu[1];
 
     void Limity();
     void RysujLimity();
-
-    void LimitDzienny();
-    void RysujLimitDzienny();
     void Stworz(sf::RenderWindow* okienko);
 };
