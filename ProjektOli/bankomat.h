@@ -20,7 +20,7 @@ public:
     int iloscProbPin = 3;
     string obecnyPIN = ""; // do logowania
     bool is_valid_pin = false;
-    bool czyPierwszePodaniePinu = true;
+    bool czyPierwszePodaniePinu = false;
     int pin[4]; // do wpisywania
     int petla = 0;
     string kwota = "";
@@ -29,11 +29,11 @@ public:
     string limitZwykly;
     int wyplata = 0;
     int wydanie[6] = { 0,0,0,0,0,0};
-    int banknoty[6] = { 10, 20, 50, 100, 200, 500 };
+    int banknoty[6] = { 500, 200, 100, 50, 20, 10 };
     int zasobnik[6];
-    bool zmianaPinu = false;
+    int pom[6];
     bool czymozna = false;
-    string ilosc;
+    string ilosc = "";
     float saldo = 0;
     bankomat() = default;
     bankomat(sf::RenderWindow* okienko);

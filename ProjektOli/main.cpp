@@ -30,7 +30,8 @@ int main() {
 	int poprzedniStan = stan::poczatkowy;
 	int stanEkranu = stan::poczatkowy;
 	int typLimitu = 0;
-	string money = "";
+	int zmianaPinu = 0;
+	string money = ""; //pomocicza do kwoty
 	while (okienko.isOpen()) {
 		while (okienko.pollEvent(event)) {
 			switch (event.type) {
@@ -40,6 +41,8 @@ int main() {
 			case sf::Event::MouseButtonPressed:
 				switch (stanEkranu) {
 				case stan::poczatkowy:
+					bankomat1.is_valid_pin = false;
+					bankomat1.iloscProbPin = 3;
 					if (bankomat1.WlozenieKarty(okienko) == true && pobranie.zablokowanieKarty == false) {
 						stanEkranu = stan::wpisywaniepinu;
 					}
@@ -48,6 +51,12 @@ int main() {
 					}
 					break;
 				case stan::wpisywaniepinu:
+					if (zmianaPinu == 1 && sf::Event::MouseButtonPressed && bankomat1.tablicaPrzyciskow[20].PolozenieMyszki(okienko) == true && bankomat1.petla == 0) {
+						bankomat1.czyPierwszePodaniePinu = false;
+						bankomat1.is_valid_pin = true;
+						stanEkranu = stan::menu;
+						
+					}
 					if (bankomat1.CzytaniePinu()) {
 						stanEkranu = stan::menu;
 						std::memset(bankomat1.pin, 0, sizeof(bankomat1.pin)); //wyzerowanie pinu
@@ -67,7 +76,9 @@ int main() {
 						stanEkranu = stan::limity;
 						break;
 					case 6:
-						bankomat1.zmianaPinu = true;
+						zmianaPinu = 1;
+						bankomat1.czyPierwszePodaniePinu = true;
+						bankomat1.is_valid_pin = false;
 						stanEkranu = stan::wpisywaniepinu;
 						break;
 					}

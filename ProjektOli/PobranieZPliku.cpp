@@ -21,20 +21,21 @@ bool PobranieZPliku::PobranieZKarty(const string& nazwaPliku)
     }
     getline(plik, numerKarty);
     getline(plik, bankomat1.obecnyPIN);
-    getline(plik, pomocnicza); 
+    getline(plik, pomocnicza);
     bankomat1.saldo = stof(pomocnicza);
     getline(plik, bankomat1.limitDzienny);
     getline(plik, bankomat1.limitMiesieczny);
     getline(plik, bankomat1.limitZwykly);
     getline(plik, pomocnicza);
+    cout << pomocnicza << endl;
     if (pomocnicza == "0") {
         return false;       //czy Karta jest zablokowana (nie jest)
     }
     else {
         return true;
     }
-    getline(plik, pomocnicza); 
-    bankomat1.czymozna= stoi(pomocnicza);
+    //getline(plik, pomocnicza); 
+    //bankomat1.czymozna= stoi(pomocnicza);
 }
 
 
@@ -89,17 +90,20 @@ void PobranieZPliku::ZapisPoWyplacie(const string& nazwaPliku)
 }
 
 void PobranieZPliku::ZapisDoKarty(const string& nazwaPliku) {
-    bankomat1.saldo -= stof(bankomat1.kwota);
     string zapis = to_string(bankomat1.saldo);
     std::ofstream plik(nazwaPliku);
     if (plik.is_open()) {
         plik << numerKarty << endl;
         plik << bankomat1.obecnyPIN << endl;
-        plik << zapis << endl;
+        plik << zapis << endl; //saldo
         plik << bankomat1.limitDzienny << endl;
         plik << bankomat1.limitMiesieczny << endl;
         plik << bankomat1.limitZwykly << endl;
-        plik << to_string(PobranieZKarty(daneKarty)) << endl;
+        string blokada = "0";
+        if (pobranie.zablokowanieKarty) {
+            blokada = "1";
+        }
+        plik << blokada << endl; //zablokowanie karty
     }
 }
 
