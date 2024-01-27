@@ -106,22 +106,13 @@ int main() {
 					switch (bankomat1.WybranieStrzalki(okienko)) {
 					case 1:
 						bankomat1.kwota = "10";
-						money = bankomat1.kwota;
-						bankomat1.WydajBanknoty(stof(money));
-						cout << bankomat1.WydajBanknoty(stof(money)) << endl;
-						if (stof(bankomat1.kwota) <= bankomat1.saldo && stod(bankomat1.kwota) <= stod(bankomat1.limitZwykly) &&
-							(stoi(bankomat1.limitZwykly) - bankomat1.wyplata)>= stoi(bankomat1.kwota) && bankomat1.czymozna == true) {
-							bankomat1.saldo -= stof(bankomat1.kwota);
-							bankomat1.wyplata += stof(bankomat1.kwota);
+						if (stoi(bankomat1.kwota) % 10 == 0) {
 							stanEkranu = stan::wydaneBanknoty;
 						}
 						break;
 					case 2:
 						bankomat1.kwota = "20";
-						money = bankomat1.kwota;
-						bankomat1.WydajBanknoty(stof(money));
-						if (stof(bankomat1.kwota) <= bankomat1.saldo && stod(bankomat1.kwota) <= stod(bankomat1.limitZwykly) &&
-							(stoi(bankomat1.limitZwykly) - bankomat1.wyplata) >= stoi(bankomat1.kwota) && bankomat1.czymozna == true) {
+						if (bankomat1.WarunekWyplat()) {
 							bankomat1.saldo -= stof(bankomat1.kwota);
 							bankomat1.wyplata += stof(bankomat1.kwota);
 							stanEkranu = stan::wydaneBanknoty;

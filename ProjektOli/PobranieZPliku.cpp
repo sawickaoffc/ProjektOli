@@ -31,11 +31,16 @@ bool PobranieZPliku::PobranieZKarty(const string& nazwaPliku)
     if (pomocnicza == "0") {
         return false;       //czy Karta jest zablokowana (nie jest)
     }
-    else {
+    else if (pomocnicza == "1") {
         return true;
     }
-    //getline(plik, pomocnicza); 
-    //bankomat1.czymozna= stoi(pomocnicza);
+    getline(plik, pomocnicza);  // do wyplacania czy nie przekraczamy limitu
+    if (pomocnicza == "0") {
+        bankomat1.czymozna = false;       
+    }
+    else if(pomocnicza == "1"){
+        bankomat1.czymozna = true;
+    }
 }
 
 

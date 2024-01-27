@@ -198,6 +198,22 @@ bool bankomat::WlozenieKarty(sf::RenderWindow& okienko)
 		return false;
 }
 
+bool bankomat::WarunekWyplat()
+{
+	if (stoi(kwota) % 10 == 0 && stoi(kwota) <= saldo && stoi(kwota) <= stoi(limitZwykly) &&
+		(stoi(limitZwykly) - wyplata) >= stoi(kwota) && czymozna == true) {
+		return true;
+	}
+	if (wyplata == stoi(limitZwykly) || wyplata == stoi(limitDzienny)|| wyplata == stoi(limitMiesieczny)) {
+		czymozna == false;
+	}
+	else if(wyplata != stoi(limitZwykly) && wyplata != stoi(limitDzienny)&& wyplata != stoi(limitMiesieczny)){
+		czymozna == true;
+	}
+	return false;
+}
+
+
 
 bool bankomat::PobierzKwote() {
 	for (int i = 10; i < 22; i++) {
@@ -286,8 +302,8 @@ string bankomat::WydajBanknoty(int kwota){
 					ilosc += ",   ";
 				}
 			}
-			bool czymozna = true;
 			bankomat1.saldo -= stof(bankomat1.kwota);
+			bankomat1.wyplata += stof(bankomat1.kwota);
 			pobranie.ZapisDoKarty(pobranie.daneKarty);
 			return ilosc;
 		}
@@ -359,8 +375,8 @@ string bankomat::WydajBanknoty(int kwota){
 								ilosc += ",   ";
 							}
 						}
-						bool czymozna = true;
 						bankomat1.saldo -= stof(bankomat1.kwota);
+						bankomat1.wyplata += stof(bankomat1.kwota);
 						pobranie.ZapisDoKarty(pobranie.daneKarty);
 						return ilosc;
 					}

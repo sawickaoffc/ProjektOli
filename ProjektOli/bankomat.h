@@ -40,6 +40,8 @@ public:
     void utworzTloEkranu();
     void rysujBankomat(sf::RenderWindow& okienko);
     bool CzytaniePinu();
+
+    bool WarunekWyplat();
     bool PobierzKwote();
     string WydajBanknoty(int kwota);
     void Stworz(sf::RenderWindow* okienko);
