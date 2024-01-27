@@ -182,6 +182,8 @@ int main() {
 				case stan::innakwota:
 					if (bankomat1.PobierzKwote() ==true && stof(bankomat1.kwota) <= bankomat1.saldo && stod(bankomat1.kwota) <= stod(bankomat1.limitZwykly) &&
 						(stoi(bankomat1.limitZwykly) - bankomat1.wyplata) >= stoi(bankomat1.kwota)) {
+						cout << "fakt" << endl;
+						
 						stanEkranu = stan::wydaneBanknoty;
 					}		
 

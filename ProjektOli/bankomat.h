@@ -32,7 +32,7 @@ public:
     int banknoty[6] = { 500, 200, 100, 50, 20, 10 };
     int zasobnik[6];
     int pom[6] = { 0,0,0,0,0,0 };
-    bool czymozna = false;
+    bool czymozna = false;  //zalez
     string ilosc = "";
     float saldo = 0;
     bankomat() = default;
