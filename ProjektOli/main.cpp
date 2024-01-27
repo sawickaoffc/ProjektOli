@@ -64,7 +64,7 @@ int main() {
 					}
 					break;
 				case stan::menu:
-					std::cout << "Stan konta: " << to_string(bankomat1.saldo) << endl;
+					//std::cout << "Stan konta: " << to_string(bankomat1.saldo) << endl;
 					switch (bankomat1.WybranieStrzalki(okienko)) {
 					case 1:
 						stanEkranu = stan::srodki;
@@ -83,7 +83,7 @@ int main() {
 						break;
 					}
 					if (sf::Event::MouseButtonPressed && bankomat1.tablicaPrzyciskow[20].PolozenieMyszki(okienko) == true && bankomat1.petla == 0) {
-						stanEkranu = poprzedniStan;
+						stanEkranu = poczatkowy;
 					}
 					break;
 				case stan::wyplacanie:
@@ -169,9 +169,14 @@ int main() {
 				case stan::innakwota:
 					if (bankomat1.PobierzKwote() ==true && stof(bankomat1.kwota) <= bankomat1.saldo && stod(bankomat1.kwota) <= stod(bankomat1.limitZwykly) &&
 						(stoi(bankomat1.limitZwykly) - bankomat1.wyplata) >= stoi(bankomat1.kwota)) {
+						cout << "fakt" << endl;
 						if (bankomat1.czymozna == true) {
 							bankomat1.saldo -= stof(bankomat1.kwota);
 							bankomat1.wyplata += stof(bankomat1.kwota);
+							bankomat1.kwota = "";
+							bankomat1.PobierzKwote();
+							cout << "ok" << endl;
+
 						}
 						stanEkranu = stan::wydaneBanknoty;
 					}		
@@ -209,18 +214,26 @@ int main() {
 
 				case stan::zmianalimitu:
 					if (bankomat1.PobierzKwote() && stof(bankomat1.kwota) >= 0) {
-						poprzedniStan = stanEkranu;
 						if (typLimitu == 0) {
 							bankomat1.limitMiesieczny = bankomat1.kwota;
-							bankomat1.kwota = "0";
+							pobranie.ZapisDoKarty(pobranie.daneKarty);
+							bankomat1.kwota = "";
+							stanEkranu = stan::limity;
+
 						}
 						else if (typLimitu == 1) {
 							bankomat1.limitDzienny = bankomat1.kwota;
-							bankomat1.kwota = "0";
+							pobranie.ZapisDoKarty(pobranie.daneKarty);
+							bankomat1.kwota = "";
+							stanEkranu = stan::limity;
+
 						}
 						else if (typLimitu == 2) {
-							bankomat1.limitZwykly = bankomat1.kwota;
-							bankomat1.kwota = "0";
+							bankomat1.limitZwykly = bankomat1.kwota;			
+							pobranie.ZapisDoKarty(pobranie.daneKarty);
+							bankomat1.kwota = "";
+							stanEkranu = stan::limity;
+
 						}
 					}
 					if (sf::Event::MouseButtonPressed && bankomat1.tablicaPrzyciskow[20].PolozenieMyszki(okienko) == true && bankomat1.petla == 0) {

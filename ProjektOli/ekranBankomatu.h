@@ -15,7 +15,7 @@ private:
     sf::Font font;
     sf::Text Powitanie;
     sf::Text WprowadzeniePinu;
-
+    int a = 0;
 public:
     ekranBankomatu() = default;
     void ekranPoczatkowy();

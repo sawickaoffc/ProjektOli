@@ -201,7 +201,7 @@ bool bankomat::WlozenieKarty(sf::RenderWindow& okienko)
 
 bool bankomat::PobierzKwote() {
 	for (int i = 10; i < 22; i++) {
-		if (tablicaPrzyciskow[i].PolozenieMyszki(*okienko) == true) {
+		if (tablicaPrzyciskow[i].PolozenieMyszki(*okienko) == true && sf::Event::MouseButtonPressed) {
 			if (tablicaPrzyciskow[i].get_value() >= 0) { // delete
 				kwota += std::to_string(tablicaPrzyciskow[i].get_value());
 			}
@@ -221,9 +221,10 @@ bool bankomat::PobierzKwote() {
 
 
 string bankomat::WydajBanknoty(int kwota){
-	int pomocnicza = kwota;
+	int pomocnicza = kwota; 
 	int dziele;
 	int reszta;
+	int czywystarczy;
 	for (int i = 0; i < 6; i++)
 	{
 		if (pomocnicza >= banknoty[i]) {
@@ -233,45 +234,49 @@ string bankomat::WydajBanknoty(int kwota){
 			if (banknoty[i] == 500 && dziele <= zasobnik[0])
 			{
 				pomocnicza = reszta;
-				pom[0] = dziele;
+				wydanie[0] = dziele;
 			}
 
 			if (banknoty[i] == 200 && dziele <= zasobnik[1])
 			{
 				pomocnicza = reszta;
-				pom[1] = dziele;
+				wydanie[1] = dziele;
 			}
 
 			if (banknoty[i] == 100 && dziele <= zasobnik[2])
 			{
 				pomocnicza = reszta;
-				pom[2] = dziele;
+				wydanie[2] = dziele;
 			}
 
 			if (banknoty[i] == 50 && dziele <= zasobnik[3])
 			{
 				pomocnicza = reszta;
-				pom[3] = dziele;
+				wydanie[3] = dziele;
 			}
 
 			if (banknoty[i] == 20 && dziele <= zasobnik[4])
 			{
 				pomocnicza = reszta;
-				pom[4] = dziele;
+				wydanie[4] = dziele;
 			}
+
 			if (banknoty[i] == 10 && dziele <= zasobnik[5])
 			{
 				pomocnicza = reszta;
-				pom[5] = dziele;
+				wydanie[5] = dziele;
+
+			}
+			if (pomocnicza == 0)
+			{
+				i = 1000;
 			}
 		}
 
-		if (pomocnicza == 0 && reszta == 0)
+		if (pomocnicza == 0)
 		{
 			pobranie.ZapisPoWyplacie("bankomatZasobnik.txt");
-			for (int i = 0; i <= 5; i++) {
-				wydanie[i] = pom[i];
-			}
+
 			for (int i = 0; i < 6; i++) {
 				if (wydanie[i] != 0) {
 
@@ -285,70 +290,69 @@ string bankomat::WydajBanknoty(int kwota){
 			bankomat1.saldo -= stof(bankomat1.kwota);
 			pobranie.ZapisDoKarty(pobranie.daneKarty);
 			return ilosc;
-
 		}
 
 	}
 
 	if (pomocnicza != 0)
 	{
+		cout << "Druga Petla" << endl;
+		
 		for (int j = 0; j < 6; j++)
 		{
+			for (int i = 0; i <= 5; i++) {
+				wydanie[i] = pom[i];
+			}
+
 			pomocnicza = kwota;
 			for (int i = 0; i < 6; i++)
 			{
 				if (pomocnicza >= banknoty[i]) {
-
 					dziele = pomocnicza / banknoty[i];
 					reszta = pomocnicza % banknoty[i];
-
 
 					if (j != 5 && banknoty[i] == 500 && dziele <= zasobnik[0])
 					{
 						pomocnicza = reszta;
-						pom[0] = dziele;
+						wydanie[0] = dziele;
 					}
 
 					if (j != 4 && banknoty[i] == 200 && dziele <= zasobnik[1])
 					{
 						pomocnicza = reszta;
-						pom[1] = dziele;
-
+						wydanie[1] = dziele;
 					}
 
 					if (j != 3 && banknoty[i] == 100 && dziele <= zasobnik[2])
 					{
 						pomocnicza = reszta;
-						pom[2] = dziele;
+						wydanie[2] = dziele;
 					}
 
 					if (j != 2 && banknoty[i] == 50 && dziele <= zasobnik[3])
 					{
 						pomocnicza = reszta;
-						pom[3] = dziele;
+						wydanie[3] = dziele;
 					}
 
 					if (j != 1 && banknoty[i] == 20 && dziele <= zasobnik[4])
 					{
 						pomocnicza = reszta;
-						pom[4] = dziele;
-
+						wydanie[4] = dziele;
 					}
 
 					if (j != 0 && banknoty[i] == 10 && dziele <= zasobnik[5])
 					{
 						pomocnicza = reszta;
-						pom[5] = dziele;
-
+						wydanie[5] = dziele;
 					}
-					if (pomocnicza == 0 && reszta == 0)
+					if (pomocnicza == 0)
 					{
-						for (int i = 0; i <= 5; i++) {
-							wydanie[i] = pom[i];
-						}
 						pobranie.ZapisPoWyplacie("bankomatZasobnik.txt");
+
 						for (int i = 0; i < 6; i++) {
 							if (wydanie[i] != 0) {
+
 								ilosc += std::to_string(banknoty[i]);
 								ilosc += "*";
 								ilosc += std::to_string(wydanie[i]);
@@ -357,18 +361,18 @@ string bankomat::WydajBanknoty(int kwota){
 						}
 						bool czymozna = true;
 						bankomat1.saldo -= stof(bankomat1.kwota);
+						pobranie.ZapisDoKarty(pobranie.daneKarty);
 						return ilosc;
-						
-
 					}
-					if (pomocnicza != 0)
-					{
-						return "NIE MOZNA WYPLACIC TAKIEJ KWOTY";
-					}
-					
 				}
+
 			}
+
 		}
 	}
 
+	if (pomocnicza != 0)
+	{
+		return "NIE MOZNA WYPLACIC";
+	}
 }

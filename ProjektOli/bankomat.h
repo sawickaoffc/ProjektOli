@@ -31,7 +31,7 @@ public:
     int wydanie[6] = { 0,0,0,0,0,0};
     int banknoty[6] = { 500, 200, 100, 50, 20, 10 };
     int zasobnik[6];
-    int pom[6];
+    int pom[6] = { 0,0,0,0,0,0 };
     bool czymozna = false;
     string ilosc = "";
     float saldo = 0;
