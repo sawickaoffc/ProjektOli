@@ -13,7 +13,7 @@ ekranBankomatu ekranbankomatu1;
 PobranieZPliku pobranie;
 enum stan {
 	poczatkowy, wpisywaniepinu, menu, wyplacanie, srodki, innakwota,
-	wyjeciekarty, limity, zmianalimitu, wydaneBanknoty
+	wyjeciekarty, limity, zmianalimitu, wydaneBanknoty, wyborkart
 };
 using namespace std;
 int main() {
@@ -44,10 +44,26 @@ int main() {
 					bankomat1.is_valid_pin = false;
 					bankomat1.iloscProbPin = 3;
 					if (bankomat1.WlozenieKarty(okienko) == true && pobranie.zablokowanieKarty == false) {
-						stanEkranu = stan::wpisywaniepinu;
+						stanEkranu = stan::wyborkart;
 					}
-					else {
-						cout << "karta zablokowana" << endl;
+					break;
+				case stan::wyborkart:
+					if (bankomat1.WlozenieKarty(okienko) == true && pobranie.zablokowanieKarty == false) {
+						stanEkranu = stan::poczatkowy;
+					}
+					switch (bankomat1.WybranieStrzalki(okienko)) {
+					case 1:
+						pobranie.daneKarty = "karta1.txt";
+						stanEkranu = stan::wpisywaniepinu;
+						break;
+					case 2:
+						pobranie.daneKarty = "karta2.txt";
+						stanEkranu = stan::wpisywaniepinu;
+						break;
+					case 3:
+						pobranie.daneKarty = "karta3.txt";
+						stanEkranu = stan::wpisywaniepinu;
+						break;
 					}
 					break;
 				case stan::wpisywaniepinu:
@@ -55,8 +71,8 @@ int main() {
 						bankomat1.czyPierwszePodaniePinu = false;
 						bankomat1.is_valid_pin = true;
 						stanEkranu = stan::menu;
-						
 					}
+					pobranie.PobranieZKarty(pobranie.daneKarty);
 					if (bankomat1.CzytaniePinu()) {
 						stanEkranu = stan::menu;
 						std::memset(bankomat1.pin, 0, sizeof(bankomat1.pin)); //wyzerowanie pinu
@@ -279,6 +295,9 @@ int main() {
 				break;
 			case stan::wydaneBanknoty:
 				ekranbankomatu1.RysujWydaneBanknoty();
+				break;
+			case stan::wyborkart:
+				ekranbankomatu1.RysujWyborKart();
 				break;
 			}
 			okienko.display();
