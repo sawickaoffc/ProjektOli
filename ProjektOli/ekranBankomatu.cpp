@@ -256,6 +256,8 @@ void ekranBankomatu::RysujWydaneBanknoty() {
 		tablicaWydaneBanknoty[i].RysujPrzycisk(*okienko);
 	}
 	a = 1;
+	bankomat1.ilosc = "";
+	bankomat1.kwota = "";
 }
 
 void ekranBankomatu::WyborKart()

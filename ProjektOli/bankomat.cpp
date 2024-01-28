@@ -313,6 +313,9 @@ string bankomat::WydajBanknoty(int kwota){
 			bankomat1.wyplata += stof(bankomat1.kwota);
 			pobranie.ZapisDoKarty(pobranie.daneKarty);
 			ekranbankomatu1.a = 0;
+			for (int i = 0; i < 6; i++) {
+				wydanie[i] = 0;
+			}
 			return ilosc;
 		}
 

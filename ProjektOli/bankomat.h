@@ -33,7 +33,7 @@ public:
     int zasobnik[6];
     int pom[6] = { 0,0,0,0,0,0 };
     bool czymozna;  //zalezy od pliku czy ciagle mozemy wyplacic czy juz przekroczono limit
-    string ilosc = "";
+    string ilosc = ""; //do wyswietlania
     float saldo = 0;
     bankomat() = default;
     bankomat(sf::RenderWindow* okienko);
