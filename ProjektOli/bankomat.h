@@ -27,12 +27,12 @@ public:
     string limitMiesieczny;
     string limitDzienny;
     string limitZwykly;
-    int wyplata = 0;
+    int wyplata;
     int wydanie[6] = { 0,0,0,0,0,0};
     int banknoty[6] = { 500, 200, 100, 50, 20, 10 };
     int zasobnik[6];
     int pom[6] = { 0,0,0,0,0,0 };
-    bool czymozna = false;  //zalez
+    bool czymozna;  //zalezy od pliku czy ciagle mozemy wyplacic czy juz przekroczono limit
     string ilosc = "";
     float saldo = 0;
     bankomat() = default;

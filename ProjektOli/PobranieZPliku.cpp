@@ -41,6 +41,8 @@ bool PobranieZPliku::PobranieZKarty(const string& nazwaPliku)
     else if(pomocnicza == "1"){
         bankomat1.czymozna = true;
     }
+    getline(plik, pomocnicza); //ile juz wyplacilismy
+    bankomat1.wyplata = stoi(pomocnicza);
 }
 
 
@@ -109,6 +111,15 @@ void PobranieZPliku::ZapisDoKarty(const string& nazwaPliku) {
             blokada = "1";
         }
         plik << blokada << endl; //zablokowanie karty
+
+        string czymozna = "0";
+        if (bankomat1.czymozna == true) {
+            czymozna = "1";
+        }
+        plik << czymozna << endl; //czy mozna wyplacac z karty
+
+        string wyplata = to_string(bankomat1.wyplata);
+        plik << wyplata << endl;
     }
 }
 

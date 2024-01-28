@@ -200,17 +200,24 @@ bool bankomat::WlozenieKarty(sf::RenderWindow& okienko)
 
 bool bankomat::WarunekWyplat()
 {
+	pobranie.PobranieZKarty(pobranie.daneKarty);
+
+	if (wyplata == stoi(limitZwykly) || wyplata == stoi(limitDzienny) || wyplata == stoi(limitMiesieczny)) {
+		czymozna = false;
+	}
+	else if (wyplata != stoi(limitZwykly) && wyplata != stoi(limitDzienny) && wyplata != stoi(limitMiesieczny)) {
+		czymozna = true;
+	}
 	if (stoi(kwota) % 10 == 0 && stoi(kwota) <= saldo && stoi(kwota) <= stoi(limitZwykly) &&
 		(stoi(limitZwykly) - wyplata) >= stoi(kwota) && czymozna == true) {
+		ekranbankomatu1.a = 0;
 		return true;
 	}
-	if (wyplata == stoi(limitZwykly) || wyplata == stoi(limitDzienny)|| wyplata == stoi(limitMiesieczny)) {
-		czymozna == false;
+	else {
+		cout << "Nie spelniono warunkow wyplaty"<<endl;
+		return false;
 	}
-	else if(wyplata != stoi(limitZwykly) && wyplata != stoi(limitDzienny)&& wyplata != stoi(limitMiesieczny)){
-		czymozna == true;
-	}
-	return false;
+	
 }
 
 
@@ -305,15 +312,14 @@ string bankomat::WydajBanknoty(int kwota){
 			bankomat1.saldo -= stof(bankomat1.kwota);
 			bankomat1.wyplata += stof(bankomat1.kwota);
 			pobranie.ZapisDoKarty(pobranie.daneKarty);
+			ekranbankomatu1.a = 0;
 			return ilosc;
 		}
 
 	}
 
 	if (pomocnicza != 0)
-	{
-		cout << "Druga Petla" << endl;
-		
+	{		
 		for (int j = 0; j < 6; j++)
 		{
 			for (int i = 0; i <= 5; i++) {
@@ -377,6 +383,7 @@ string bankomat::WydajBanknoty(int kwota){
 						}
 						bankomat1.saldo -= stof(bankomat1.kwota);
 						bankomat1.wyplata += stof(bankomat1.kwota);
+						ekranbankomatu1.a = 0;
 						pobranie.ZapisDoKarty(pobranie.daneKarty);
 						return ilosc;
 					}
@@ -390,5 +397,7 @@ string bankomat::WydajBanknoty(int kwota){
 	if (pomocnicza != 0)
 	{
 		return "NIE MOZNA WYPLACIC";
+		ekranbankomatu1.a = 0;
+
 	}
 }
