@@ -74,8 +74,6 @@ int main() {
 					break;
 				case stan::wpisywaniepinu:
 					pobranie.PobranieZKarty(pobranie.daneKarty);
-					cout << bankomat1.wyplata << endl;
-
 					if (zmianaPinu == 1 && sf::Event::MouseButtonPressed && bankomat1.tablicaPrzyciskow[20].PolozenieMyszki(okienko) == true && bankomat1.petla == 0) {
 						bankomat1.czyPierwszePodaniePinu = false;
 						bankomat1.is_valid_pin = true;
@@ -92,7 +90,6 @@ int main() {
 					}
 					break;
 				case stan::menu:
-					//std::cout << "Stan konta: " << to_string(bankomat1.saldo) << endl;
 					switch (bankomat1.WybranieStrzalki(okienko)) {
 					case 1:
 						stanEkranu = stan::srodki;

@@ -209,6 +209,8 @@ bool bankomat::WarunekWyplat()
 	else if (wyplata != stoi(limitZwykly) && wyplata != stoi(limitDzienny) && wyplata != stoi(limitMiesieczny)) {
 		czymozna = true;
 	}
+	pobranie.ZapisDoKarty(pobranie.daneKarty);
+
 	if (stoi(kwota) % 10 == 0 && stoi(kwota) <= saldo && stoi(kwota) <= stoi(limitZwykly) &&
 		(stoi(limitZwykly) - wyplata) >= stoi(kwota) && czymozna == true) {
 		ekranbankomatu1.a = 0;
