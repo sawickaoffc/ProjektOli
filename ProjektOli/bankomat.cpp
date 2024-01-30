@@ -1,5 +1,6 @@
 ﻿#include "bankomat.h"
 #include "ekranBankomatu.h"
+#include <algorithm>
 #include <SFML/Graphics/Font.hpp>
 extern bankomat bankomat1;
 extern ekranBankomatu ekranbankomatu1;
@@ -249,6 +250,52 @@ bool bankomat::PobierzKwote() {
 	return false;
 }
 
+string bankomat::WydajBanknoty(int kwota)
+{
+	int pomocnicza = kwota;
+	pobranie.PobranieZBankomatu("bankomatZasobnik.txt");
+	for (int i = 5; i >= 0; i--) {
+		for (int i = 0; i < 6; i++) {
+			pom[i] = 0;
+		}
+		int pomocnicza = kwota;
+		for (int j = i; j < 6; j++) {
+			int liczba = min(pomocnicza / banknoty[j], zasobnik[j]); //bierze mi mniejszą liczbę - ile mamy max w zasobniku
+			pomocnicza -= liczba * banknoty[j];
+			pom[j] = liczba;
+		}
+		if (pomocnicza == 0) {
+			for (int i = 0; i < 6; i++) {
+				wydanie[i] = pom[i];
+			}
+			pobranie.ZapisPoWyplacie("bankomatZasobnik.txt");
+			for (int i = 0; i < 6; i++) {
+				if (wydanie[i] != 0) {
+
+					ilosc += std::to_string(banknoty[i]);
+					ilosc += "*";
+					ilosc += std::to_string(wydanie[i]);
+					ilosc += ",   ";
+				}
+			}
+			bankomat1.saldo -= stof(bankomat1.kwota);
+			bankomat1.wyplata += stof(bankomat1.kwota);
+			pobranie.ZapisDoKarty(pobranie.daneKarty);
+			ekranbankomatu1.a = 0;
+			for (int i = 0; i < 6; i++) {
+				wydanie[i] = 0;
+			}
+			return ilosc;
+		}
+
+	}
+	if (pomocnicza != 0)
+	{
+		return "NIE MOZNA WYPLACIC";
+		ekranbankomatu1.a = 0;
+	}
+}
+/*
 string bankomat::WydajBanknoty(int kwota){
 	int pomocnicza = kwota; 
 	int dziele;
@@ -341,7 +388,7 @@ string bankomat::WydajBanknoty(int kwota){
 					dziele = pomocnicza / banknoty[i];
 					reszta = pomocnicza % banknoty[i];
 
-					if (j != 5 && banknoty[i] == 500)
+					if (reszta != banknoty[j] && banknoty[i] == 500)
 					{
 						if (dziele <= zasobnik[0]) {
 							pomocnicza = reszta;
@@ -353,7 +400,7 @@ string bankomat::WydajBanknoty(int kwota){
 						}
 					}
 
-					if (j != 4 && banknoty[i] == 200)
+					if (reszta != banknoty[j] && banknoty[i] == 200)
 					{
 						if (dziele <= zasobnik[1]) {
 							pomocnicza = reszta;
@@ -365,7 +412,7 @@ string bankomat::WydajBanknoty(int kwota){
 						}
 					}
 
-					if (j != 3 && banknoty[i] == 100)
+					if (reszta != banknoty[j] && banknoty[i] == 100)
 					{
 						if (dziele <= zasobnik[2]) {
 							pomocnicza = reszta;
@@ -377,7 +424,7 @@ string bankomat::WydajBanknoty(int kwota){
 						}
 					}
 
-					if (j != 2 && banknoty[i] == 50)
+					if (reszta != banknoty[j] && banknoty[i] == 50)
 					{
 						if (dziele <= zasobnik[3]) {
 							pomocnicza = reszta;
@@ -389,7 +436,7 @@ string bankomat::WydajBanknoty(int kwota){
 						}
 					}
 
-					if (j != 1 && banknoty[i] == 20)
+					if (reszta != banknoty[j] && banknoty[i] == 20)
 					{
 						if (dziele <= zasobnik[4]) {
 							pomocnicza = reszta;
@@ -401,7 +448,7 @@ string bankomat::WydajBanknoty(int kwota){
 						}
 					}
 
-					if (j != 0 && banknoty[i] == 10)
+					if (reszta != banknoty[j] && banknoty[i] == 10)
 					{
 						if (dziele <= zasobnik[5]) {
 							pomocnicza = reszta;
@@ -443,3 +490,4 @@ string bankomat::WydajBanknoty(int kwota){
 
 	}
 }
+*/

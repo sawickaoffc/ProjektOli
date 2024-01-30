@@ -50,7 +50,9 @@ int main() {
 				case stan::wyborkart:
 					if (bankomat1.WlozenieKarty(okienko) == true && pobranie.zablokowanieKarty == false) {
 						stanEkranu = stan::poczatkowy;
+						bankomat1.kwota = "";
 					}
+					bankomat1.kwota = "";
 					switch (bankomat1.WybranieStrzalki(okienko)) {
 					case 1:
 						pobranie.daneKarty = "karta1.txt";
@@ -222,8 +224,7 @@ int main() {
 					}
 					break;
 				case stan::dane:
-					
-
+					bankomat1.kwota = "";
 					if (sf::Event::MouseButtonPressed && bankomat1.tablicaPrzyciskow[20].PolozenieMyszki(okienko) == true) {
 						stanEkranu = stan::menu;
 					}
@@ -250,6 +251,7 @@ int main() {
 					break;
 
 				case stan::zmianalimitu:
+					bankomat1.kwota = "";
 					if (bankomat1.PobierzKwote() && stof(bankomat1.kwota) >= 0) {
 						if (typLimitu == 0) {
 							bankomat1.limitMiesieczny = bankomat1.kwota;
