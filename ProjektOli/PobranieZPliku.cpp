@@ -129,7 +129,7 @@ void PobranieZPliku::ZapisDoKarty(const string& nazwaPliku) {
     string zapis = to_string(bankomat1.saldo);
     std::ofstream plik(nazwaPliku);
     if (plik.is_open()) {
-        plik << numerKarty << endl;
+        plik << bankomat1.numerKonta << endl;
         plik << bankomat1.obecnyPIN << endl;
         plik << zapis << endl; //saldo
         plik << bankomat1.limitDzienny << endl;

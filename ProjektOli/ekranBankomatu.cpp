@@ -172,7 +172,7 @@ void ekranBankomatu::DostepneSrodki() {
 	tablicaSrodki[0].Czcionka(font);
 	tablicaSrodki[0].Polozenie({ 370, 300 });
 
-	tablicaSrodki[1] = Guzik("Sodtepne Srodki na Koncie: ", { 350,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
+	tablicaSrodki[1] = Guzik("Dostepne srodki na koncie: ", { 350,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
 	tablicaSrodki[1].Czcionka(font);
 	tablicaSrodki[1].Polozenie({ 300, 180 });
 }
