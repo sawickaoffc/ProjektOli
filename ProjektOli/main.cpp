@@ -12,8 +12,8 @@ bankomat bankomat1;
 ekranBankomatu ekranbankomatu1;
 PobranieZPliku pobranie;
 enum stan {
-	poczatkowy, wpisywaniepinu, menu, wyplacanie, srodki, innakwota,
-	wyjeciekarty, limity, zmianalimitu, wydaneBanknoty, wyborkart
+	poczatkowy, wpisywaniepinu, menu, wyplacanie, srodki, wplacanie, innakwota,
+	wyjeciekarty, limity, zmianalimitu, wydaneBanknoty, wyborkart, dane
 };
 using namespace std;
 int main() {
@@ -64,6 +64,10 @@ int main() {
 						pobranie.daneKarty = "karta3.txt";
 						stanEkranu = stan::wpisywaniepinu;
 						break;
+					case 4:
+						pobranie.daneKarty = "karta4.txt";
+						stanEkranu = stan::wpisywaniepinu;
+						break;
 					}
 					break;
 				case stan::wpisywaniepinu:
@@ -91,6 +95,9 @@ int main() {
 					case 2:
 						stanEkranu = stan::wyplacanie;
 						break;
+					case 3:
+						stanEkranu = stan::wplacanie;
+						break;
 					case 5:
 						stanEkranu = stan::limity;
 						break;
@@ -99,6 +106,11 @@ int main() {
 						bankomat1.czyPierwszePodaniePinu = true;
 						bankomat1.is_valid_pin = false;
 						stanEkranu = stan::wpisywaniepinu;
+						break;
+					case 7:
+						stanEkranu = stan::dane;
+
+						///////////////////////////////////////////////////////////////////////////////////////////////
 						break;
 					}
 					if (sf::Event::MouseButtonPressed && bankomat1.tablicaPrzyciskow[20].PolozenieMyszki(okienko) == true && bankomat1.petla == 0) {
@@ -160,12 +172,62 @@ int main() {
 						stanEkranu = stan::wyplacanie;
 					}
 					break;
+				case stan::wplacanie:
+					
+					switch (bankomat1.WybranieStrzalki(okienko)) {
+					case 1:
+						bankomat1.kwota = "10";
+						bankomat1.wydanie[0] = 1;
+						bankomat1.Wplata();
+						stanEkranu = stan::srodki;
+						break;
+					case 2:
+						bankomat1.kwota = "20";
+						bankomat1.wydanie[1] = 1;
+						bankomat1.Wplata();
+						stanEkranu = stan::srodki;
+						break;
+					case 3:
+						bankomat1.kwota = "50";
+						bankomat1.wydanie[2] = 1;
+						bankomat1.Wplata();
+						stanEkranu = stan::srodki;
+						break;
+					case 4:
+						bankomat1.kwota = "100";
+						bankomat1.wydanie[3] = 1;
+						bankomat1.Wplata();
+						stanEkranu = stan::srodki;
+						break;
+					case 5:
+						bankomat1.kwota = "200";
+						bankomat1.wydanie[4] = 1;
+						bankomat1.Wplata();
+						stanEkranu = stan::srodki;
+						break;
+					case 6:
+						bankomat1.kwota = "500";
+						bankomat1.wydanie[5] = 1;
+						bankomat1.Wplata();
+						stanEkranu = stan::srodki;
+						break;
+					}
+					if (sf::Event::MouseButtonPressed && bankomat1.tablicaPrzyciskow[20].PolozenieMyszki(okienko) == true) {
+						stanEkranu = stan::menu;
+					}
+					break;
 				case stan::srodki: 
 					if (sf::Event::MouseButtonPressed && bankomat1.tablicaPrzyciskow[20].PolozenieMyszki(okienko) == true && bankomat1.petla == 0) {
 						stanEkranu = stan::menu;
 					}
 					break;
+				case stan::dane:
+					
 
+					if (sf::Event::MouseButtonPressed && bankomat1.tablicaPrzyciskow[20].PolozenieMyszki(okienko) == true) {
+						stanEkranu = stan::menu;
+					}
+					break;
 				case stan::limity:
 					poprzedniStan = limity;
 					switch (bankomat1.WybranieStrzalki(okienko)) {
@@ -257,6 +319,12 @@ int main() {
 				break;
 			case stan::wyborkart:
 				ekranbankomatu1.RysujWyborKart();
+				break;
+			case stan::wplacanie:
+				ekranbankomatu1.RysujWplataGotowki();
+				break;
+			case stan::dane:
+				ekranbankomatu1.RysujDane();
 				break;
 			}
 			okienko.display();

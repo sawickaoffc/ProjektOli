@@ -19,7 +19,7 @@ bool PobranieZPliku::PobranieZKarty(const string& nazwaPliku)
     if (!plik.is_open()) {
         std::cerr << "Nie otworzono pliku karta" << std::endl;
     }
-    getline(plik, numerKarty);
+    getline(plik, bankomat1.numerKonta);
     getline(plik, bankomat1.obecnyPIN);
     getline(plik, pomocnicza);
     bankomat1.saldo = stof(pomocnicza);
@@ -29,9 +29,11 @@ bool PobranieZPliku::PobranieZKarty(const string& nazwaPliku)
     getline(plik, pomocnicza);
     //cout << pomocnicza << endl;
     if (pomocnicza == "0") {
+        bankomat1.blokada = "nie jest zablokowana";
         return false;       //czy Karta jest zablokowana (nie jest)
     }
     else if (pomocnicza == "1") {
+        bankomat1.blokada = "jest zablokowana";
         return true;
     }
     getline(plik, pomocnicza);  // do wyplacania czy nie przekraczamy limitu
@@ -87,6 +89,33 @@ void PobranieZPliku::ZapisPoWyplacie(const string& nazwaPliku)
         pomocnicza = to_string(bankomat1.zasobnik[4] - bankomat1.wydanie[4]);
         plik << pomocnicza << endl;
         pomocnicza = to_string(bankomat1.zasobnik[5] - bankomat1.wydanie[5]);
+        plik << pomocnicza << endl;
+        plik.close();
+
+    }
+    else {
+        std::cerr << "Nie mo¿na otworzyæ pliku." << std::endl;
+    }
+}
+
+void PobranieZPliku::ZapisPoWplacie(const string& nazwaPliku)
+{
+    std::ofstream plik(nazwaPliku);
+
+    if (plik.is_open()) {
+
+        string pomocnicza;
+        pomocnicza = to_string(bankomat1.zasobnik[0] + bankomat1.wydanie[0]);
+        plik << pomocnicza << endl;
+        pomocnicza = to_string(bankomat1.zasobnik[1] + bankomat1.wydanie[1]);
+        plik << pomocnicza << endl;
+        pomocnicza = to_string(bankomat1.zasobnik[2] + bankomat1.wydanie[2]);
+        plik << pomocnicza << endl;
+        pomocnicza = to_string(bankomat1.zasobnik[3] + bankomat1.wydanie[3]);
+        plik << pomocnicza << endl;
+        pomocnicza = to_string(bankomat1.zasobnik[4] + bankomat1.wydanie[4]);
+        plik << pomocnicza << endl;
+        pomocnicza = to_string(bankomat1.zasobnik[5] + bankomat1.wydanie[5]);
         plik << pomocnicza << endl;
         plik.close();
 

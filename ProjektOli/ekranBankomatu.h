@@ -30,6 +30,9 @@ public:
     void RysujWyplataGotowki();
     int a = 0; //do rysuj wyplaty
 
+    void WplataGotowki();
+    void RysujWplataGotowki();
+
     void InnaKwota();
     void RysujInnaKwote();
 
@@ -38,6 +41,10 @@ public:
 
     void DostepneSrodki();
     void RysujDostepneSrodki();
+
+    void Dane();
+    void RysujDane();
+
     void ZmianaLimitu();
     void RysujZmianeLimitu();
 
@@ -47,16 +54,18 @@ public:
     void WyborKart();
     void RysujWyborKart();
 
-    Guzik tablicaMenu[4];
+    Guzik tablicaMenu[6];
     Guzik tablicaPinu[1];
     Guzik tablicaWydaneBanknoty[1];
     Guzik tablicaWyplacanie[8];
-    Guzik tablicaSrodki[1];
+    Guzik tablicaSrodki[2];
     Guzik tablicaAktywacja[2];
     Guzik tablicaZmianyPinu[1];
     Guzik tablicaLimitu[6];
     Guzik tablicaZmianyLimitu[1];
-    Guzik tablicaKart[3];
+    Guzik tablicaKart[4];
+    Guzik tablicaWplacanie[6];
+    Guzik tablicaDane[3];
 
     void Limity();
     void RysujLimity();

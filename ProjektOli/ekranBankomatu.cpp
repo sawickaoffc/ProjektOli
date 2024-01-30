@@ -89,12 +89,19 @@ void ekranBankomatu::Menu()
 	tablicaMenu[3].Czcionka(font);
 	tablicaMenu[3].Polozenie({ 560,60 });
 
+	tablicaMenu[4] = Guzik("Wplacanie Gotowki", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaMenu[4].Czcionka(font);
+	tablicaMenu[4].Polozenie({ 180,260 });
+
+	tablicaMenu[5] = Guzik("Dane Konta", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaMenu[5].Czcionka(font);
+	tablicaMenu[5].Polozenie({ 560,260 });
 }
 
 void ekranBankomatu::RysujMenu()
 {
 	okienko->draw(tloEkranu);
-	for (int i = 0; i < 4; ++i) {
+	for (int i = 0; i < 6; ++i) {
 		tablicaMenu[i].RysujPrzycisk(*okienko);
 	}
 }
@@ -158,18 +165,86 @@ void ekranBankomatu::RysujInnaKwote() {
 
 
 void ekranBankomatu::DostepneSrodki() {
+
+	pobranie.PobranieZKarty(pobranie.daneKarty);
 	string str = to_string(bankomat1.saldo);
 	tablicaSrodki[0] = Guzik(str, { 260,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
 	tablicaSrodki[0].Czcionka(font);
 	tablicaSrodki[0].Polozenie({ 370, 300 });
+
+	tablicaSrodki[1] = Guzik("Sodtepne Srodki na Koncie: ", { 350,70 }, 20, sf::Color{ 255, 255, 255 }, sf::Color::Black, font);
+	tablicaSrodki[1].Czcionka(font);
+	tablicaSrodki[1].Polozenie({ 300, 180 });
 }
 
 void ekranBankomatu::RysujDostepneSrodki() {
 	DostepneSrodki();
 
 	okienko->draw(tloEkranu);
-	for (int i = 0; i < 1; ++i) {
+	for (int i = 0; i < 2; ++i) {
 		tablicaSrodki[i].RysujPrzycisk(*okienko);
+	}
+}
+
+void ekranBankomatu::Dane()
+{
+	pobranie.PobranieZKarty(pobranie.daneKarty);
+
+	tablicaDane[0] = Guzik("Numer Konta:  " + bankomat1.numerKonta, {360,70}, 20, sf::Color{255, 191, 143}, sf::Color::White, font);
+	tablicaDane[0].Czcionka(font);
+	tablicaDane[0].Polozenie({ 160,60 });
+
+	tablicaDane[1] = Guzik("Karta:  " + bankomat1.blokada, { 360,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaDane[1].Czcionka(font);
+	tablicaDane[1].Polozenie({ 160,160 });
+
+	tablicaDane[2] = Guzik("wyplacona dzis kwota:  " + to_string(bankomat1.wyplata), { 360,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaDane[2].Czcionka(font);
+	tablicaDane[2].Polozenie({ 160,260 });
+
+}
+
+void ekranBankomatu::RysujDane()
+{
+	Dane();
+
+	okienko->draw(tloEkranu);
+	for (int i = 0; i < 3; ++i) {
+		tablicaDane[i].RysujPrzycisk(*okienko);
+	}
+}
+
+void ekranBankomatu::WplataGotowki()
+{
+	tablicaWplacanie[0] = Guzik("10", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaWplacanie[0].Czcionka(font);
+	tablicaWplacanie[0].Polozenie({ 180,60 });
+
+	tablicaWplacanie[1] = Guzik("20", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaWplacanie[1].Czcionka(font);
+	tablicaWplacanie[1].Polozenie({ 180,160 });
+
+	tablicaWplacanie[2] = Guzik("50", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaWplacanie[2].Czcionka(font);
+	tablicaWplacanie[2].Polozenie({ 180,260 });
+
+	tablicaWplacanie[3] = Guzik("100", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaWplacanie[3].Czcionka(font);
+	tablicaWplacanie[3].Polozenie({ 560,60 });
+	
+	tablicaWplacanie[4] = Guzik("200", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaWplacanie[4].Czcionka(font);
+	tablicaWplacanie[4].Polozenie({ 560, 160 });
+
+	tablicaWplacanie[5] = Guzik("500", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaWplacanie[5].Czcionka(font);
+	tablicaWplacanie[5].Polozenie({ 560,260 });
+}
+void ekranBankomatu::RysujWplataGotowki() {
+	WplataGotowki();
+	okienko->draw(tloEkranu);
+	for (int i = 0; i < 6; ++i) {
+		tablicaWplacanie[i].RysujPrzycisk(*okienko);
 	}
 }
 
@@ -273,13 +348,17 @@ void ekranBankomatu::WyborKart()
 	tablicaKart[2] = Guzik("Karta 3", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
 	tablicaKart[2].Czcionka(font);
 	tablicaKart[2].Polozenie({ 180,260 });
+
+	tablicaKart[3] = Guzik("Karta 4", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaKart[3].Czcionka(font);
+	tablicaKart[3].Polozenie({ 180,360 });
 }
 
 void ekranBankomatu::RysujWyborKart()
 {
 	WyborKart();
 	okienko->draw(tloEkranu);
-	for (int i = 0; i < 3; ++i) {
+	for (int i = 0; i < 4; ++i) {
 		tablicaKart[i].RysujPrzycisk(*okienko);
 	}
 }

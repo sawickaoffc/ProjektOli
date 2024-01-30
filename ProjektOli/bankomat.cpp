@@ -220,6 +220,16 @@ bool bankomat::WarunekWyplat()
 	
 }
 
+void bankomat::Wplata()
+{
+	bankomat1.saldo += stof(bankomat1.kwota);
+	pobranie.ZapisDoKarty(pobranie.daneKarty);
+	pobranie.ZapisPoWplacie("bankomatZasobnik.txt");
+	for (int i = 0; i < 6; i++) {
+		wydanie[i] = 0;
+	}
+}
+
 
 
 bool bankomat::PobierzKwote() {
@@ -248,6 +258,7 @@ string bankomat::WydajBanknoty(int kwota){
 	int dziele;
 	int reszta;
 	int czywystarczy;
+	pobranie.PobranieZBankomatu("bankomatZasobnik.txt");
 	for (int i = 0; i < 6; i++)
 	{
 		if (pomocnicza >= banknoty[i]) {

@@ -28,6 +28,7 @@ public:
 	bool PobranieZKarty(const string& plik);
 	void PobranieZBankomatu(const string& nazwaPliku);
 	void ZapisPoWyplacie(const string& nazwaPliku);
+	void ZapisPoWplacie(const string& nazwaPliku);
 	void ZapisDoKarty(const string& nazwaPliku);
 };
 
