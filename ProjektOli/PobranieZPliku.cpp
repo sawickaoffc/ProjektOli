@@ -12,7 +12,7 @@ void PobranieZPliku::Stworz(sf::RenderWindow* okienko)
     ZapisPoWyplacie(zasobnik);
 }
 
-bool PobranieZPliku::PobranieZKarty(const string& nazwaPliku)
+void PobranieZPliku::PobranieZKarty(const string& nazwaPliku)
 {
     string pomocnicza;
     std::ifstream plik(nazwaPliku);
@@ -29,19 +29,20 @@ bool PobranieZPliku::PobranieZKarty(const string& nazwaPliku)
     getline(plik, pomocnicza);
     //cout << pomocnicza << endl;
     if (pomocnicza == "0") {
+        zablokowanieKarty = false;
         bankomat1.blokada = "nie jest zablokowana";
-        return false;       //czy Karta jest zablokowana (nie jest)
+        //czy Karta jest zablokowana (nie jest)
     }
-    else if (pomocnicza == "1") {
+    if (pomocnicza == "1") {
         bankomat1.blokada = "jest zablokowana";
-        return true;
+        zablokowanieKarty = true;
     }
 
     getline(plik, pomocnicza);  // do wyplacania czy nie przekraczamy limitu
     if (pomocnicza == "0") {
         bankomat1.czymozna = false;       
     }
-    else if(pomocnicza == "1"){
+    if(pomocnicza == "1"){
         bankomat1.czymozna = true;
     }
 

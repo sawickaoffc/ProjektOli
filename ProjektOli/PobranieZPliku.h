@@ -22,10 +22,10 @@ private:
 public:
 	string daneKarty = "karta1.txt";
 	string zasobnik = "bankomatZasobnik.txt";
-	bool zablokowanieKarty = PobranieZKarty(daneKarty);
+	bool zablokowanieKarty;
 	void Stworz(sf::RenderWindow* okienko);
 	PobranieZPliku() = default;
-	bool PobranieZKarty(const string& plik);
+	void PobranieZKarty(const string& plik);
 	void PobranieZBankomatu(const string& nazwaPliku);
 	void ZapisPoWyplacie(const string& nazwaPliku);
 	void ZapisPoWplacie(const string& nazwaPliku);
