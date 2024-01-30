@@ -111,8 +111,6 @@ int main() {
 						break;
 					case 7:
 						stanEkranu = stan::dane;
-
-						///////////////////////////////////////////////////////////////////////////////////////////////
 						break;
 					}
 					if (sf::Event::MouseButtonPressed && bankomat1.tablicaPrzyciskow[20].PolozenieMyszki(okienko) == true && bankomat1.petla == 0) {
@@ -251,7 +249,6 @@ int main() {
 					break;
 
 				case stan::zmianalimitu:
-					bankomat1.kwota = "";
 					if (bankomat1.PobierzKwote() && stof(bankomat1.kwota) >= 0) {
 						if (typLimitu == 0) {
 							bankomat1.limitMiesieczny = bankomat1.kwota;

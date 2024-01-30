@@ -36,6 +36,7 @@ bool PobranieZPliku::PobranieZKarty(const string& nazwaPliku)
         bankomat1.blokada = "jest zablokowana";
         return true;
     }
+
     getline(plik, pomocnicza);  // do wyplacania czy nie przekraczamy limitu
     if (pomocnicza == "0") {
         bankomat1.czymozna = false;       
@@ -43,8 +44,10 @@ bool PobranieZPliku::PobranieZKarty(const string& nazwaPliku)
     else if(pomocnicza == "1"){
         bankomat1.czymozna = true;
     }
-    getline(plik, pomocnicza); //ile juz wyplacilismy
-    bankomat1.wyplata = stoi(pomocnicza);
+
+    string nowa;
+    getline(plik, nowa); //ile juz wyplacilismy
+    bankomat1.wyplata = stoi(nowa);
 }
 
 

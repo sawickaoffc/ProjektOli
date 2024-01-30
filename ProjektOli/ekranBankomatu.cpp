@@ -207,7 +207,6 @@ void ekranBankomatu::Dane()
 void ekranBankomatu::RysujDane()
 {
 	Dane();
-
 	okienko->draw(tloEkranu);
 	for (int i = 0; i < 3; ++i) {
 		tablicaDane[i].RysujPrzycisk(*okienko);
