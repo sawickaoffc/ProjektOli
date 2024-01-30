@@ -43,7 +43,7 @@ int main() {
 				case stan::poczatkowy:
 					bankomat1.is_valid_pin = false;
 					bankomat1.iloscProbPin = 3;
-					if (bankomat1.WlozenieKarty(okienko) == true && pobranie.zablokowanieKarty == false) {
+					if (bankomat1.WlozenieKarty(okienko) == true) {
 						stanEkranu = stan::wyborkart;
 					}
 					break;

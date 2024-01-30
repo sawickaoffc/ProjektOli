@@ -249,16 +249,12 @@ bool bankomat::PobierzKwote() {
 	return false;
 }
 
-
-
-
-
 string bankomat::WydajBanknoty(int kwota){
 	int pomocnicza = kwota; 
 	int dziele;
 	int reszta;
-	int czywystarczy;
 	pobranie.PobranieZBankomatu("bankomatZasobnik.txt");
+
 	for (int i = 0; i < 6; i++)
 	{
 		if (pomocnicza >= banknoty[i]) {
@@ -329,7 +325,6 @@ string bankomat::WydajBanknoty(int kwota){
 			}
 			return ilosc;
 		}
-
 	}
 
 	if (pomocnicza != 0)
@@ -339,7 +334,6 @@ string bankomat::WydajBanknoty(int kwota){
 			for (int i = 0; i <= 5; i++) {
 				wydanie[i] = pom[i];
 			}
-
 			pomocnicza = kwota;
 			for (int i = 0; i < 6; i++)
 			{
@@ -347,40 +341,76 @@ string bankomat::WydajBanknoty(int kwota){
 					dziele = pomocnicza / banknoty[i];
 					reszta = pomocnicza % banknoty[i];
 
-					if (j != 5 && banknoty[i] == 500 && dziele <= zasobnik[0])
+					if (j != 5 && banknoty[i] == 500)
 					{
-						pomocnicza = reszta;
-						wydanie[0] = dziele;
+						if (dziele <= zasobnik[0]) {
+							pomocnicza = reszta;
+							wydanie[0] = dziele;
+						}
+						else {
+							pomocnicza -= banknoty[0] * zasobnik[0];
+							wydanie[0] = zasobnik[0];
+						}
 					}
 
-					if (j != 4 && banknoty[i] == 200 && dziele <= zasobnik[1])
+					if (j != 4 && banknoty[i] == 200)
 					{
-						pomocnicza = reszta;
-						wydanie[1] = dziele;
+						if (dziele <= zasobnik[1]) {
+							pomocnicza = reszta;
+							wydanie[1] = dziele;
+						}
+						else {
+							pomocnicza -= banknoty[1] * zasobnik[1];
+							wydanie[1] = zasobnik[1];
+						}
 					}
 
-					if (j != 3 && banknoty[i] == 100 && dziele <= zasobnik[2])
+					if (j != 3 && banknoty[i] == 100)
 					{
-						pomocnicza = reszta;
-						wydanie[2] = dziele;
+						if (dziele <= zasobnik[2]) {
+							pomocnicza = reszta;
+							wydanie[2] = dziele;
+						}
+						else {
+							pomocnicza -= banknoty[2] * zasobnik[2];
+							wydanie[2] = zasobnik[2];
+						}
 					}
 
-					if (j != 2 && banknoty[i] == 50 && dziele <= zasobnik[3])
+					if (j != 2 && banknoty[i] == 50)
 					{
-						pomocnicza = reszta;
-						wydanie[3] = dziele;
+						if (dziele <= zasobnik[3]) {
+							pomocnicza = reszta;
+							wydanie[3] = dziele;
+						}
+						else {
+							pomocnicza -= banknoty[3] * zasobnik[3];
+							wydanie[3] = zasobnik[3];
+						}
 					}
 
-					if (j != 1 && banknoty[i] == 20 && dziele <= zasobnik[4])
+					if (j != 1 && banknoty[i] == 20)
 					{
-						pomocnicza = reszta;
-						wydanie[4] = dziele;
+						if (dziele <= zasobnik[4]) {
+							pomocnicza = reszta;
+							wydanie[4] = dziele;
+						}
+						else {
+							pomocnicza -= banknoty[4] * zasobnik[4];
+							wydanie[4] = zasobnik[4];
+						}
 					}
 
-					if (j != 0 && banknoty[i] == 10 && dziele <= zasobnik[5])
+					if (j != 0 && banknoty[i] == 10)
 					{
-						pomocnicza = reszta;
-						wydanie[5] = dziele;
+						if (dziele <= zasobnik[5]) {
+							pomocnicza = reszta;
+							wydanie[5] = dziele;
+						}
+						else {
+							pomocnicza -= banknoty[5] * zasobnik[5];
+							wydanie[5] = zasobnik[5];
+						}
 					}
 					if (pomocnicza == 0)
 					{
@@ -402,9 +432,7 @@ string bankomat::WydajBanknoty(int kwota){
 						return ilosc;
 					}
 				}
-
 			}
-
 		}
 	}
 

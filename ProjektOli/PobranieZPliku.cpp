@@ -151,4 +151,3 @@ void PobranieZPliku::ZapisDoKarty(const string& nazwaPliku) {
         plik << wyplata << endl;
     }
 }
-
