@@ -1,4 +1,5 @@
 #include "PobranieZPliku.h"
+#pragma warning(suppress : 4996)
 
 extern bankomat bankomat1;
 extern ekranBankomatu ekranbankomatu1;
@@ -10,6 +11,7 @@ void PobranieZPliku::Stworz(sf::RenderWindow* okienko)
     PobranieZKarty(daneKarty);
     PobranieZBankomatu(zasobnik);
     ZapisPoWyplacie(zasobnik);
+    PorownanieDat();
 }
 
 void PobranieZPliku::PobranieZKarty(const string& nazwaPliku)
@@ -47,12 +49,21 @@ void PobranieZPliku::PobranieZKarty(const string& nazwaPliku)
     }
 
     string nowa;
-    getline(plik, nowa); //ile juz wyplacilismy
+    getline(plik, nowa); //ile juz wyplacilismy dziennie
     bankomat1.wyplataDzienna = stoi(nowa);
 
-    string nowa;
-    getline(plik, nowa); //ile juz wyplacilismy
+    getline(plik, nowa); //ile juz wyplacilismy miesiecznie
     bankomat1.wyplataMiesieczna = stoi(nowa);
+
+    getline(plik, nowa); 
+    dzien = stoi(nowa);
+
+    getline(plik, nowa);
+    miesiac = stoi(nowa);
+
+    getline(plik, nowa);
+    rok = stoi(nowa);
+
 }
 
 
@@ -160,43 +171,38 @@ void PobranieZPliku::ZapisDoKarty(const string& nazwaPliku) {
 
         string wyplataMiesieczna = to_string(bankomat1.wyplataMiesieczna);
         plik << wyplataMiesieczna << endl;
+
+        string dzien = to_string(pobranie.dzien);
+        plik << dzien << endl;
+
+        string miesiac = to_string(pobranie.miesiac);
+        plik << miesiac << endl;
+
+        string rok = to_string(pobranie.rok);
+        plik << rok << endl;
     }
 }
 
-void PobranieZPliku::Data()
+void PobranieZPliku::PorownanieDat()
 {
-    // Pobierz aktualny czas
-    std::time_t currentTime = std::time(nullptr);
-
-    // Przekszta³æ czas do lokalnej struktury czasowej
-    std::tm* localTime_s = std::localTime_s(&currentTime); 
-    dzien = localTime_s->tm_mday;
-    miesiac = localTime_s->tm_mon + 1;
-    rok = localTime_s->tm_year + 1900;
-    // Wyœwietl datê
-    if (localTime_s != nullptr) {
-        std::cout << "Aktualna data: "
-            << localTime_s->tm_year + 1900 << "-" // Rok liczacy od 1900 wiec trzeba to dodac aby byla poprawna
-            << localTime_s->tm_mon + 1 << "-"     // Miesi¹c (0-11, st¹d +1)
-            << localTime_s->tm_mday << std::endl; // Dzieñ
-    }
-}
-
-bool PobranieZPliku::PorownanieDat()
-{// Pobierz aktualny czas
     int d = dzien;
     int m = miesiac;
     int r = rok;
     std::time_t currentTime = std::time(nullptr);
+    std::tm localTime;
 
-    // Przekszta³æ czas do lokalnej struktury czasowej
-    std::tm* localTime_s = localTime_s(&currentTime);
-    if (r == localTime_s->tm_year + 1900 && m == localTime_s->tm_mon + 1 && d == localTime_s->tm_mday) {
-        return true;
+    if (r == localTime.tm_year + 1900 && m == localTime.tm_mon + 1 && d == localTime.tm_mday) {
+        return;
     }
-    else if(r == localTime_s->tm_year + 1900 && m == localTime_s->tm_mon + 1) {
+    else if(r == localTime.tm_year + 1900 && m == localTime.tm_mon + 1) {
         bankomat1.wyplataDzienna = 0;
-        
+        dzien = localTime.tm_mday;
     }
-    return false;
+    else {
+        rok = localTime.tm_year + 1900;
+        miesiac = localTime.tm_mon + 1;
+        dzien = localTime.tm_mday;
+        bankomat1.wyplataMiesieczna = 0;
+    }
+    return;
 }

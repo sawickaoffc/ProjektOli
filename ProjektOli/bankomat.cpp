@@ -201,6 +201,7 @@ bool bankomat::WlozenieKarty(sf::RenderWindow& okienko)
 
 bool bankomat::WarunekWyplat()
 {
+	pobranie.PorownanieDat();
 	pobranie.PobranieZKarty(pobranie.daneKarty);
 
 	if (wyplataDzienna == stoi(limitZwykly) || wyplataDzienna == stoi(limitDzienny) || wyplataDzienna == stoi(limitMiesieczny) || wyplataMiesieczna == stoi(limitMiesieczny)) {

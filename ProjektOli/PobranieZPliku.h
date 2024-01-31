@@ -1,4 +1,6 @@
 #pragma once
+#pragma warning(suppress : 4996)
+
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -38,7 +40,6 @@ public:
 	void ZapisPoWyplacie(const string& nazwaPliku);
 	void ZapisPoWplacie(const string& nazwaPliku);
 	void ZapisDoKarty(const string& nazwaPliku);
-	void Data();
-	bool PorownanieDat();
+	void PorownanieDat();
 };
 
