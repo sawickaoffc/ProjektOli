@@ -203,16 +203,16 @@ bool bankomat::WarunekWyplat()
 {
 	pobranie.PobranieZKarty(pobranie.daneKarty);
 
-	if (wyplata == stoi(limitZwykly) || wyplata == stoi(limitDzienny) || wyplata == stoi(limitMiesieczny)) {
+	if (wyplataDzienna == stoi(limitZwykly) || wyplataDzienna == stoi(limitDzienny) || wyplataDzienna == stoi(limitMiesieczny) || wyplataMiesieczna == stoi(limitMiesieczny)) {
 		czymozna = false;
 	}
-	else if (wyplata != stoi(limitZwykly) && wyplata != stoi(limitDzienny) && wyplata != stoi(limitMiesieczny)) {
+	else if (wyplataDzienna != stoi(limitZwykly) && wyplataDzienna != stoi(limitDzienny) && wyplataDzienna != stoi(limitMiesieczny) && wyplataMiesieczna != stoi(limitMiesieczny)) {
 		czymozna = true;
 	}
 	pobranie.ZapisDoKarty(pobranie.daneKarty);
 
 	if (stoi(kwota) % 10 == 0 && stoi(kwota) <= saldo && stoi(kwota) <= stoi(limitZwykly) &&
-		(stoi(limitZwykly) - wyplata) >= stoi(kwota) && czymozna == true) {
+		(stoi(limitZwykly) - wyplataDzienna) >= stoi(kwota) && (stoi(limitMiesieczny) - wyplataMiesieczna) >= stoi(kwota) && czymozna == true) {
 		ekranbankomatu1.a = 0;
 		return true;
 	}
@@ -281,7 +281,7 @@ string bankomat::WydajBanknoty(int kwota)
 				}
 			}
 			bankomat1.saldo -= stof(bankomat1.kwota);
-			bankomat1.wyplata += stof(bankomat1.kwota);
+			bankomat1.wyplataDzienna += stof(bankomat1.kwota);
 			pobranie.ZapisDoKarty(pobranie.daneKarty);
 			ekranbankomatu1.a = 0;
 			for (int i = 0; i < 6; i++) {

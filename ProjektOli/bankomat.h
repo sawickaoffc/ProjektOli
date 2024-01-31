@@ -31,7 +31,8 @@ public:
     string limitDzienny;
     string limitZwykly;
 
-    int wyplata;
+    int wyplataDzienna;
+    int wyplataMiesieczna;
     int wydanie[6] = { 0,0,0,0,0,0};
     int banknoty[6] = { 500, 200, 100, 50, 20, 10 };
     int zasobnik[6];

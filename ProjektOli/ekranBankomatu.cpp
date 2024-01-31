@@ -198,7 +198,7 @@ void ekranBankomatu::Dane()
 	tablicaDane[1].Czcionka(font);
 	tablicaDane[1].Polozenie({ 160,160 });
 
-	tablicaDane[2] = Guzik("wyplacona dzis kwota:  " + to_string(bankomat1.wyplata), { 360,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaDane[2] = Guzik("wyplacona dzis kwota:  " + to_string(bankomat1.wyplataDzienna), { 360,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
 	tablicaDane[2].Czcionka(font);
 	tablicaDane[2].Polozenie({ 160,260 });
 

@@ -48,7 +48,11 @@ void PobranieZPliku::PobranieZKarty(const string& nazwaPliku)
 
     string nowa;
     getline(plik, nowa); //ile juz wyplacilismy
-    bankomat1.wyplata = stoi(nowa);
+    bankomat1.wyplataDzienna = stoi(nowa);
+
+    string nowa;
+    getline(plik, nowa); //ile juz wyplacilismy
+    bankomat1.wyplataMiesieczna = stoi(nowa);
 }
 
 
@@ -151,7 +155,48 @@ void PobranieZPliku::ZapisDoKarty(const string& nazwaPliku) {
         }
         plik << czymozna << endl; //czy mozna wyplacac z karty
 
-        string wyplata = to_string(bankomat1.wyplata);
-        plik << wyplata << endl;
+        string wyplataDzienna = to_string(bankomat1.wyplataDzienna);
+        plik << wyplataDzienna << endl;
+
+        string wyplataMiesieczna = to_string(bankomat1.wyplataMiesieczna);
+        plik << wyplataMiesieczna << endl;
     }
+}
+
+void PobranieZPliku::Data()
+{
+    // Pobierz aktualny czas
+    std::time_t currentTime = std::time(nullptr);
+
+    // Przekszta³æ czas do lokalnej struktury czasowej
+    std::tm* localTime_s = std::localTime_s(&currentTime); 
+    dzien = localTime_s->tm_mday;
+    miesiac = localTime_s->tm_mon + 1;
+    rok = localTime_s->tm_year + 1900;
+    // Wyœwietl datê
+    if (localTime_s != nullptr) {
+        std::cout << "Aktualna data: "
+            << localTime_s->tm_year + 1900 << "-" // Rok liczacy od 1900 wiec trzeba to dodac aby byla poprawna
+            << localTime_s->tm_mon + 1 << "-"     // Miesi¹c (0-11, st¹d +1)
+            << localTime_s->tm_mday << std::endl; // Dzieñ
+    }
+}
+
+bool PobranieZPliku::PorownanieDat()
+{// Pobierz aktualny czas
+    int d = dzien;
+    int m = miesiac;
+    int r = rok;
+    std::time_t currentTime = std::time(nullptr);
+
+    // Przekszta³æ czas do lokalnej struktury czasowej
+    std::tm* localTime_s = localTime_s(&currentTime);
+    if (r == localTime_s->tm_year + 1900 && m == localTime_s->tm_mon + 1 && d == localTime_s->tm_mday) {
+        return true;
+    }
+    else if(r == localTime_s->tm_year + 1900 && m == localTime_s->tm_mon + 1) {
+        bankomat1.wyplataDzienna = 0;
+        
+    }
+    return false;
 }
