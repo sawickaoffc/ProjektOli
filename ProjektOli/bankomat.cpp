@@ -331,4 +331,74 @@ string bankomat::WydajBanknoty(int kwota) {
 		}
 
 	}
+	if (pomocnicza != 0)
+	{
+		for (int j = 0; j < 6; j++)
+		{
+			for (int i = 0; i <= 5; i++) {
+				wydanie[i] = pom[i];
+			}
+			pomocnicza = kwota;
+			for (int i = 0; i < 6; i++)
+			{
+				if (pomocnicza >= banknoty[i]) {
+					dziele = pomocnicza / banknoty[i];
+					reszta = pomocnicza % banknoty[i];
+					if (j != 5 && banknoty[i] == 500 && dziele <= zasobnik[0])
+					{
+						pomocnicza = reszta;
+						wydanie[0] = dziele;
+					}
+					if (j != 4 && banknoty[i] == 200 && dziele <= zasobnik[1])
+					{
+						pomocnicza = reszta;
+						wydanie[1] = dziele;
+					}
+					if (j != 3 && banknoty[i] == 100 && dziele <= zasobnik[2])
+					{
+						pomocnicza = reszta;
+						wydanie[2] = dziele;
+					}
+					if (j != 2 && banknoty[i] == 50 && dziele <= zasobnik[3])
+					{
+						pomocnicza = reszta;
+						wydanie[3] = dziele;
+					}
+					if (j != 1 && banknoty[i] == 20 && dziele <= zasobnik[4])
+					{
+						pomocnicza = reszta;
+						wydanie[4] = dziele;
+					}
+					if (j != 0 && banknoty[i] == 10 && dziele <= zasobnik[5])
+					{
+						pomocnicza = reszta;
+						wydanie[5] = dziele;
+					}
+					if (pomocnicza == 0)
+					{
+						pobranie.ZapisPoWyplacie("bankomatZasobnik.txt");
+						for (int i = 0; i < 6; i++) {
+							if (wydanie[i] != 0) {
+								ilosc += std::to_string(banknoty[i]);
+								ilosc += "*";
+								ilosc += std::to_string(wydanie[i]);
+								ilosc += ",   ";
+							}
+						}
+						bankomat1.saldo -= stof(bankomat1.kwota);
+						bankomat1.wyplataDzienna += stof(bankomat1.kwota);
+						bankomat1.wyplataMiesieczna += stof(bankomat1.kwota);
+						ekranbankomatu1.a = 0;
+						pobranie.ZapisDoKarty(pobranie.daneKarty);
+						return ilosc;
+					}
+				}
+			}
+		}
+	}
+	if (pomocnicza != 0)
+	{
+		return "NIE MOZNA WYPLACIC";
+		ekranbankomatu1.a = 0;
+	}
 }

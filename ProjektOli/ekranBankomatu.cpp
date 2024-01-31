@@ -189,18 +189,21 @@ void ekranBankomatu::RysujDostepneSrodki() {
 void ekranBankomatu::Dane()
 {
 	pobranie.PobranieZKarty(pobranie.daneKarty);
-
-	tablicaDane[0] = Guzik("Numer Konta:  " + bankomat1.numerKonta, {360,70}, 20, sf::Color{255, 191, 143}, sf::Color::White, font);
+	tablicaDane[0] = Guzik("Numer Konta:  " + bankomat1.numerKonta, {400,70}, 20, sf::Color{255, 191, 143}, sf::Color::White, font);
 	tablicaDane[0].Czcionka(font);
-	tablicaDane[0].Polozenie({ 160,60 });
+	tablicaDane[0].Polozenie({ 180,60 });
 
-	tablicaDane[1] = Guzik("Karta:  " + bankomat1.blokada, { 360,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaDane[1] = Guzik("Karta:  " + bankomat1.blokada, { 400,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
 	tablicaDane[1].Czcionka(font);
-	tablicaDane[1].Polozenie({ 160,160 });
+	tablicaDane[1].Polozenie({ 180,160 });
 
-	tablicaDane[2] = Guzik("wyplacona dzis kwota:  " + to_string(bankomat1.wyplataDzienna), { 360,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaDane[2] = Guzik("wyplacona dzis kwota:  " + to_string(bankomat1.wyplataDzienna), { 400,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
 	tablicaDane[2].Czcionka(font);
-	tablicaDane[2].Polozenie({ 160,260 });
+	tablicaDane[2].Polozenie({ 180,260 });
+
+	tablicaDane[3] = Guzik("wyplacona w tym miesiacu kwota:  " + to_string(bankomat1.wyplataMiesieczna), { 400,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
+	tablicaDane[3].Czcionka(font);
+	tablicaDane[3].Polozenie({ 180,360 });
 
 }
 
@@ -208,7 +211,7 @@ void ekranBankomatu::RysujDane()
 {
 	Dane();
 	okienko->draw(tloEkranu);
-	for (int i = 0; i < 3; ++i) {
+	for (int i = 0; i < 4; ++i) {
 		tablicaDane[i].RysujPrzycisk(*okienko);
 	}
 }

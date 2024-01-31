@@ -61,7 +61,7 @@ public:
     Guzik tablicaLimitu[6];
     Guzik tablicaZmianyLimitu[1];
     Guzik tablicaWplacanie[6];
-    Guzik tablicaDane[3];
+    Guzik tablicaDane[4];
 
     void Limity();
     void RysujLimity();
