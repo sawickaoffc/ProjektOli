@@ -253,36 +253,75 @@ bool bankomat::PobierzKwote() {
 	return false;
 }
 
-string bankomat::WydajBanknoty(int kwota)
-{
+string bankomat::WydajBanknoty(int kwota) {
 	int pomocnicza = kwota;
-	pobranie.PobranieZBankomatu("bankomatZasobnik.txt");
-	for (int i = 5; i >= 0; i--) {
-		for (int i = 0; i < 6; i++) {
-			pom[i] = 0;
-		}
-		int pomocnicza = kwota;
-		for (int j = i; j < 6; j++) {
-			int liczba = min(pomocnicza / banknoty[j], zasobnik[j]); //bierze mi mniejszą liczbę - ile mamy max w zasobniku
-			pomocnicza -= liczba * banknoty[j];
-			pom[j] = liczba;
-		}
-		if (pomocnicza == 0) {
-			for (int i = 0; i < 6; i++) {
-				wydanie[i] = pom[i];
+	int dziele;
+	int reszta;
+	int czywystarczy;
+	for (int i = 0; i < 6; i++)
+	{
+		if (pomocnicza >= banknoty[i]) {
+			dziele = pomocnicza / banknoty[i];
+			reszta = pomocnicza % banknoty[i];
+
+			if (banknoty[i] == 500 && dziele <= zasobnik[0])
+			{
+				pomocnicza = reszta;
+				wydanie[0] = dziele;
 			}
+
+			if (banknoty[i] == 200 && dziele <= zasobnik[1])
+			{
+				pomocnicza = reszta;
+				wydanie[1] = dziele;
+			}
+
+			if (banknoty[i] == 100 && dziele <= zasobnik[2])
+			{
+				pomocnicza = reszta;
+				wydanie[2] = dziele;
+			}
+
+			if (banknoty[i] == 50 && dziele <= zasobnik[3])
+			{
+				pomocnicza = reszta;
+				wydanie[3] = dziele;
+			}
+
+			if (banknoty[i] == 20 && dziele <= zasobnik[4])
+			{
+				pomocnicza = reszta;
+				wydanie[4] = dziele;
+			}
+
+			if (banknoty[i] == 10 && dziele <= zasobnik[5])
+			{
+				pomocnicza = reszta;
+				wydanie[5] = dziele;
+
+			}
+			if (pomocnicza == 0)
+			{
+				i = 1000;
+			}
+		}
+
+		if (pomocnicza == 0)
+		{
 			pobranie.ZapisPoWyplacie("bankomatZasobnik.txt");
+
 			for (int i = 0; i < 6; i++) {
 				if (wydanie[i] != 0) {
 
 					ilosc += std::to_string(banknoty[i]);
 					ilosc += "*";
 					ilosc += std::to_string(wydanie[i]);
-					ilosc += ",   ";
+					ilosc += ", ";
 				}
 			}
 			bankomat1.saldo -= stof(bankomat1.kwota);
 			bankomat1.wyplataDzienna += stof(bankomat1.kwota);
+			bankomat1.wyplataMiesieczna += stof(bankomat1.kwota);
 			pobranie.ZapisDoKarty(pobranie.daneKarty);
 			ekranbankomatu1.a = 0;
 			for (int i = 0; i < 6; i++) {
@@ -291,10 +330,5 @@ string bankomat::WydajBanknoty(int kwota)
 			return ilosc;
 		}
 
-	}
-	if (pomocnicza != 0)
-	{
-		return "NIE MOZNA WYPLACIC";
-		ekranbankomatu1.a = 0;
 	}
 }

@@ -1,5 +1,5 @@
 #include "PobranieZPliku.h"
-#pragma warning(suppress : 4996)
+#pragma warning(disable : 4996)
 
 extern bankomat bankomat1;
 extern ekranBankomatu ekranbankomatu1;
@@ -145,6 +145,7 @@ void PobranieZPliku::ZapisPoWplacie(const string& nazwaPliku)
 }
 
 void PobranieZPliku::ZapisDoKarty(const string& nazwaPliku) {
+
     string zapis = to_string(bankomat1.saldo);
     std::ofstream plik(nazwaPliku);
     if (plik.is_open()) {
@@ -185,24 +186,65 @@ void PobranieZPliku::ZapisDoKarty(const string& nazwaPliku) {
 
 void PobranieZPliku::PorownanieDat()
 {
-    int d = dzien;
-    int m = miesiac;
-    int r = rok;
-    std::time_t currentTime = std::time(nullptr);
-    std::tm localTime;
+    PobranieZKarty(daneKarty);
+    using namespace std::chrono;
+    time_t tt = system_clock::to_time_t(system_clock::now());
+    std::stringstream s;
+    s << ctime(&tt);
+    int d = std::stoi(s.str().substr(8, 2));
+    int m = 0;
+    int r = std::stoi(s.str().substr(20, 4));
+    std::string temp = s.str().substr(4, 3);
+    if (temp == "Jan") {
+        m = 1;
+    }
+    else if (temp == "Feb") {
+        m = 2;
+    }
+    else if (temp == "Mar") {
+        m = 3;
+    }
+    else if (temp == "Apr") {
+        m = 4;
+    }
+    else if (temp == "May") {
+        m = 5;
+    }
+    else if (temp == "Jun") {
+        m = 6;
+    }
+    else if (temp == "Jul") {
+        m = 7;
+    }
+    else if (temp == "Aug") {
+        m = 8;
+    }
+    else if (temp == "Sep") {
+        m = 9;
+    }
+    else if (temp == "Oct") {
+        m = 10;
+    }
+    else if (temp == "Nov") {
+        m = 11;
+    }
+    else if (temp == "Dec") {
+        m = 12;
+    }
 
-    if (r == localTime.tm_year + 1900 && m == localTime.tm_mon + 1 && d == localTime.tm_mday) {
+    if (r == rok && m == miesiac && d == dzien) {
         return;
     }
-    else if(r == localTime.tm_year + 1900 && m == localTime.tm_mon + 1) {
+    else if(r == rok && m == miesiac) {
         bankomat1.wyplataDzienna = 0;
-        dzien = localTime.tm_mday;
+        dzien = d;
     }
     else {
-        rok = localTime.tm_year + 1900;
-        miesiac = localTime.tm_mon + 1;
-        dzien = localTime.tm_mday;
+        rok = r;
+        miesiac = m;
+        dzien = d;
         bankomat1.wyplataMiesieczna = 0;
     }
+    pobranie.ZapisDoKarty(daneKarty);
     return;
 }
