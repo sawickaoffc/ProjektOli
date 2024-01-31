@@ -7,7 +7,7 @@
 #include "Guzik.h"
 #include <cstring>
 #include "PobranieZPliku.h"
-
+ 
 bankomat bankomat1;
 ekranBankomatu ekranbankomatu1;
 PobranieZPliku pobranie;
