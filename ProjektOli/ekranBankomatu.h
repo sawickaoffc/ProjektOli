@@ -51,9 +51,6 @@ public:
     void WydaneBanknoty();
     void RysujWydaneBanknoty();
 
-    void WyborKart();
-    void RysujWyborKart();
-
     Guzik tablicaMenu[6];
     Guzik tablicaPinu[1];
     Guzik tablicaWydaneBanknoty[1];
@@ -63,7 +60,6 @@ public:
     Guzik tablicaZmianyPinu[1];
     Guzik tablicaLimitu[6];
     Guzik tablicaZmianyLimitu[1];
-    Guzik tablicaKart[4];
     Guzik tablicaWplacanie[6];
     Guzik tablicaDane[3];
 

@@ -333,31 +333,3 @@ void ekranBankomatu::RysujWydaneBanknoty() {
 	bankomat1.ilosc = "";
 	bankomat1.kwota = "";
 }
-
-void ekranBankomatu::WyborKart()
-{
-	tablicaKart[0] = Guzik("Karta 1", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
-	tablicaKart[0].Czcionka(font);
-	tablicaKart[0].Polozenie({ 180,60 });
-
-	tablicaKart[1] = Guzik("Karta 2", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
-	tablicaKart[1].Czcionka(font);
-	tablicaKart[1].Polozenie({ 180,160 });
-
-	tablicaKart[2] = Guzik("Karta 3", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
-	tablicaKart[2].Czcionka(font);
-	tablicaKart[2].Polozenie({ 180,260 });
-
-	tablicaKart[3] = Guzik("Karta 4", { 260,70 }, 20, sf::Color{ 255, 191, 143 }, sf::Color::White, font);
-	tablicaKart[3].Czcionka(font);
-	tablicaKart[3].Polozenie({ 180,360 });
-}
-
-void ekranBankomatu::RysujWyborKart()
-{
-	WyborKart();
-	okienko->draw(tloEkranu);
-	for (int i = 0; i < 4; ++i) {
-		tablicaKart[i].RysujPrzycisk(*okienko);
-	}
-}
